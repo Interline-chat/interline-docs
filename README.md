@@ -85,7 +85,15 @@ The `site/` folder is plain HTML — host it anywhere. Easiest options:
 
 - **GitHub Pages:** push this repo to GitHub and run `mkdocs gh-deploy`. It builds and publishes to the `gh-pages` branch in one step.
 - **Netlify / Vercel / Cloudflare Pages:** point them at this repo with build command `mkdocs build` and publish directory `site`.
-- Update `site_url` in `mkdocs.yml` to your final URL.
+
+### Custom domain (help.interline.chat)
+
+This site is configured for **https://help.interline.chat/**:
+
+1. DNS (Cloudflare): `CNAME  help → interline-chat.github.io`. Set Proxy status to **DNS only (grey cloud)** until GitHub provisions HTTPS; if you later re-enable the proxy, set Cloudflare SSL/TLS to **Full**.
+2. GitHub repo → **Settings → Pages → Custom domain** = `help.interline.chat`, then enable **Enforce HTTPS**.
+3. `docs/CNAME` holds `help.interline.chat` so the custom domain survives every `mkdocs gh-deploy` (the deploy wipes the branch otherwise).
+4. `site_url` in `mkdocs.yml` is set to `https://help.interline.chat/`.
 
 ## Adding API reference docs later
 

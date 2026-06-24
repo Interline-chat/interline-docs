@@ -2,8 +2,8 @@
 site_name: Help Center
 site_description: User, agent, admin, and API documentation for Interline — the unified client messaging platform.
 site_author: Interline
-# GitHub Pages URL — update if you later add a custom domain
-site_url: https://interline-chat.github.io/interline-docs/
+# Custom domain (CNAME file in docs/ keeps it across gh-deploy)
+site_url: https://help.interline.chat/
 repo_url: https://github.com/Interline-chat/interline-docs
 repo_name: Interline-chat/interline-docs
 
