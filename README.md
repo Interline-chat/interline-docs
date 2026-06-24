@@ -71,6 +71,10 @@ The preview auto-reloads every time you save a Markdown file.
     - `logo.png` / `favicon.png` — leftover placeholders from an earlier step; safe to delete.
 - **Title text:** because the header shows the wordmark, `site_name` is set to "Help Center" to avoid duplicating "interline". Change it in `mkdocs.yml` if you prefer.
 
+## Screenshots & GIFs
+
+Walkthrough GIFs live in `docs/assets/media/` and are embedded with standard image syntax, e.g. `![alt](../assets/media/inbox-sorting.gif){ width="760" }`. Current Inbox GIFs: sorting, canned reply, closing a conversation, editing a contact, and the contact panel (tags + notes). They were captured in the **demo** workspace and post-processed with a "start wide, then zoom into the action" effect (ffmpeg + PIL). Each is ~1.4–1.7 MB.
+
 ## Building & hosting
 
 ```bash

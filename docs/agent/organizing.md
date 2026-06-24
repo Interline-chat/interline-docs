@@ -12,6 +12,9 @@ Status tracks where a conversation is in its lifecycle. You can filter the conve
 
 Status is the broadest filter. Most agents start their day in **Unread**, work those down, then keep **Open** clear through the day.
 
+!!! tip "The yellow dot"
+    In the conversation list, a **yellow dot** on a row marks an **open** conversation — a fast visual cue for what's still active versus what's been closed.
+
 ## Priority
 
 Priority lets you flag how urgent a conversation is, independent of its status. There are three levels:

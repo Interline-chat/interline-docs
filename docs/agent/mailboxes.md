@@ -1,44 +1,62 @@
 # Mailboxes & Inboxes
 
-Interline separates *where* a message lives (mailboxes) from *which channel* it came in on (inboxes). Understanding the two together is the key to keeping a busy queue under control.
+The left sidebar is how you choose *which* conversations you're looking at. It's organized into three groups: **My Inbox**, **Inboxes**, and **Custom Views**. Each entry shows a count of conversations so you can see where work is waiting.
 
-## Team vs. personal mailboxes
+## My Inbox
 
-There are two kinds of mailbox.
+This group is about *you*.
 
-A **team mailbox** holds messages that belong to the whole team. Anyone with access can see them, reply, and pick them up. New incoming messages that aren't directed at a specific person land here by default, so it acts as the shared queue everyone works from.
+**All messages** shows every conversation you can see in one place. That means all conversations from all the [inboxes](#inboxes) you have access to — *plus* any conversation that's been **assigned to you from an inbox you don't have access to**. So if a teammate hands you a conversation that lives in an inbox you're not a member of, it still shows up here under All messages. It's the one view guaranteed to include everything that's yours or visible to you.
 
-Your **personal mailbox** holds messages that are *yours*. A message becomes personal in one of two ways: a teammate (or a workflow rule) **assigns it to you**, or a client sends a message **directly to your inbox**. Your personal mailbox is your to-do list — the conversations you're personally responsible for.
+**Assigned to me** narrows that down to only the conversations currently assigned to you — your personal to-do list, regardless of which inbox each one came from.
 
-!!! tip "Working as a team"
-    A common pattern is to triage from the team mailbox — read what's come in, then assign each conversation to whoever should own it. Once assigned, it moves into that person's personal mailbox and out of the shared queue.
+!!! tip "Start your day here"
+    **Assigned to me** is what you personally owe a response on. **All messages** is the wider pool you and the team are working from. Most agents check *Assigned to me* first, then help clear *All messages*.
 
-## Per-channel vs. unified inboxes
+## Inboxes
 
-Independently of mailboxes, you can choose which **channels** you're looking at.
+Below My Inbox is the list of **shared inboxes** you're a member of (for example *Main Support*, *Sales*, or a team- or brand-specific inbox). Each inbox is a shared queue: everyone with access to it sees the same conversations and can pick them up.
 
-A **unified inbox** shows messages from **all channels together** — email, SMS, and WhatsApp interleaved in one list. This is the best view when you want a single stream of everything coming in.
+Click an inbox to focus on just its conversations. New incoming messages land in the appropriate inbox based on how your workspace is configured, and the team works them from there.
 
-A **per-channel inbox** shows **one channel at a time** — just SMS, just WhatsApp, or just email. Use these when a particular channel needs focused attention, or when different team members specialize in different channels.
+!!! note "Access matters"
+    You only see the inboxes you've been given access to. A conversation assigned to you from an inbox you *aren't* a member of won't appear under that inbox for you — but it will still appear under **All messages** and **Assigned to me**.
 
-You can combine the two ideas freely. For example: *the team's unified inbox* (everything, for everyone) or *my personal WhatsApp inbox* (just WhatsApp messages assigned to me).
+## Custom Views
 
-## Sorting
+**Custom Views** are saved, personalized lists you create for yourself (for example a view for a specific channel or a particular slice of conversations). Use **+ Add View** to create one. They're a convenient shortcut to a set of conversations you return to often.
 
-Within any mailbox you can sort the conversation list by:
+## Tabs: Unread, Open, All
 
-- **Newest first** — the most recently active conversations at the top. Best for staying on top of what's happening right now.
-- **Oldest first** — the longest-waiting conversations at the top. Best for making sure nothing falls through the cracks.
+Across the top of the conversation list are three tabs that filter by status:
 
-!!! note
-    Sorting only changes the order of the list you're looking at — it doesn't filter anything out. To narrow down *which* conversations appear, use status, priority, and tags, covered in [Organizing Conversations](organizing.md).
+- **Unread** — conversations with messages no one has read yet.
+- **Open** — active conversations that still need attention.
+- **All** — everything, including closed conversations.
 
-## Choosing where to work
+More on status in [Organizing Conversations](organizing.md).
 
-There's no single right setup — it depends on your role:
+## Sorting and channel filter
 
-- **A generalist agent** often works the team unified inbox, sorted oldest-first, so the longest-waiting client gets answered next.
-- **A specialist** (say, the person who handles WhatsApp) works a per-channel inbox.
-- **An account owner** lives mostly in their personal mailbox, handling the conversations assigned to them.
+Above the list you can **sort** the conversations four ways:
+
+- **Newest** — latest activity on top. Best for staying current.
+- **Oldest** — longest-waiting first, so nothing slips through.
+- **Unreplied first** — conversations that haven't been replied to yet, bumped to the top.
+- **Awaiting response** — conversations where the client sent the last message and the team still owes a reply.
+
+You can also **filter by channel** with the **All Channels** dropdown — switch to just SMS, just WhatsApp, or just email when you want to focus on one channel.
+
+![Sorting the Inbox conversation list by Newest, Oldest, and Awaiting response](../assets/media/inbox-sorting.gif){ width="760" }
+
+## Reading the conversation list
+
+Each row in the list packs in several signals at a glance:
+
+- **Contact name or number** — who the conversation is with (save a name so it isn't just a phone number — see [Contacts](contacts.md)).
+- **Channel badge** — which inbox/channel the conversation belongs to.
+- **Assigned name** — the name shown on the row tells you **who the conversation is currently assigned to**, so you can instantly see who owns it.
+- **Yellow dot** — indicates the conversation is **open** (still active). It's a quick visual cue for what's outstanding versus what's been closed.
+- **Timestamp** — when the last message arrived.
 
 Next: [Reading & Replying](reading-and-replying.md).

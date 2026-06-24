@@ -4,9 +4,9 @@ The Inbox is a shared workspace, so the most important thing is that the team st
 
 ## Assigning conversations
 
-Assigning a conversation makes one person responsible for it. Once assigned, the conversation moves into that person's [personal mailbox](mailboxes.md), signalling to the rest of the team that it's being handled.
+Assigning a conversation makes one person responsible for it. Once assigned, it appears under that person's **Assigned to me** in [My Inbox](mailboxes.md), signalling to the rest of the team that it's being handled. The **assigned person's name is shown right on the conversation row** in the list, so anyone scanning the queue can instantly see who owns what.
 
-Use assignment to hand a conversation to the right specialist, to claim a conversation you're taking on yourself, or to triage the shared team mailbox by distributing its conversations to individual owners.
+Use assignment to hand a conversation to the right specialist, to claim a conversation you're taking on yourself, or to triage a shared inbox by distributing its conversations to individual owners.
 
 ## Internal comments
 
@@ -28,14 +28,18 @@ When a conversation is fully handled, **close** it. Closing does two things:
 1. It takes the conversation out of the active queue, so it's not cluttering the Open and Unread views.
 2. It **un-assigns the conversation from you**, releasing your ownership.
 
-This keeps personal mailboxes clean — once you've finished with something and closed it, it's off your plate. If the client replies again later, the conversation reopens and re-enters the queue.
+This keeps your **Assigned to me** clean — once you've finished with something and closed it, it's off your plate. If the client replies again later, the conversation reopens and re-enters the queue.
+
+Use the green **Close conversation** check at the top of the thread. It immediately drops out of the Open queue (and the count ticks down):
+
+![Closing a conversation with the green check removes it from the Open queue](../assets/media/inbox-close-conversation.gif){ width="760" }
 
 !!! note "Closing isn't deleting"
     A closed conversation isn't gone — it's archived and fully searchable, and it reopens automatically if the client messages again. Closing simply means “done for now.”
 
 ## A typical team workflow
 
-1. Messages arrive in the **team mailbox**.
+1. Messages arrive in a **shared inbox**.
 2. An agent triages **Unread**, reading and setting **priority** and **tags** as needed.
 3. Each conversation is **assigned** to whoever should own it (or the agent handles it directly).
 4. The owner replies, using **internal comments** and **@mentions** to pull in help when needed.

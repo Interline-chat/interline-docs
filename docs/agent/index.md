@@ -7,8 +7,8 @@ If you set up the workspace, manage the team, run campaigns, or configure settin
 ## What you do as an agent
 
 - Read and reply to messages across **all three channels** from one screen.
-- Work out of **shared team mailboxes** and your own **personal** assigned messages.
-- View a **unified inbox** of everything, or **separate inboxes** per channel.
+- Work out of **shared inboxes** and your own conversations under **My Inbox** (All messages / Assigned to me).
+- See everything in **All messages**, filter by **channel**, or jump to a saved **custom view**.
 - **Sort** and organize conversations with **status**, **priority**, and **tags**.
 - Reply faster with **canned messages** and **attachments**.
 - Collaborate with **internal comments** and **@mentions**.
@@ -20,7 +20,7 @@ If you set up the workspace, manage the team, run campaigns, or configure settin
 
 | Guide | What it covers |
 |-------|----------------|
-| [Mailboxes & Inboxes](mailboxes.md) | Team vs. personal mailboxes, per-channel vs. unified inboxes, and sorting. |
+| [Mailboxes & Inboxes](mailboxes.md) | My Inbox (All messages / Assigned to me), shared inboxes, custom views, sorting, and reading the list. |
 | [Reading & Replying](reading-and-replying.md) | Opening conversations, the reply editor, canned messages, attachments, and delivery status. |
 | [Organizing Conversations](organizing.md) | Status, priority, tags, awaiting-response, and search. |
 | [Team Collaboration](collaboration.md) | Assigning, internal comments, @mentions, and opening/closing threads. |
@@ -29,7 +29,7 @@ If you set up the workspace, manage the team, run campaigns, or configure settin
 
 ## Key concepts at a glance
 
-A **conversation** (or thread) is the running history of messages with one contact on one channel. A **mailbox** is a collection of conversations — either a shared team mailbox or your personal one. **Status**, **priority**, and **tags** are the three ways you label conversations so the right ones rise to the top. **Assigning** a conversation makes one person responsible for it; **closing** it signals the work is done and removes it from the active queue.
+A **conversation** (or thread) is the running history of messages with one contact on one channel. An **inbox** is a shared queue of conversations; **My Inbox** (All messages / Assigned to me) gathers what's visible or assigned to you across inboxes. **Status**, **priority**, and **tags** are the three ways you label conversations so the right ones rise to the top. **Assigning** a conversation makes one person responsible for it; **closing** it signals the work is done and removes it from the active queue.
 
 Start with [Mailboxes & Inboxes](mailboxes.md) to understand how messages are routed and grouped, then move on to [Reading & Replying](reading-and-replying.md).
 

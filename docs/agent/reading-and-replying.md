@@ -27,6 +27,8 @@ To use one, open the canned-message picker from the reply editor and choose the 
 
 Canned messages can include **{variables}** — placeholders like `{first_name}` that fill in automatically with the contact's details, so a canned reply still reads as personal. Your admin manages the shared library of canned messages; see the [Admin Guide](../admin/index.md).
 
+![Inserting a canned reply into the editor from the canned-message picker](../assets/media/inbox-canned-reply.gif){ width="760" }
+
 ## Attachments
 
 You can attach files to your replies — images, PDFs, and other documents.
