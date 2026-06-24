@@ -16,7 +16,7 @@ Once you're in, the screen is split into three areas:
 
 ## What each tool does
 
-**Inbox** is your shared workspace for incoming messages. Every email, text, and WhatsApp message from clients lands here. You can reply, assign conversations to teammates, tag them, leave internal notes, and close them when they're handled. This is where most agents spend their time — start with the [Inbox guide](inbox/index.md).
+**Inbox** is your shared workspace for incoming messages. Every email, text, and WhatsApp message from clients lands here. You can reply, assign conversations to teammates, tag them, leave internal notes, and close them when they're handled. This is where most agents spend their time — start with the [Agent Guide](agent/index.md).
 
 **Broadcast** lets you send a single SMS or WhatsApp message out to a whole list of contacts at once — order reminders, holiday greetings, promotions. You can personalize each message with variables, preview it, schedule it, and save it as a template. See the [Broadcast guide](broadcast/index.md).
 
@@ -30,7 +30,7 @@ Once you're in, the screen is split into three areas:
 4. When you reply to a new number, Interline will prompt you to **save the sender's name** to your contacts — do it so the conversation has a name instead of a phone number next time.
 5. When a conversation is fully handled, **close** it to take it out of the active queue.
 
-That's the core loop. The [Inbox guide](inbox/index.md) covers everything in depth — mailboxes, tags, priorities, canned replies, internal comments, and more.
+That's the core loop. The [Agent Guide](agent/index.md) covers everything in depth — mailboxes, sorting, tags, priorities, canned replies, internal comments, notifications, and more.
 
 !!! note "Channels recap"
     Interline speaks three channels: **email**, **SMS** (text), and **WhatsApp**. Most features work across all three, with a few exceptions noted in each guide (for example, rich formatting behaves differently on SMS than on email).

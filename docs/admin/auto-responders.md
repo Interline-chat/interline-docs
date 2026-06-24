@@ -23,8 +23,8 @@ Because the messages are tied to time windows, the right one goes out automatica
 
 ## Setup
 
-Configuring auto-responders — defining the time windows and writing each message — is done in settings. Depending on how your workspace is set up this may be an admin task; see the [Admin Guide](../admin/index.md).
+Configuring auto-responders — defining the time windows and writing each message — is an admin task, done in settings. See the [Admin Guide](index.md).
 
 ---
 
-That's the full Inbox guide. From here you can explore [Broadcast](../broadcast/index.md) for outbound campaigns or [Keywords](../keywords/index.md) for keyword-triggered replies.
+Related: [Keywords](../keywords/index.md) reply based on the specific word a client texts (rather than the time), and [Broadcast](../broadcast/index.md) sends outbound campaigns. For the agent-facing side of the Inbox, see the [Agent Guide](../agent/index.md).

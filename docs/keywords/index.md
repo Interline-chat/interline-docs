@@ -10,7 +10,7 @@ Keywords automatically reply when a client texts a specific word. Text `HOURS` a
 ### How keywords work
 - The keyword-trigger wizard: setting a trigger word and its automatic response
 - One response per message (not conversational in this phase)
-- How a keyword reply differs from an [auto-responder](../inbox/auto-responders.md)
+- How a keyword reply differs from an [auto-responder](../admin/auto-responders.md)
 
 ### Building keyword responses
 - Creating a keyword and writing its response

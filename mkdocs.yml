@@ -52,20 +52,19 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Inbox:
-      - Overview: inbox/index.md
-      - Mailboxes & Inboxes: inbox/mailboxes.md
-      - Reading & Replying: inbox/reading-and-replying.md
-      - Organizing Conversations: inbox/organizing.md
-      - Team Collaboration: inbox/collaboration.md
-      - Contacts: inbox/contacts.md
-      - Auto-Responders: inbox/auto-responders.md
-  - Broadcast:
-      - Overview: broadcast/index.md
-  - Keywords:
-      - Overview: keywords/index.md
+  - Agent Guide:
+      - Overview: agent/index.md
+      - Mailboxes & Inboxes: agent/mailboxes.md
+      - Reading & Replying: agent/reading-and-replying.md
+      - Organizing Conversations: agent/organizing.md
+      - Team Collaboration: agent/collaboration.md
+      - Contacts: agent/contacts.md
+      - Notifications: agent/notifications.md
   - Admin Guide:
       - Overview: admin/index.md
+      - Auto-Responders: admin/auto-responders.md
+      - Broadcast: broadcast/index.md
+      - Keywords: keywords/index.md
   - API & Reference:
       - Overview: api/index.md
 

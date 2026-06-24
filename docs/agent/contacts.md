@@ -22,4 +22,4 @@ A contact record can hold the information your team needs to recognize and serve
 !!! note "Managing contacts in bulk"
     Adding and editing a contact happens right here in the conversation, but importing contacts in bulk (for example from a CSV) and managing the full contact database is an admin task. See the [Admin Guide](../admin/index.md).
 
-Next: [Auto-Responders](auto-responders.md).
+Next: [Notifications](notifications.md).
