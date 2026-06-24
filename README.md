@@ -61,6 +61,16 @@ The preview auto-reloads every time you save a Markdown file.
       Your note here.
   ```
 
+## Branding (logo & colors)
+
+- **Brand color:** the Interline blue (`#0085FF`, taken from the official logo) is set in `docs/stylesheets/extra.css`. Change the `--interline-blue*` values there to adjust the whole site's color.
+- **Logo files** in `docs/assets/`:
+    - `logo.svg` — the official **interline** wordmark (colored).
+    - `logo-white.svg` — a white version of the wordmark, used in the blue header (`theme.logo`). Auto-generated from `logo.svg`; regenerate if the wordmark changes.
+    - `favicon.svg` — the square icon mark, used as the browser-tab icon (`theme.favicon`).
+    - `logo.png` / `favicon.png` — leftover placeholders from an earlier step; safe to delete.
+- **Title text:** because the header shows the wordmark, `site_name` is set to "Help Center" to avoid duplicating "interline". Change it in `mkdocs.yml` if you prefer.
+
 ## Building & hosting
 
 ```bash

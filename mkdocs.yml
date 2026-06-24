@@ -1,4 +1,5 @@
-site_name: Interline Help Center
+# Header shows the wordmark logo, so the title text is kept short to avoid duplicating "interline"
+site_name: Help Center
 site_description: User, agent, admin, and API documentation for Interline — the unified client messaging platform.
 site_author: Interline
 # GitHub Pages URL — update if you later add a custom domain
@@ -12,6 +13,8 @@ repo_name: Interline-chat/interline-docs
 theme:
   name: material
   language: en
+  logo: assets/logo-white.svg   # white wordmark for the blue header (colored original: assets/logo.svg)
+  favicon: assets/favicon.svg
   features:
     - navigation.instant      # fast SPA-style page loads
     - navigation.tracking     # update URL with active anchor
@@ -24,19 +27,15 @@ theme:
     - content.tabs.link
     - toc.follow
   palette:
-    # Light mode
+    # Light mode — brand colors come from docs/stylesheets/extra.css
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -67,6 +66,12 @@ nav:
       - Keywords: keywords/index.md
   - API & Reference:
       - Overview: api/index.md
+
+# ---------------------------------------------------------------------------
+# Custom brand styling
+# ---------------------------------------------------------------------------
+extra_css:
+  - stylesheets/extra.css
 
 # ---------------------------------------------------------------------------
 # Plugins
