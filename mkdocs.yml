@@ -2,7 +2,7 @@
 # It also shows next to the logo in the header. If you prefer a cleaner header,
 # set this back to "Help Center" (at a small SEO cost — pages lose the brand in <title>).
 site_name: Interline Help Center
-site_description: User, agent, admin, and API documentation for Interline — the unified client messaging platform.
+site_description: Help center and documentation for Interline — manage client SMS, WhatsApp, and email conversations, broadcasts, and automations from one shared inbox.
 site_author: Interline
 # Custom domain (CNAME file in docs/ keeps it across gh-deploy)
 site_url: https://help.interline.chat/
@@ -13,8 +13,9 @@ site_url: https://help.interline.chat/
 theme:
   name: material
   language: en
+  custom_dir: overrides         # main.html adds favicon fallbacks (extrahead)
   logo: assets/logo-white.svg   # white wordmark for the blue header (colored original: assets/logo.svg)
-  favicon: assets/favicon.svg
+  favicon: assets/favicon.svg   # primary favicon (SVG); .ico/.png fallbacks in overrides/main.html
   features:
     - navigation.instant      # fast SPA-style page loads
     - navigation.tracking     # update URL with active anchor
@@ -91,11 +92,15 @@ extra_css:
 # ---------------------------------------------------------------------------
 plugins:
   - search
-  # Social cards = auto-generated Open Graph / Twitter preview images per page
-  # (big for click-through when links are shared on Slack, X, LinkedIn, etc.).
-  # To enable: pip install "mkdocs-material[imaging]"  (needs Cairo/Pango libs),
-  # then uncomment the next line:
-  # - social
+  # Social cards = auto-generated Open Graph / Twitter preview images per page.
+  # enabled: !ENV [CI, false] -> runs ONLY in CI (GitHub Actions sets CI=true),
+  # so local `mkdocs serve` / `gh-deploy` still work without Cairo/Pango installed.
+  # The CI workflow (.github/workflows/deploy.yml) installs the imaging deps.
+  - social:
+      enabled: !ENV [CI, false]
+      cards_layout_options:
+        background_color: "#0085FF"
+        color: "#ffffff"
 
 # ---------------------------------------------------------------------------
 # Markdown extensions

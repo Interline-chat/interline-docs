@@ -1,0 +1,37 @@
+name: Deploy Help Center
+
+# Builds the MkDocs Material site (with social cards) and deploys it to the
+# gh-pages branch. Runs on every push to main, or manually.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # System libraries required by the social-cards plugin (Cairo/Pango).
+      - name: Install image libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev pngquant
+
+      - name: Install MkDocs Material (with imaging extras)
+        run: pip install "mkdocs-material[imaging]"
+
+      # CI=true (set automatically by GitHub Actions) enables the social plugin.
+      - name: Build and deploy to GitHub Pages
+        run: mkdocs gh-deploy --force --no-history

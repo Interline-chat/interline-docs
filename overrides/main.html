@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+<!--
+  Favicon fallbacks. The primary favicon (SVG) is set via theme.favicon in
+  mkdocs.yml; these add classic raster fallbacks for full browser + Google
+  Search support.
+-->
+{% block extrahead %}
+  {{ super() }}
+  <link rel="icon" type="image/x-icon" href="{{ 'assets/favicon.ico' | url }}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ 'assets/favicon-512.png' | url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon.png' | url }}">
+{% endblock %}
