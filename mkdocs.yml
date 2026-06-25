@@ -4,8 +4,6 @@ site_description: User, agent, admin, and API documentation for Interline — th
 site_author: Interline
 # Custom domain (CNAME file in docs/ keeps it across gh-deploy)
 site_url: https://help.interline.chat/
-repo_url: https://github.com/Interline-chat/interline-docs
-repo_name: Interline-chat/interline-docs
 
 # ---------------------------------------------------------------------------
 # Theme
