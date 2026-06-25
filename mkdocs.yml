@@ -74,6 +74,7 @@ nav:
       - Broadcast: broadcast/index.md
       - Automation:
           - Overview: admin/automation.md
+          - Auto-Assign: admin/auto-assign.md
           - Auto-Responders: admin/auto-responders.md
           - Keyword Campaigns: keywords/index.md
   - API & Reference:

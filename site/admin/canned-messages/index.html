@@ -12,13 +12,13 @@
         <meta name="author" content="Interline">
       
       
-        <link rel="canonical" href="https://help.interline.chat/admin/auto-responders/">
+        <link rel="canonical" href="https://help.interline.chat/admin/canned-messages/">
       
       
-        <link rel="prev" href="../automation/">
+        <link rel="prev" href="../custom-fields/">
       
       
-        <link rel="next" href="../../keywords/">
+        <link rel="next" href="../../broadcast/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Auto-Responders - Help Center</title>
+        <title>Canned Replies - Help Center</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#auto-responders" class="md-skip">
+        <a href="#canned-replies" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Auto-Responders
+              Canned Replies
             
           </span>
         </div>
@@ -933,10 +933,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../canned-messages/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Canned Replies
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -952,6 +979,76 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-canned-replies-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The canned replies list
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-canned-reply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a canned reply
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating a canned reply">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personalize-with-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Personalize with variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-agents-use-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How agents use them
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -989,8 +1086,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1000,11 +1095,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
         
           
           <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
@@ -1025,7 +1120,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1068,37 +1163,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Auto-Responders
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../auto-responders/" class="md-nav__link">
         
   
   
@@ -1114,59 +1182,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-an-auto-responder-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What an auto-responder does
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#different-messages-for-different-hours" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Different messages for different hours
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Setup
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1329,10 +1344,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-an-auto-responder-does" class="md-nav__link">
+  <a href="#the-canned-replies-list" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What an auto-responder does
+        The canned replies list
       
     </span>
   </a>
@@ -1340,21 +1355,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#different-messages-for-different-hours" class="md-nav__link">
+  <a href="#creating-a-canned-reply" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Different messages for different hours
+        Creating a canned reply
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating a canned reply">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#personalize-with-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Personalize with variables
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
+  <a href="#how-agents-use-them" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setup
+        How agents use them
       
     </span>
   </a>
@@ -1381,29 +1413,26 @@
   
 
 
-<h1 id="auto-responders">Auto-Responders<a class="headerlink" href="#auto-responders" title="Permanent link">&para;</a></h1>
-<p>An auto-responder sends an automatic reply to incoming messages so clients aren't left wondering whether anyone received them — most often used to set expectations outside of working hours.</p>
-<h2 id="what-an-auto-responder-does">What an auto-responder does<a class="headerlink" href="#what-an-auto-responder-does" title="Permanent link">&para;</a></h2>
-<p>When a client messages you, the auto-responder can immediately send back a message you've written in advance — for example, “Thanks for reaching out! Our office is closed right now. We'll get back to you when we reopen at 9am.” The client gets an instant acknowledgement, and the conversation still lands in your inbox for a real reply later.</p>
-<h2 id="different-messages-for-different-hours">Different messages for different hours<a class="headerlink" href="#different-messages-for-different-hours" title="Permanent link">&para;</a></h2>
-<p>Interline lets you set <strong>separate auto-responder messages for different hours</strong>, so the reply fits the moment:</p>
-<ul>
-<li>A <strong>business-hours</strong> message can reassure clients you'll respond shortly.</li>
-<li>An <strong>after-hours</strong> message can tell them when you'll be back.</li>
-</ul>
-<p>Because the messages are tied to time windows, the right one goes out automatically depending on when the client writes — you don't have to switch anything on and off manually.</p>
+<h1 id="canned-replies">Canned Replies<a class="headerlink" href="#canned-replies" title="Permanent link">&para;</a></h1>
+<p>Canned replies are pre-written messages your agents can drop into a conversation instead of typing the same thing repeatedly. You manage the shared library under <strong>Settings → Messages</strong>.</p>
+<p>Agents use these from the reply editor in the <a href="../../agent/reading-and-replying/#canned-messages">Inbox</a>; this page covers creating and maintaining them.</p>
+<h2 id="the-canned-replies-list">The canned replies list<a class="headerlink" href="#the-canned-replies-list" title="Permanent link">&para;</a></h2>
+<p><strong>Settings → Messages</strong> shows every canned reply with its <strong>name</strong>, a <strong>text snippet</strong> (preview of the content), and its <strong>status</strong> (Active). You can search by name and filter by channel. Each row's menu (<strong>⋯</strong>) lets you edit or remove a reply.</p>
+<h2 id="creating-a-canned-reply">Creating a canned reply<a class="headerlink" href="#creating-a-canned-reply" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Go to <strong>Settings → Messages</strong> and click <strong>New canned reply</strong>.</li>
+<li>Enter a <strong>Name</strong> — this is the label agents see in the picker, so make it short and recognizable (e.g. <em>Order confirmation</em>, <em>Hours</em>, <em>Payment pending</em>).</li>
+<li>Write the <strong>Reply</strong> in the rich-text editor. You can format text (<strong>bold</strong>, <em>italic</em>, underline, strikethrough), add <strong>emoji</strong> and <strong>images</strong>, and <strong>attach files</strong>, so a canned reply can be more than plain text.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+<h3 id="personalize-with-variables">Personalize with variables<a class="headerlink" href="#personalize-with-variables" title="Permanent link">&para;</a></h3>
+<p>Include <strong>{variables}</strong> like <code>{first_name}</code> in the reply, and they fill in with the contact's details when an agent inserts it — so a canned message still reads personally.</p>
 <div class="admonition tip">
-<p class="admonition-title">Keep it short and useful</p>
-<p>A good auto-reply tells the client three things: that you received their message, when they can expect a response, and what to do if it's urgent. Keep it brief — especially on SMS, where length affects how the message is sent.</p>
+<p class="admonition-title">What makes a good canned reply</p>
+<p>Build canned replies for your most common, repeatable answers — order status, business hours, payment instructions, "we've received your message." Keep the names clear so agents can find the right one fast, and review the library periodically to retire ones you no longer use.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Auto-responders vs. Keywords</p>
-<p>Auto-responders reply to <em>any</em> incoming message based on the <strong>time</strong> it arrives. <a href="../../keywords/">Keywords</a> reply based on the <strong>specific word</strong> a client texts in. Use auto-responders for office hours; use Keywords for things like “text HOURS for our opening times.”</p>
-</div>
-<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
-<p>Auto-responders are a type of <a href="../automation/">Automation</a>. To create one, go to <strong>Automation → New Automation → Autoresponder</strong>, then define the time windows and write the message for each. Manage and pause existing auto-responders from the <strong>Automation</strong> list.</p>
-<hr />
-<p>Related: <a href="../../keywords/">Keywords</a> reply based on the specific word a client texts (rather than the time), and <a href="../../broadcast/">Broadcast</a> sends outbound campaigns. For the agent-facing side of the Inbox, see the <a href="../../agent/">Agent Guide</a>.</p>
+<h2 id="how-agents-use-them">How agents use them<a class="headerlink" href="#how-agents-use-them" title="Permanent link">&para;</a></h2>
+<p>In a conversation, an agent opens the canned-message picker from the reply toolbar, searches by name, and inserts the reply — then edits before sending if needed. See <a href="../../agent/reading-and-replying/#canned-messages">Reading &amp; Replying</a>.</p>
 
 
 
@@ -1441,7 +1470,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../automation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+          <a href="../custom-fields/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Custom Fields &amp; Tags">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1451,20 +1480,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Overview
+                Custom Fields & Tags
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../keywords/" class="md-footer__link md-footer__link--next" aria-label="Next: Keyword Campaigns">
+          <a href="../../broadcast/" class="md-footer__link md-footer__link--next" aria-label="Next: Broadcast">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Keyword Campaigns
+                Broadcast
               </div>
             </div>
             <div class="md-footer__button md-icon">

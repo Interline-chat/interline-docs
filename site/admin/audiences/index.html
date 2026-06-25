@@ -12,13 +12,13 @@
         <meta name="author" content="Interline">
       
       
-        <link rel="canonical" href="https://help.interline.chat/admin/auto-responders/">
+        <link rel="canonical" href="https://help.interline.chat/admin/audiences/">
       
       
-        <link rel="prev" href="../automation/">
+        <link rel="prev" href="../contacts-import/">
       
       
-        <link rel="next" href="../../keywords/">
+        <link rel="next" href="../custom-fields/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Auto-Responders - Help Center</title>
+        <title>Audiences - Help Center</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#auto-responders" class="md-skip">
+        <a href="#audiences" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Auto-Responders
+              Audiences
             
           </span>
         </div>
@@ -792,6 +792,8 @@
                 
   
   
+    
+  
   
   
     
@@ -801,11 +803,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" checked>
         
           
           <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
@@ -826,7 +828,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -869,10 +871,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../audiences/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audiences
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -888,6 +917,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#two-kinds-of-audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two kinds of audience
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-an-audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating an audience
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-audiences-are-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How audiences are used
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -989,8 +1071,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1000,11 +1080,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
         
           
           <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
@@ -1025,7 +1105,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1068,37 +1148,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Auto-Responders
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../auto-responders/" class="md-nav__link">
         
   
   
@@ -1114,59 +1167,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-an-auto-responder-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What an auto-responder does
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#different-messages-for-different-hours" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Different messages for different hours
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Setup
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1329,10 +1329,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-an-auto-responder-does" class="md-nav__link">
+  <a href="#two-kinds-of-audience" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What an auto-responder does
+        Two kinds of audience
       
     </span>
   </a>
@@ -1340,10 +1340,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#different-messages-for-different-hours" class="md-nav__link">
+  <a href="#creating-an-audience" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Different messages for different hours
+        Creating an audience
       
     </span>
   </a>
@@ -1351,10 +1351,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
+  <a href="#how-audiences-are-used" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Setup
+        How audiences are used
       
     </span>
   </a>
@@ -1381,29 +1381,33 @@
   
 
 
-<h1 id="auto-responders">Auto-Responders<a class="headerlink" href="#auto-responders" title="Permanent link">&para;</a></h1>
-<p>An auto-responder sends an automatic reply to incoming messages so clients aren't left wondering whether anyone received them — most often used to set expectations outside of working hours.</p>
-<h2 id="what-an-auto-responder-does">What an auto-responder does<a class="headerlink" href="#what-an-auto-responder-does" title="Permanent link">&para;</a></h2>
-<p>When a client messages you, the auto-responder can immediately send back a message you've written in advance — for example, “Thanks for reaching out! Our office is closed right now. We'll get back to you when we reopen at 9am.” The client gets an instant acknowledgement, and the conversation still lands in your inbox for a real reply later.</p>
-<h2 id="different-messages-for-different-hours">Different messages for different hours<a class="headerlink" href="#different-messages-for-different-hours" title="Permanent link">&para;</a></h2>
-<p>Interline lets you set <strong>separate auto-responder messages for different hours</strong>, so the reply fits the moment:</p>
+<h1 id="audiences">Audiences<a class="headerlink" href="#audiences" title="Permanent link">&para;</a></h1>
+<p>An <strong>audience</strong> is a list of contacts you send <a href="../../broadcast/">campaigns</a> to. You manage them on the <strong>Audiences</strong> tab of the <strong>Contacts</strong> page. Each audience shows its <strong>name</strong>, <strong>description</strong>, <strong>type</strong>, <strong>contact count</strong>, and <strong>created</strong> date.</p>
+<h2 id="two-kinds-of-audience">Two kinds of audience<a class="headerlink" href="#two-kinds-of-audience" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A <strong>business-hours</strong> message can reassure clients you'll respond shortly.</li>
-<li>An <strong>after-hours</strong> message can tell them when you'll be back.</li>
+<li><strong>Manual</strong> — a fixed list you build by hand or by <a href="../contacts-import/">import</a>. Contacts stay in it until you remove them. Best for a specific, known set of people.</li>
+<li><strong>Dynamic</strong> — a rule-based segment that updates itself. Contacts join or leave automatically as they match (or stop matching) the rules — for example <em>customers with high lifetime value</em>. Best for "always current" segments.</li>
 </ul>
-<p>Because the messages are tied to time windows, the right one goes out automatically depending on when the client writes — you don't have to switch anything on and off manually.</p>
-<div class="admonition tip">
-<p class="admonition-title">Keep it short and useful</p>
-<p>A good auto-reply tells the client three things: that you received their message, when they can expect a response, and what to do if it's urgent. Keep it brief — especially on SMS, where length affects how the message is sent.</p>
-</div>
 <div class="admonition note">
-<p class="admonition-title">Auto-responders vs. Keywords</p>
-<p>Auto-responders reply to <em>any</em> incoming message based on the <strong>time</strong> it arrives. <a href="../../keywords/">Keywords</a> reply based on the <strong>specific word</strong> a client texts in. Use auto-responders for office hours; use Keywords for things like “text HOURS for our opening times.”</p>
+<p class="admonition-title">Manual vs. Dynamic (a.k.a. Automatic)</p>
+<p>The Audiences page labels rule-based lists <strong>Dynamic</strong>; the campaign builder may call the same thing <strong>Automatic</strong>. They're the same concept: a self-updating segment.</p>
 </div>
-<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
-<p>Auto-responders are a type of <a href="../automation/">Automation</a>. To create one, go to <strong>Automation → New Automation → Autoresponder</strong>, then define the time windows and write the message for each. Manage and pause existing auto-responders from the <strong>Automation</strong> list.</p>
-<hr />
-<p>Related: <a href="../../keywords/">Keywords</a> reply based on the specific word a client texts (rather than the time), and <a href="../../broadcast/">Broadcast</a> sends outbound campaigns. For the agent-facing side of the Inbox, see the <a href="../../agent/">Agent Guide</a>.</p>
+<h2 id="creating-an-audience">Creating an audience<a class="headerlink" href="#creating-an-audience" title="Permanent link">&para;</a></h2>
+<ol>
+<li>On <strong>Contacts → Audiences</strong>, click <strong>New audience</strong> and give it a <strong>name</strong>.</li>
+<li>Choose the type:<ul>
+<li>For a <strong>Manual</strong> audience, add contacts to it (hand-pick them, or add during a <a href="../contacts-import/">CSV import</a> by selecting the audience there).</li>
+<li>For a <strong>Dynamic</strong> audience, define the <strong>rules</strong> that decide membership; contacts matching the rules are included automatically and kept up to date.</li>
+</ul>
+</li>
+<li>Save. The audience is now available to select when building a <a href="../../broadcast/">campaign</a>.</li>
+</ol>
+<h2 id="how-audiences-are-used">How audiences are used<a class="headerlink" href="#how-audiences-are-used" title="Permanent link">&para;</a></h2>
+<p>When you send a <a href="../../broadcast/">Broadcast campaign</a>, you pick one or more audiences as the recipients, and the builder shows the total recipient count. <a href="../../keywords/">Keyword campaigns</a> can also <strong>add contacts to an audience</strong> automatically (the "text JOIN to sign up" pattern), and <a href="../contacts-import/">imports</a> can drop a whole batch into an audience.</p>
+<div class="admonition tip">
+<p class="admonition-title">Keep audiences purposeful</p>
+<p>Build audiences around how you actually send — by location, interest, plan, or signup source. Combine with <a href="../custom-fields/">tags and custom fields</a> so your dynamic segments can be precise.</p>
+</div>
 
 
 
@@ -1441,7 +1445,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../automation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+          <a href="../contacts-import/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Importing Contacts">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1451,20 +1455,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Overview
+                Importing Contacts
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../keywords/" class="md-footer__link md-footer__link--next" aria-label="Next: Keyword Campaigns">
+          <a href="../custom-fields/" class="md-footer__link md-footer__link--next" aria-label="Next: Custom Fields &amp; Tags">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Keyword Campaigns
+                Custom Fields & Tags
               </div>
             </div>
             <div class="md-footer__button md-icon">

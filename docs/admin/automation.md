@@ -14,9 +14,9 @@ Creating a new automation is a short wizard: **1. Automation type → 2. Trigger
 
 ### Available now
 
-- **Auto assign** — set rules that automatically assign new conversations and messages to the right inbox, team, or person (for example route a specific incoming number or address to a particular inbox). This is how incoming messages get to the right place without manual triage. See [routing & inboxes](#auto-assign-routing).
-- **Autoresponder** — automatically reply to incoming messages based on rules, most often for after-hours or out-of-office acknowledgements. Covered in detail in [Auto-Responders](auto-responders.md).
-- **Keyword campaign** — reply automatically when a contact texts a specific keyword (e.g. `SALE`, `HELP`, `HOURS`), and optionally add them to a list. Covered in [Keywords](../keywords/index.md).
+- **Auto assign** — automatically assign new conversations and messages to the right inbox, team, or person (for example route a specific incoming number to a particular inbox). Covered in [Auto-Assign](auto-assign.md).
+- **Autoresponder** — automatically reply to incoming messages based on rules, most often for after-hours or out-of-office acknowledgements. Covered in [Auto-Responders](auto-responders.md).
+- **Keyword campaign** — reply automatically when a contact texts a specific keyword (e.g. `SALE`, `HELP`, `HOURS`), and optionally add them to a list. Covered in [Keyword Campaigns](../keywords/index.md).
 
 ### Coming soon
 
@@ -28,15 +28,15 @@ These appear in the **New Automation** menu but aren't available yet:
 - **Drip campaign** — send scheduled messages over a period of time.
 - **AI agent** — let AI handle conversations based on your business rules and data.
 
-## Auto-assign (routing)
+## The three live automation types
 
-Auto-assign rules decide where incoming messages land. Use them to route conversations to the correct [inbox](../agent/mailboxes.md) or owner based on simple conditions — such as the incoming phone number or email address — so the right team picks them up automatically instead of everything piling into one queue.
+Each available type has its own guide:
 
-!!! tip "Keep rules simple"
-    Start with a few clear routing rules (by number, address, or channel) and expand as needed. Overlapping rules can fight each other, so review them when conversations end up in the wrong place.
+- **[Auto-Assign](auto-assign.md)** — route incoming conversations to the right inbox or person.
+- **[Auto-Responders](auto-responders.md)** — time-based automatic replies (e.g. after-hours).
+- **[Keyword Campaigns](../keywords/index.md)** — reply to specific keywords and add contacts to lists.
 
 ## Related
 
-- [Auto-Responders](auto-responders.md) — time-based automatic replies.
-- [Keywords](../keywords/index.md) — keyword-triggered replies and list sign-ups.
+- [Inboxes](inboxes.md) and [Users & Roles](users-roles.md) — where auto-assign sends conversations.
 - [Channels](channels.md) — the numbers/addresses automations act on.
