@@ -1,3 +1,7 @@
+---
+description: Create Interline keyword campaigns that auto-reply to words like HOURS or JOIN, add contacts to lists, and apply tags.
+---
+
 # Keyword Campaigns
 
 A keyword campaign replies automatically when a contact sends a message containing a specific word — text `HOURS` and get your opening times back, text `SIGN ME UP` and get added to a list. Keyword campaigns are a type of [Automation](../admin/automation.md), created and managed from the **Automation** area.

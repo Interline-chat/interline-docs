@@ -1,3 +1,7 @@
+---
+description: Create and manage canned replies in Interline — pre-written messages with rich text and personalization variables for faster agent responses.
+---
+
 # Canned Replies
 
 Canned replies are pre-written messages your agents can drop into a conversation instead of typing the same thing repeatedly. You manage the shared library under **Settings → Messages**.

@@ -1,3 +1,7 @@
+---
+description: Send SMS and WhatsApp broadcast campaigns in Interline — choose an audience, write with variables, preview segments, test, and send.
+---
+
 # Broadcast (Campaigns)
 
 Broadcast lets you send a message to many contacts at once — order reminders, promotions, holiday greetings, surveys. In Interline these are called **Campaigns**, and you build them from the **Campaigns** area in the left navigation.

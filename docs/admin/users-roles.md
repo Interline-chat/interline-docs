@@ -1,3 +1,7 @@
+---
+description: Add users to Interline and assign roles (Admin, Manager, Agent) and inbox access — invitations, statuses, and permissions explained.
+---
+
 # Users & Roles
 
 Your team members are managed under **Settings → User Management**. From here you add people, set their role, control which inboxes they can see, and enable or disable accounts.

@@ -1,3 +1,7 @@
+---
+description: Set up Interline auto-responders to automatically reply to incoming messages, including after-hours and business-hours replies.
+---
+
 # Auto-Responders
 
 An auto-responder sends an automatic reply to incoming messages so clients aren't left wondering whether anyone received them — most often used to set expectations outside of working hours.

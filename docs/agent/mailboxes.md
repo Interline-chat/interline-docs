@@ -1,3 +1,7 @@
+---
+description: Understand the Interline Inbox — My Inbox (All messages, Assigned to me), shared inboxes, custom views, sorting, and the channel filter.
+---
+
 # Mailboxes & Inboxes
 
 The left sidebar is how you choose *which* conversations you're looking at. It's organized into three groups: **My Inbox**, **Inboxes**, and **Custom Views**. Each entry shows a count of conversations so you can see where work is waiting.

@@ -1,3 +1,7 @@
+---
+description: Create saved, filtered conversation views in Interline — private or shared — by status, channel type, and specific channels.
+---
+
 # Custom Views
 
 A **custom view** is a saved, named, filtered list of conversations — for example "High priority", "WhatsApp only", or "My email". Views appear in the **Inbox** left rail under **Custom Views**, giving agents one-click access to the slice of conversations they care about.

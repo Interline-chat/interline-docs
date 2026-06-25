@@ -1,3 +1,7 @@
+---
+description: Automate messaging in Interline with auto-assign routing, auto-responders, and keyword campaigns from the Automation area.
+---
+
 # Automation
 
 Automation handles messages and conversations for you, without an agent doing it manually — auto-replies, keyword responses, and routing rules. You build and manage these from the **Automation** area in the left navigation.

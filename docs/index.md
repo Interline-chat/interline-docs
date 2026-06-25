@@ -1,3 +1,7 @@
+---
+description: Interline Help Center — guides for agents, admins, and developers using Interline, the unified SMS, WhatsApp, and email client messaging platform.
+---
+
 # Interline Help Center
 
 Welcome to the Interline documentation. Interline is a unified messaging platform that lets your team handle all client communication — **SMS, WhatsApp, and email** — from one place.

@@ -1,3 +1,7 @@
+---
+description: Configure Interline company settings — organization info, timezone, address, and business hours that drive automation schedules.
+---
+
 # Company Settings
 
 Company Settings holds your organization's core information and operating hours. Find it under **Settings → Company Settings**.

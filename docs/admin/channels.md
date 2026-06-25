@@ -1,3 +1,7 @@
+---
+description: Connect and manage Interline channels — SMS, WhatsApp, and email — including channel status and how channels feed your inboxes.
+---
+
 # Channels
 
 Channels are the ways Interline sends and receives messages: **SMS**, **WhatsApp**, and **Email**. You manage them under **Settings → Channels**.

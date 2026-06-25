@@ -1,3 +1,7 @@
+---
+description: Interline API and developer reference (coming soon) — authentication, endpoints, webhooks, and integration guides.
+---
+
 # API & Reference Overview
 
 !!! warning "Skeleton — content coming later"

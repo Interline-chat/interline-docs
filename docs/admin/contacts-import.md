@@ -1,3 +1,7 @@
+---
+description: Bulk-import contacts into Interline from CSV with field mapping, tags, audiences, and duplicate handling — plus adding single contacts.
+---
+
 # Importing Contacts
 
 Your contact database lives under **Contacts** in the left navigation. From there you can browse and search contacts, build **audiences** (lists/segments), add a single contact, or **bulk-import** from a CSV file.

@@ -1,3 +1,7 @@
+---
+description: Organize Interline conversations with status, priority, custom tags, the awaiting-response flag, and advanced search.
+---
+
 # Organizing Conversations
 
 When a lot of messages are coming in, organization is what keeps the queue manageable. Interline gives you three independent labels — **status**, **priority**, and **tags** — plus an awaiting-response indicator and search.

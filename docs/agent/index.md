@@ -1,3 +1,7 @@
+---
+description: Agent Guide for Interline — handle client conversations in the shared Inbox by replying, sorting, tagging, assigning, closing, and managing notifications.
+---
+
 # Agent Guide
 
 This guide is for **agents** — the people who handle client conversations day to day. Everything an agent needs lives in the **Inbox**: reading messages, replying across email, SMS, and WhatsApp, organizing the queue, working with teammates, and staying on top of notifications.

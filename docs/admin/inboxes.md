@@ -1,3 +1,7 @@
+---
+description: Create and manage shared inboxes in Interline — name, color, and members — and route conversations to the right team.
+---
+
 # Inboxes
 
 Inboxes are the shared queues your team works from. Each is a named space (often a team or topic) that members can access to handle conversations. You manage them under **Settings → Inboxes**.

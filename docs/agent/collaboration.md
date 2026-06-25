@@ -1,3 +1,7 @@
+---
+description: Collaborate in the Interline Inbox — assign conversations, leave internal comments, @mention teammates, and open or close threads.
+---
+
 # Team Collaboration
 
 The Inbox is a shared workspace, so the most important thing is that the team stays coordinated — no two people replying to the same client, and nothing dropped because everyone assumed someone else had it. Interline handles this with assignment, internal comments, and a clear closing flow.

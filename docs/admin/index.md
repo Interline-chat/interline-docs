@@ -1,3 +1,7 @@
+---
+description: Admin Guide for Interline — set up channels, users and roles, inboxes, contacts, canned replies, broadcasts, and automation.
+---
+
 # Admin Guide
 
 The Admin Guide covers everything used to **set up and run** an Interline workspace — channels, team and roles, contacts, automation, campaigns, and message settings. These are tasks for **admins and managers**, not the day-to-day work agents do in the Inbox.

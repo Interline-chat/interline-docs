@@ -1,3 +1,7 @@
+---
+description: Route incoming Interline conversations automatically — assign new messages to the right inbox, user, or tags with auto-assign rules.
+---
+
 # Auto-Assign
 
 Auto-assign rules decide where incoming messages land — they route conversations to the right [inbox](inboxes.md) or person automatically, so work doesn't pile into one queue. Auto-assign is a type of [Automation](automation.md).

@@ -1,3 +1,7 @@
+---
+description: Add custom contact fields and manage tags in Interline to store and segment business-specific contact data.
+---
+
 # Custom Fields & Tags
 
 Beyond the built-in contact details (name, phone, email), you can add your own **custom fields** to store information specific to your business — and maintain the shared list of **tags**. Both live under **Settings → Contacts**, which has a **Custom fields** tab and a **Tags** tab.

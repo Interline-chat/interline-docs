@@ -1,3 +1,7 @@
+---
+description: Reply to clients in Interline — the reply editor, canned replies, attachments, delivery status, and the awaiting-response indicator.
+---
+
 # Reading & Replying
 
 This is the core of inbox work: open a conversation, read the history, and send a reply. This guide covers the reply editor and the tools that make replying faster.

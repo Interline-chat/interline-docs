@@ -1,3 +1,7 @@
+---
+description: Get started with Interline — sign in, learn the layout, and handle your first client messages across SMS, WhatsApp, and email.
+---
+
 # Getting Started
 
 This guide gives you a quick orientation to Interline so you can start handling client messages right away. It assumes your admin has already set up your account and connected your channels. If you're the admin, see the [Admin Guide](admin/index.md) first.

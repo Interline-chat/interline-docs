@@ -1,3 +1,7 @@
+---
+description: Build Interline audiences — manual lists and dynamic, rule-based segments — to target Broadcast campaigns and keyword sign-ups.
+---
+
 # Audiences
 
 An **audience** is a list of contacts you send [campaigns](../broadcast/index.md) to. You manage them on the **Audiences** tab of the **Contacts** page. Each audience shows its **name**, **description**, **type**, **contact count**, and **created** date.

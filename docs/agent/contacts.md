@@ -1,3 +1,7 @@
+---
+description: Work with contacts in Interline — the contact panel, saving names, custom fields, notes, tags, audiences, and conversation history.
+---
+
 # Contacts
 
 Every conversation is with a contact, and Interline keeps that contact's details right beside the conversation so you always have context while you reply.

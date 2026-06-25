@@ -1,3 +1,7 @@
+---
+description: Stay on top of Interline notifications for assignments, @mentions, new messages, and awaiting responses — and tune your alerts.
+---
+
 # Notifications
 
 Notifications keep you on top of what needs your attention without having to constantly scan the queue. As an agent, you're alerted when something becomes *yours* or needs a reply.

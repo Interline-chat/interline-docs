@@ -1,5 +1,7 @@
-# Header shows the wordmark logo, so the title text is kept short to avoid duplicating "interline"
-site_name: Help Center
+# site_name appears in the <title> of every page (good for SEO/branding).
+# It also shows next to the logo in the header. If you prefer a cleaner header,
+# set this back to "Help Center" (at a small SEO cost — pages lose the brand in <title>).
+site_name: Interline Help Center
 site_description: User, agent, admin, and API documentation for Interline — the unified client messaging platform.
 site_author: Interline
 # Custom domain (CNAME file in docs/ keeps it across gh-deploy)
@@ -89,6 +91,11 @@ extra_css:
 # ---------------------------------------------------------------------------
 plugins:
   - search
+  # Social cards = auto-generated Open Graph / Twitter preview images per page
+  # (big for click-through when links are shared on Slack, X, LinkedIn, etc.).
+  # To enable: pip install "mkdocs-material[imaging]"  (needs Cairo/Pango libs),
+  # then uncomment the next line:
+  # - social
 
 # ---------------------------------------------------------------------------
 # Markdown extensions
@@ -116,3 +123,7 @@ markdown_extensions:
 # ---------------------------------------------------------------------------
 extra:
   generator: false
+  # Google Analytics 4 — add your Measurement ID (G-XXXX) to track traffic:
+  # analytics:
+  #   provider: google
+  #   property: G-XXXXXXXXXX
