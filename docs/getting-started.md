@@ -10,17 +10,17 @@ Open Interline in your browser and sign in with the email address your admin inv
 
 Once you're in, the screen is split into three areas:
 
-- **Left rail** — switch between the three tools (Inbox, Broadcast, Keywords) and your settings.
-- **Conversation list** — the middle column, showing the messages in the currently selected mailbox.
+- **Left rail** — switch between the main areas: **Inbox**, **Campaigns** (Broadcast), **Automation** (auto-replies and Keywords), **Contacts**, and **Settings**.
+- **Conversation list** — the middle column, showing the messages in the currently selected inbox.
 - **Conversation / detail panel** — the right side, where you read and reply to the selected conversation and see contact details.
 
 ## What each tool does
 
-**Inbox** is your shared workspace for incoming messages. Every email, text, and WhatsApp message from clients lands here. You can reply, assign conversations to teammates, tag them, leave internal notes, and close them when they're handled. This is where most agents spend their time — start with the [Agent Guide](agent/index.md).
+**Inbox** is your shared workspace for incoming messages. Every SMS, WhatsApp, and email message from clients lands here. You can reply, assign conversations to teammates, tag them, leave internal notes, and close them when they're handled. This is where most agents spend their time — start with the [Agent Guide](agent/index.md).
 
-**Broadcast** lets you send a single SMS or WhatsApp message out to a whole list of contacts at once — order reminders, holiday greetings, promotions. You can personalize each message with variables, preview it, schedule it, and save it as a template. See the [Broadcast guide](broadcast/index.md).
+**Broadcast** (Campaigns) lets you send a single SMS or WhatsApp message out to a whole list of contacts at once — order reminders, holiday greetings, promotions. You can personalize each message with variables, preview it, and see how many recipients and segments it uses before sending. See the [Broadcast guide](broadcast/index.md).
 
-**Keywords** automatically replies when a client texts a specific word. For example, a client texting `HOURS` could get an automatic reply with your opening times, and texting `SIGN ME UP` could add them to a contact list. See the [Keywords guide](keywords/index.md).
+**Keywords** automatically replies when a client texts a specific word — text `HOURS` to get your opening times, or `SIGN ME UP` to be added to a contact list. Keywords are part of the **Automation** area. See the [Keywords guide](keywords/index.md).
 
 ## Your first five minutes
 
@@ -30,7 +30,7 @@ Once you're in, the screen is split into three areas:
 4. When you reply to a new number, Interline will prompt you to **save the sender's name** to your contacts — do it so the conversation has a name instead of a phone number next time.
 5. When a conversation is fully handled, **close** it to take it out of the active queue.
 
-That's the core loop. The [Agent Guide](agent/index.md) covers everything in depth — mailboxes, sorting, tags, priorities, canned replies, internal comments, notifications, and more.
+That's the core loop. The [Agent Guide](agent/index.md) covers everything in depth — inboxes, sorting, tags, priorities, canned replies, internal comments, notifications, and more.
 
 !!! note "Channels recap"
-    Interline speaks three channels: **email**, **SMS** (text), and **WhatsApp**. Most features work across all three, with a few exceptions noted in each guide (for example, rich formatting behaves differently on SMS than on email).
+    Interline speaks three channels: **SMS** (text), **WhatsApp**, and **email**. Most features work across all three, with a few exceptions noted in each guide (for example, rich formatting behaves differently on SMS than on email).

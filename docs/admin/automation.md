@@ -10,7 +10,7 @@ To create one, click **New Automation** and pick a type.
 
 ## Automation types
 
-Creating a new automation is a short wizard: **1. Automation type → 2. Triggers & response**. The available types are grouped into message workflows and automations.
+Creating a new automation is a short wizard: **1. Automation type → 2. Triggers & response**. The available types are listed below.
 
 ### Available now
 

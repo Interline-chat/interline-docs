@@ -16,6 +16,8 @@ The **Inboxes** tab lists every inbox with its **team name**, **description**, *
 4. Pick an **Inbox Color**. A live **Preview** shows how the inbox will look in the conversation list.
 5. Click **Create Inbox**.
 
+![Creating a new inbox: name, description, and color with a live preview](../assets/media/new-inbox.gif){ width="820" }
+
 ## Adding members
 
 A user's access to an inbox is controlled from **[User Management](users-roles.md)** — when you add or edit a user, you tick the inboxes they should belong to. The inbox list shows how many members each inbox has.

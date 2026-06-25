@@ -14,6 +14,8 @@ Custom fields add extra, structured data to every contact (for example *Company 
 4. Choose a **Type** — for example **Text**, **Number**, or **Checkbox** — so the field captures the right kind of value.
 5. Click **Create field**.
 
+![Creating a custom field: name, key, and type](../assets/media/new-custom-field.gif){ width="760" }
+
 Once created, the field appears on contact records (in the **Contact information** section of the [contact panel](../agent/contacts.md)) where it can be filled in, and it's available for exports and the API.
 
 ## Tags

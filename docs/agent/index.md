@@ -10,7 +10,7 @@ If you set up the workspace, manage the team, run campaigns, or configure settin
 - Work out of **shared inboxes** and your own conversations under **My Inbox** (All messages / Assigned to me).
 - See everything in **All messages**, filter by **channel**, or jump to a saved **custom view**.
 - **Sort** and organize conversations with **status**, **priority**, and **tags**.
-- Reply faster with **canned messages** and **attachments**.
+- Reply faster with **canned replies** and **attachments**.
 - Collaborate with **internal comments** and **@mentions**.
 - **Open and close** conversations to manage your queue.
 - Stay on top of **notifications** for assignments, mentions, and new messages.
@@ -21,7 +21,7 @@ If you set up the workspace, manage the team, run campaigns, or configure settin
 | Guide | What it covers |
 |-------|----------------|
 | [Mailboxes & Inboxes](mailboxes.md) | My Inbox (All messages / Assigned to me), shared inboxes, custom views, sorting, and reading the list. |
-| [Reading & Replying](reading-and-replying.md) | Opening conversations, the reply editor, canned messages, attachments, and delivery status. |
+| [Reading & Replying](reading-and-replying.md) | Opening conversations, the reply editor, canned replies, attachments, and delivery status. |
 | [Organizing Conversations](organizing.md) | Status, priority, tags, awaiting-response, and search. |
 | [Team Collaboration](collaboration.md) | Assigning, internal comments, @mentions, and opening/closing threads. |
 | [Contacts](contacts.md) | The contact panel, saving names, and contact details. |

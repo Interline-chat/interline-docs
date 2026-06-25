@@ -4,7 +4,7 @@ The Inbox is a shared workspace, so the most important thing is that the team st
 
 ## Assigning conversations
 
-Assigning a conversation makes one person responsible for it. Once assigned, it appears under that person's **Assigned to me** in [My Inbox](mailboxes.md), signalling to the rest of the team that it's being handled. The **assigned person's name is shown right on the conversation row** in the list, so anyone scanning the queue can instantly see who owns what.
+Assigning a conversation makes one person responsible for it. Once assigned, it appears under that person's **Assigned to me** in [My Inbox](mailboxes.md), signaling to the rest of the team that it's being handled. The **assigned person's name is shown right on the conversation row** in the list, so anyone scanning the queue can instantly see who owns what.
 
 Use assignment to hand a conversation to the right specialist, to claim a conversation you're taking on yourself, or to triage a shared inbox by distributing its conversations to individual owners.
 

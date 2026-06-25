@@ -27,6 +27,8 @@ Click **Upload contacts** to open the import wizard. It has three steps: **Uploa
 
 Then click **Next Step**.
 
+![Import step 1: upload a CSV, set tags, audiences, and duplicate strategy](../assets/media/contacts-import.gif){ width="820" }
+
 ### Step 2 — Map fields
 
 Match the **columns in your CSV** to Interline's contact fields (name, phone, email, custom fields). Good column headers in your file make this quick. Mapping means your spreadsheet's columns don't have to match Interline's field names exactly — you just line them up here.

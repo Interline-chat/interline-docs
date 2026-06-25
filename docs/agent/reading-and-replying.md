@@ -19,15 +19,15 @@ For **SMS and WhatsApp**, formatting is simpler because the channels themselves 
 !!! tip "Saving a contact's name"
     The first time you reply to a new sender, Interline prompts you to **save their name to your contacts**. Do it — next time the conversation shows a name instead of a raw phone number or email address, which makes the whole inbox easier to scan. See [Contacts](contacts.md).
 
-## Canned messages
+## Canned replies
 
-Canned messages are pre-written replies you can drop into the editor instead of typing the same thing over and over — things like “Thanks, we've received your order and will confirm shortly.”
+Canned replies are pre-written messages you can drop into the editor instead of typing the same thing over and over — things like “Thanks, we've received your order and will confirm shortly.”
 
-To use one, open the canned-message picker from the reply editor and choose the message you want. It's inserted into the editor, where you can edit it before sending.
+To use one, open the canned-reply picker from the reply editor and choose the reply you want. It's inserted into the editor, where you can edit it before sending.
 
-Canned messages can include **{variables}** — placeholders like `{first_name}` that fill in automatically with the contact's details, so a canned reply still reads as personal. Your admin manages the shared library of canned messages; see the [Admin Guide](../admin/index.md).
+Canned replies can include **{variables}** — placeholders like `{first_name}` that fill in automatically with the contact's details, so a canned reply still reads as personal. Your admin manages the shared library of canned replies; see [Canned Replies](../admin/canned-messages.md).
 
-![Inserting a canned reply into the editor from the canned-message picker](../assets/media/inbox-canned-reply.gif){ width="760" }
+![Inserting a canned reply into the editor from the canned-reply picker](../assets/media/inbox-canned-reply.gif){ width="760" }
 
 ## Attachments
 

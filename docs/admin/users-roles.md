@@ -17,6 +17,8 @@ Each user's row menu (**⋯**) lets you edit them, change their role or inbox ac
 5. Under **Select Inboxes**, tick the inboxes this user should have access to (or **Select All**). A user only sees conversations in the inboxes assigned to them — plus anything assigned directly to them (see [Mailboxes & Inboxes](../agent/mailboxes.md)).
 6. Click **Add User**. They'll receive an **invitation email** to set their password and join.
 
+![Adding a new user: email, role, name, and inbox assignment](../assets/media/add-user.gif){ width="760" }
+
 !!! tip "Inbox access matters"
     Assigning the right inboxes is how you scope what each agent sees. An agent on only the *Sales* inbox won't see *Support* conversations — but if a *Support* conversation is assigned to them, it still shows up under their **Assigned to me**.
 

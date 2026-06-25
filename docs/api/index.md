@@ -25,4 +25,4 @@ This section will hold the developer-facing documentation for Interline: how to 
 - Migrating from the previous third-party tool
 
 !!! tip "Rendering an OpenAPI spec"
-    When the API is ready, this MkDocs site can render an interactive reference directly from an OpenAPI/Swagger file using a plugin such as `mkdocs-swagger-ui-tag` or `neoteroi-mkdocs`. See the [README](https://github.com/) build notes for how to add it.
+    When the API is ready, this MkDocs site can render an interactive reference directly from an OpenAPI/Swagger file using a plugin such as `mkdocs-swagger-ui-tag` or `neoteroi-mkdocs`. See the project README for how to add it.

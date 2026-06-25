@@ -8,7 +8,7 @@ Interline notifies you when:
 
 - A conversation is **assigned to you** — it's now under **Assigned to me** in your [My Inbox](mailboxes.md) and you own it.
 - You're **@mentioned** in an internal comment — a teammate is pulling you in. See [Team Collaboration](collaboration.md).
-- A **new message** arrives in a mailbox you're watching, or a client replies to a conversation you own.
+- A **new message** arrives in an inbox you're watching, or a client replies to a conversation you own.
 - A conversation you own moves to **awaiting response** — the client has replied and the ball is back in your court.
 
 ## Where notifications show up

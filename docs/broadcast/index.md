@@ -16,6 +16,8 @@ To start a new one, click **New Campaign**, give it a name, and continue into th
 
 The builder is a four-step wizard: **Campaign type → Audience → Content → Review**. Your progress is shown down the left, and a live **Preview** sits on the right throughout.
 
+![Creating a Broadcast campaign: name, type, channel, audience, message, and review](../assets/media/new-campaign.gif){ width="820" }
+
 ### 1. Campaign type & channel
 
 Choose the type of campaign:
@@ -33,7 +35,7 @@ After picking a type, choose the **channel/number to send from** (for example wh
 Pick who receives the campaign. You select one or more **audiences** (contact lists). Each audience shows its **type** and **contact count**:
 
 - **Manual** audiences are fixed lists you've built by hand or by import.
-- **Automatic** audiences are dynamic segments that update themselves based on rules (for example *High Value Customers — customers with high lifetime value*).
+- **Dynamic** audiences (the builder may label these **Automatic**) are segments that update themselves based on rules (for example *High Value Customers — customers with high lifetime value*).
 
 Select as many audiences as you need; the **Preview** updates the **total recipients** as you go. You can also create a new audience on the spot with **+ Add new audience**.
 

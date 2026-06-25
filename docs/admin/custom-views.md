@@ -22,6 +22,8 @@ Under **Settings → Inboxes → Custom Views**, each view shows its **name**, *
     - …and other criteria for honing in on exactly the conversations you want.
 5. Save. The view appears under **Custom Views** in the Inbox.
 
+![Creating a custom view: name, visibility, and filter criteria](../assets/media/custom-view.gif){ width="820" }
+
 !!! tip "Good views to create"
     Set up shared views for the slices your whole team uses (e.g. *Awaiting response*, *VIP*, *WhatsApp*), and private views for your own workflow. Because views are just saved filters, they always stay current — new matching conversations show up automatically.
 

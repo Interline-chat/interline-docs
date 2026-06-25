@@ -4,6 +4,8 @@ Auto-assign rules decide where incoming messages land — they route conversatio
 
 Create one from **Automation → New Automation → Auto assign**. Setup is a four-step wizard: **Channels → Conditions → Actions → Review**.
 
+![Creating an auto-assign rule: channels, conditions, and assignment actions](../assets/media/auto-assign.gif){ width="820" }
+
 ## 1. Channels
 
 Choose which channels the rule applies to. Leave it on **All channels (default)** to apply everywhere, or pick specific ones.

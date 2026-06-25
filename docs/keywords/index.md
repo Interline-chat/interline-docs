@@ -1,6 +1,6 @@
 # Keyword Campaigns
 
-A keyword campaign replies automatically when a contact sends a message containing a specific word — text `HOURS` and get your opening times back, text `SIGN ME UP` and get added to a list. Keyword campaigns are a type of [Automation](../admin/index.md), created and managed from the **Automation** area.
+A keyword campaign replies automatically when a contact sends a message containing a specific word — text `HOURS` and get your opening times back, text `SIGN ME UP` and get added to a list. Keyword campaigns are a type of [Automation](../admin/automation.md), created and managed from the **Automation** area.
 
 ## Where keywords live
 
@@ -9,6 +9,8 @@ Keyword campaigns are created under **Automation → New Automation → Keyword 
 ## Building a keyword campaign
 
 After naming it, you go through a four-step wizard: **Keywords → Conditions → Settings → Review**.
+
+![Creating a keyword campaign: trigger word, reply message, and settings](../assets/media/keyword-campaign.gif){ width="820" }
 
 ### 1. Keywords
 

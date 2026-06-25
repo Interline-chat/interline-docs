@@ -12,6 +12,8 @@ Status tracks where a conversation is in its lifecycle. You can filter the conve
 
 Status is the broadest filter. Most agents start their day in **Unread**, work those down, then keep **Open** clear through the day.
 
+Under the hood, a conversation is **Open**, **Closed**, or **Archived** — the **All** tab includes closed ones, and you can target these states precisely when building a [custom view](../admin/custom-views.md).
+
 !!! tip "The yellow dot"
     In the conversation list, a **yellow dot** on a row marks an **open** conversation — a fast visual cue for what's still active versus what's been closed.
 
@@ -40,9 +42,9 @@ Conversations where the client sent the most recent message are marked **awaitin
 
 ## Search
 
-Use **advanced search** to find a specific conversation or contact across your mailboxes — search by contact name, phone number, email, or message content.
+Use **advanced search** to find a specific conversation or contact across your inboxes — search by contact name, phone number, email, or message content.
 
-!!! note "Phase 1 scope"
-    In this release, search is for finding conversations directly. Saved filters and filtered views are planned for a later phase. For now, lean on status, priority, and tags to shape what's in front of you.
+!!! note "Saved views vs. saved searches"
+    For a reusable, filtered list of conversations, save a [custom view](../admin/custom-views.md). Saving a *search query* itself is planned for a later phase — for now, search is for finding conversations directly, and custom views handle saved filtered lists.
 
 Next: [Team Collaboration](collaboration.md).
