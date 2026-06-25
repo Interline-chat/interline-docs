@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/</loc>
+         <loc>https://help.interline.chat/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/getting-started/</loc>
+         <loc>https://help.interline.chat/getting-started/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/admin/</loc>
+         <loc>https://help.interline.chat/admin/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/admin/auto-responders/</loc>
+         <loc>https://help.interline.chat/admin/auto-responders/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/</loc>
+         <loc>https://help.interline.chat/agent/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/collaboration/</loc>
+         <loc>https://help.interline.chat/agent/collaboration/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/contacts/</loc>
+         <loc>https://help.interline.chat/agent/contacts/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/mailboxes/</loc>
+         <loc>https://help.interline.chat/agent/mailboxes/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/notifications/</loc>
+         <loc>https://help.interline.chat/agent/notifications/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/organizing/</loc>
+         <loc>https://help.interline.chat/agent/organizing/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/agent/reading-and-replying/</loc>
+         <loc>https://help.interline.chat/agent/reading-and-replying/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/api/</loc>
+         <loc>https://help.interline.chat/api/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/broadcast/</loc>
+         <loc>https://help.interline.chat/broadcast/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
     <url>
-         <loc>https://interline-chat.github.io/interline-docs/keywords/</loc>
+         <loc>https://help.interline.chat/keywords/</loc>
          <lastmod>2026-06-24</lastmod>
     </url>
 </urlset>

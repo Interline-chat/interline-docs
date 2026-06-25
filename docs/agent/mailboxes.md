@@ -24,7 +24,7 @@ Click an inbox to focus on just its conversations. New incoming messages land in
 
 ## Custom Views
 
-**Custom Views** are saved, personalized lists you create for yourself (for example a view for a specific channel or a particular slice of conversations). Use **+ Add View** to create one. They're a convenient shortcut to a set of conversations you return to often.
+**Custom Views** are saved, filtered lists (for example a view for a specific channel or a particular slice of conversations). Use **+ Add View** to create one — you can keep it private or share it with the team. They're a convenient shortcut to a set of conversations you return to often. See [Custom Views](../admin/custom-views.md) for the full details.
 
 ## Tabs: Unread, Open, All
 

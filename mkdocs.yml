@@ -61,9 +61,21 @@ nav:
       - Notifications: agent/notifications.md
   - Admin Guide:
       - Overview: admin/index.md
-      - Auto-Responders: admin/auto-responders.md
+      - Company Settings: admin/company-settings.md
+      - Channels: admin/channels.md
+      - Users & Roles: admin/users-roles.md
+      - Inboxes: admin/inboxes.md
+      - Custom Views: admin/custom-views.md
+      - Contacts:
+          - Importing Contacts: admin/contacts-import.md
+          - Audiences: admin/audiences.md
+          - Custom Fields & Tags: admin/custom-fields.md
+      - Canned Replies: admin/canned-messages.md
       - Broadcast: broadcast/index.md
-      - Keywords: keywords/index.md
+      - Automation:
+          - Overview: admin/automation.md
+          - Auto-Responders: admin/auto-responders.md
+          - Keyword Campaigns: keywords/index.md
   - API & Reference:
       - Overview: api/index.md
 

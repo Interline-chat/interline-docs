@@ -23,7 +23,7 @@ Because the messages are tied to time windows, the right one goes out automatica
 
 ## Setup
 
-Configuring auto-responders — defining the time windows and writing each message — is an admin task, done in settings. See the [Admin Guide](index.md).
+Auto-responders are a type of [Automation](automation.md). To create one, go to **Automation → New Automation → Autoresponder**, then define the time windows and write the message for each. Manage and pause existing auto-responders from the **Automation** list.
 
 ---
 
