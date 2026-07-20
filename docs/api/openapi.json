@@ -1,1 +1,3652 @@
-{"openapi":"3.0.0","paths":{"/v1/contacts":{"post":{"description":"Create a new contact in your organization. At least one of phone_number, email, or whatsapp_id is required.","operationId":"ContactsV1Controller_create_v1","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateContactDto"}}}},"responses":{"201":{"description":"Contact created successfully","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ContactSummaryDto"}}}},"400":{"description":"Bad request - validation failed"},"401":{"description":"Unauthorized - invalid API key"},"409":{"description":"Conflict - contact already exists"}},"security":[{"bearer":[]}],"summary":"Create a new contact","tags":["Contacts"]},"get":{"description":"Retrieve a paginated list of contacts. Supports search and filtering.","operationId":"ContactsV1Controller_findAll_v1","parameters":[{"name":"has_channel","required":false,"in":"query","schema":{"type":"string","enum":["SMS","WhatsApp","Email","WebChat"]}},{"name":"tag_ids","required":false,"in":"query","schema":{"type":"array","items":{"type":"number"}}},{"name":"audience_ids","required":false,"in":"query","schema":{"type":"array","items":{"type":"number"}}},{"name":"created_after","required":false,"in":"query","schema":{"type":"string"}},{"name":"created_before","required":false,"in":"query","schema":{"type":"string"}},{"name":"after","required":false,"in":"query","schema":{"type":"string"}},{"name":"limit","required":false,"in":"query","schema":{"minimum":1,"maximum":100,"default":50,"type":"number"}}],"responses":{"200":{"description":"List of contacts","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ListContactsServiceResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"}},"security":[{"bearer":[]}],"summary":"List contacts","tags":["Contacts"]}},"/v1/contacts/{id}":{"get":{"description":"Retrieve detailed information about a specific contact.","operationId":"ContactsV1Controller_findOne_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Contact ID","schema":{"type":"number"}}],"responses":{"200":{"description":"Contact details","content":{"application/json":{"schema":{"$ref":"#/components/schemas/FullContactDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Contact not found"}},"security":[{"bearer":[]}],"summary":"Get contact by ID","tags":["Contacts"]},"patch":{"description":"Update an existing contact. Only provided fields will be updated.","operationId":"ContactsV1Controller_update_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Contact ID","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateContactDto"}}}},"responses":{"200":{"description":"Contact updated successfully","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ContactSummaryDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Contact not found"}},"security":[{"bearer":[]}],"summary":"Update contact","tags":["Contacts"]},"delete":{"description":"Permanently delete a contact. This action cannot be undone.","operationId":"ContactsV1Controller_delete_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Contact ID","schema":{"type":"number"}}],"responses":{"204":{"description":"Contact deleted successfully"},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Contact not found"}},"security":[{"bearer":[]}],"summary":"Delete contact","tags":["Contacts"]}},"/v1/messages":{"post":{"description":"Send a message through a channel. Requires either contact_id or to (phone/email). Requires either body or template_id.","operationId":"MessagesV1Controller_send_v1","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SendMessageDto"}}}},"responses":{"201":{"description":"Message queued for delivery","content":{"application/json":{"schema":{"$ref":"#/components/schemas/MessageDto"}}}},"400":{"description":"Bad request - missing required fields"},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - insufficient scope"},"429":{"description":"Too many requests - rate limit exceeded"}},"security":[{"bearer":[]}],"summary":"Send a message","tags":["Messages"]}},"/v1/conversations":{"get":{"description":"Retrieve a paginated list of conversations. Supports filtering by status, contact, and channel.","operationId":"ConversationsV1Controller_findAll_v1","parameters":[{"name":"limit","required":false,"in":"query","description":"Number of results (default: 20, max: 100)","schema":{"minimum":1,"maximum":100,"default":20,"type":"number"}},{"name":"after","required":false,"in":"query","description":"Cursor for pagination","schema":{"type":"string"}},{"name":"status","required":false,"in":"query","description":"Filter by conversation status (open, closed, snoozed)","schema":{"type":"string","enum":["open","closed","archived"]}},{"name":"contact_id","required":false,"in":"query","description":"Filter by contact ID","schema":{"type":"number"}},{"name":"channel_id","required":false,"in":"query","description":"Filter by channel ID","schema":{"type":"number"}}],"responses":{"200":{"description":"List of conversations with pagination","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"}},"security":[{"bearer":[]}],"summary":"List conversations","tags":["Conversations"]}},"/v1/conversations/{id}":{"get":{"description":"Retrieve detailed information about a specific conversation including contact and channel details.","operationId":"ConversationsV1Controller_findOne_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}}],"responses":{"200":{"description":"Conversation details","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Conversation not found"}},"security":[{"bearer":[]}],"summary":"Get conversation by ID","tags":["Conversations"]}},"/v1/conversations/{id}/messages":{"get":{"description":"Retrieve a paginated list of messages in a conversation, ordered by most recent first.","operationId":"ConversationsV1Controller_getMessages_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}},{"name":"limit","required":false,"in":"query","description":"Number of messages (default: 50, max: 100)","schema":{"minimum":1,"maximum":100,"default":50,"type":"number"}},{"name":"after","required":false,"in":"query","description":"Cursor for pagination","schema":{"type":"string"}}],"responses":{"200":{"description":"List of messages with pagination","content":{"application/json":{"schema":{"$ref":"#/components/schemas/MessageListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Conversation not found"}},"security":[{"bearer":[]}],"summary":"Get messages for a conversation","tags":["Conversations"]},"post":{"description":"Send an outbound message in an existing conversation. A closed conversation is automatically reopened.","operationId":"ConversationsV1Controller_reply_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ReplyDto"}}}},"responses":{"201":{"description":"Reply queued for delivery","content":{"application/json":{"schema":{"$ref":"#/components/schemas/MessageDto"}}}},"400":{"description":"Bad request - missing body"},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - insufficient scope"},"404":{"description":"Conversation not found"},"429":{"description":"Too many requests"}},"security":[{"bearer":[]}],"summary":"Reply to a conversation","tags":["Conversations"]}},"/v1/conversations/{id}/activity":{"get":{"description":"Retrieve a paginated history of assignments, status and priority changes, and internal comments, ordered by most recent first.","operationId":"ConversationsV1Controller_getActivity_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}},{"name":"limit","required":false,"in":"query","description":"Number of activity entries (default: 50, max: 100)","schema":{"minimum":1,"maximum":100,"default":50,"type":"number"}},{"name":"after","required":false,"in":"query","description":"Cursor for pagination","schema":{"type":"string"}},{"name":"activity_type","required":false,"in":"query","description":"Filter by activity type. Repeat the parameter or pass a comma-separated list.","schema":{"type":"array","items":{"type":"string","enum":["assigned","unassigned","status_change","priority_change","comment"]}}}],"responses":{"200":{"description":"List of activity with pagination","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationActivityListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Conversation not found"}},"security":[{"bearer":[]}],"summary":"Get activity for a conversation","tags":["Conversations"]}},"/v1/conversations/{id}/status":{"put":{"description":"Set a conversation status to \"open\" or \"closed\".","operationId":"ConversationsV1Controller_updateStatus_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateStatusDto"}}}},"responses":{"200":{"description":"Updated conversation status","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationStatusResponseDto"}}}},"400":{"description":"Bad request - invalid status"},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - insufficient scope"},"404":{"description":"Conversation not found"},"429":{"description":"Too many requests"}},"security":[{"bearer":[]}],"summary":"Open or close a conversation","tags":["Conversations"]}},"/v1/conversations/{id}/assign":{"post":{"description":"Assign a conversation to a user, or pass a null assignee_user_id to unassign. Optionally move it to a different inbox.","operationId":"ConversationsV1Controller_assign_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AssignConversationDto"}}}},"responses":{"200":{"description":"Updated assignment","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationAssignmentResponseDto"}}}},"201":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationAssignmentResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - insufficient scope"},"404":{"description":"Conversation or assignee user not found"},"429":{"description":"Too many requests"}},"security":[{"bearer":[]}],"summary":"Assign or unassign a conversation","tags":["Conversations"]}},"/v1/conversations/{id}/comments":{"post":{"description":"Add an internal note to a conversation, optionally with rich-text blocks and user mentions. Comments are not sent to the contact.","operationId":"ConversationsV1Controller_addComment_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Conversation ID","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AddCommentDto"}}}},"responses":{"201":{"description":"Comment added","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ConversationCommentResponseDto"}}}},"400":{"description":"Bad request - missing text"},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - insufficient scope"},"404":{"description":"Conversation not found"},"429":{"description":"Too many requests"}},"security":[{"bearer":[]}],"summary":"Add an internal comment","tags":["Conversations"]}},"/v1/channels":{"get":{"description":"Retrieve all active channels for your organization. Returns channel ID, name, type (whatsapp, email, etc.), and status.","operationId":"ChannelsV1Controller_findAll_v1","parameters":[],"responses":{"200":{"description":"List of channels","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ChannelListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"}},"security":[{"bearer":[]}],"summary":"List channels","tags":["Channels"]}},"/v1/templates":{"get":{"description":"Retrieve WhatsApp message templates. Templates must be approved by Meta before they can be used for sending messages.","operationId":"TemplatesV1Controller_findAll_v1","parameters":[{"name":"channel_id","required":false,"in":"query","description":"Filter by WhatsApp channel ID","schema":{"type":"number"}},{"name":"status","required":false,"in":"query","description":"Filter by status (APPROVED, PENDING, REJECTED)","schema":{"type":"string","enum":["DRAFT","PENDING","APPROVED","REJECTED","PAUSED","DISABLED"]}},{"name":"category","required":false,"in":"query","description":"Filter by category (MARKETING, UTILITY, AUTHENTICATION)","schema":{"type":"string","enum":["MARKETING","UTILITY","AUTHENTICATION"]}}],"responses":{"200":{"description":"List of templates","content":{"application/json":{"schema":{"$ref":"#/components/schemas/TemplateListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"}},"security":[{"bearer":[]}],"summary":"List WhatsApp templates","tags":["Templates"]}},"/v1/webhooks":{"post":{"description":"Register a new webhook endpoint to receive event notifications. You can subscribe to specific events like message.received, conversation.created, etc.","operationId":"WebhooksV1Controller_create_v1","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateWebhookDto"}}}},"responses":{"201":{"description":"Webhook registered successfully","content":{"application/json":{"schema":{"$ref":"#/components/schemas/WebhookDto"}}}},"400":{"description":"Bad request - invalid URL or events"},"401":{"description":"Unauthorized - invalid API key"}},"security":[{"bearer":[]}],"summary":"Register a webhook","tags":["Webhooks"]},"get":{"description":"Retrieve all registered webhooks for your organization.","operationId":"WebhooksV1Controller_findAll_v1","parameters":[],"responses":{"200":{"description":"List of webhooks","content":{"application/json":{"schema":{"$ref":"#/components/schemas/WebhookListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"}},"security":[{"bearer":[]}],"summary":"List webhooks","tags":["Webhooks"]}},"/v1/webhooks/{id}":{"get":{"description":"Retrieve details of a specific webhook including its configuration and health status.","operationId":"WebhooksV1Controller_findOne_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Webhook ID","schema":{"type":"number"}}],"responses":{"200":{"description":"Webhook details","content":{"application/json":{"schema":{"$ref":"#/components/schemas/WebhookDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Webhook not found"}},"security":[{"bearer":[]}],"summary":"Get webhook by ID","tags":["Webhooks"]},"patch":{"description":"Update webhook configuration. You can change the URL, subscribed events, or enable/disable the webhook.","operationId":"WebhooksV1Controller_update_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Webhook ID","schema":{"type":"number"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateWebhookDto"}}}},"responses":{"200":{"description":"Webhook updated successfully","content":{"application/json":{"schema":{"$ref":"#/components/schemas/WebhookDto"}}}},"400":{"description":"Bad request - invalid data"},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Webhook not found"}},"security":[{"bearer":[]}],"summary":"Update webhook","tags":["Webhooks"]},"delete":{"description":"Permanently delete a webhook. This will stop all future event deliveries to this endpoint.","operationId":"WebhooksV1Controller_remove_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Webhook ID","schema":{"type":"number"}}],"responses":{"204":{"description":"Webhook deleted successfully"},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Webhook not found"}},"security":[{"bearer":[]}],"summary":"Delete webhook","tags":["Webhooks"]}},"/v1/webhooks/{id}/deliveries":{"get":{"description":"Retrieve recent delivery attempts for a webhook. Useful for debugging failed deliveries.","operationId":"WebhooksV1Controller_getDeliveries_v1","parameters":[{"name":"id","required":true,"in":"path","description":"Webhook ID","schema":{"type":"number"}}],"responses":{"200":{"description":"List of delivery attempts","content":{"application/json":{"schema":{"$ref":"#/components/schemas/WebhookDeliveryListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"404":{"description":"Webhook not found"}},"security":[{"bearer":[]}],"summary":"Get webhook delivery history","tags":["Webhooks"]}},"/v1/users":{"get":{"description":"Retrieve a paginated list of the members of your organization. Removed members are excluded. Use these IDs to resolve `assigned_user_id` on conversations, or to pick an `assignee_user_id` when assigning.","operationId":"UsersV1Controller_findAll_v1","parameters":[{"name":"role","required":false,"in":"query","description":"Filter by organization role (admin, manager, agent)","schema":{"type":"string","enum":["admin","manager","agent"]}},{"name":"status","required":false,"in":"query","description":"Filter by user status (active, inactive, disabled)","schema":{"type":"string","enum":["active","inactive","disabled"]}},{"name":"after","required":false,"in":"query","description":"Cursor for pagination","schema":{"type":"string"}},{"name":"limit","required":false,"in":"query","description":"Number of results (default: 50, max: 100)","schema":{"minimum":1,"maximum":100,"default":50,"type":"number"}}],"responses":{"200":{"description":"List of users with pagination","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserListResponseDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - API key lacks the users:read scope"},"429":{"description":"Rate limit exceeded"}},"security":[{"bearer":[]}],"summary":"List users","tags":["Users"]}},"/v1/users/{id}":{"get":{"description":"Retrieve a single member of your organization. Returns 404 if the user is not an active member of your organization.","operationId":"UsersV1Controller_findOne_v1","parameters":[{"name":"id","required":true,"in":"path","description":"User ID","schema":{"type":"number"}}],"responses":{"200":{"description":"User details","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserDto"}}}},"401":{"description":"Unauthorized - invalid API key"},"403":{"description":"Forbidden - API key lacks the users:read scope"},"404":{"description":"User not found"},"429":{"description":"Rate limit exceeded"}},"security":[{"bearer":[]}],"summary":"Get user by ID","tags":["Users"]}}},"info":{"title":"Interline Public API","description":"\n## Overview\n\nThe Interline Public API allows you to programmatically send messages, manage contacts, read conversations, and receive real-time webhook notifications.\n\nThis page documents **only** `/v1/...` routes. It is published for customers at [help.interline.chat/api/reference](https://help.interline.chat/api/reference/), rebuilt from this spec on every production deploy. The full authenticated product API (JWT) is internal, and documented separately on the app host at `/api/reference`.\n\n## Authentication\n\nAll API requests require an API key, passed as a Bearer token:\n\n```\nAuthorization: Bearer ilc_live_your_api_key_here\n```\n\nYou can create and manage API keys in the Interline dashboard under Settings > API Keys.\n\n## Rate Limiting\n\nAuthenticated requests are rate limited per endpoint, based on the HTTP method:\n\n- Read requests (`GET`, `HEAD`): 120 requests per minute per API key\n- Write requests (everything else): 30 requests per minute per API key\n\nSome endpoints set a stricter limit than these defaults; check the endpoint's documentation for its specific limit.\n\nAuthenticated limits are enforced at two levels — per API key, and per organization across all of that organization's API keys combined. The organization ceiling scales with the org's subscription plan, so it is always a multiple of the per-key limit. Requests without a valid API key are additionally limited per IP address before authentication.\n\nRate limit headers are included in every response, reflecting whichever applicable limit is closest to being reached:\n\n- `X-RateLimit-Limit`: Maximum requests per minute for the binding scope\n- `X-RateLimit-Remaining`: Remaining requests in current window\n- `X-RateLimit-Reset`: Unix timestamp when the limit resets\n- `Retry-After`: Seconds to wait before retrying (sent only on `429` responses)\n\n## Scopes\n\nAPI keys can be restricted to specific scopes:\n\n| Scope | Description |\n|-------|-------------|\n| `messages:read` | Read message status and content |\n| `messages:write` | Send messages |\n| `contacts:read` | List and view contacts |\n| `contacts:write` | Create and update contacts |\n| `conversations:read` | List and view conversations |\n| `conversations:write` | Open, close, assign, comment on, and reply to conversations |\n| `channels:read` | List available channels |\n| `templates:read` | List WhatsApp templates |\n| `webhooks:read` | List registered webhooks |\n| `webhooks:write` | Create and delete webhooks |\n| `users:read` | List and view organization members |\n\n## Errors\n\nAll errors follow a consistent format:\n\n```json\n{\n  \"error\": \"error_code\",\n  \"message\": \"Human-readable description\",\n  \"statusCode\": 400\n}\n```\n\n| Status | Error Code | Description |\n|--------|-----------|-------------|\n| 400 | `bad_request` | Invalid request body or parameters |\n| 401 | `unauthorized` | Missing or invalid API key |\n| 403 | `insufficient_scope` | API key lacks required scope |\n| 404 | `not_found` | Resource not found |\n| 429 | `rate_limit_exceeded` | Too many requests |\n| 500 | `internal_error` | Server error |\n","version":"1.0","contact":{}},"tags":[{"name":"Messages","description":"Send and retrieve messages"},{"name":"Contacts","description":"Manage contacts"},{"name":"Conversations","description":"View conversations and message history; open, close, assign, comment, and reply"},{"name":"Channels","description":"List available messaging channels"},{"name":"Templates","description":"WhatsApp message templates"},{"name":"Webhooks","description":"Configure webhook notifications"}],"servers":[{"url":"https://api.interline.chat","description":"Production"},{"url":"http://localhost:3000","description":"Local Development"}],"components":{"securitySchemes":{"bearer":{"scheme":"bearer","bearerFormat":"JWT","type":"http","description":"API key, e.g. `Authorization: Bearer ilc_live_...`"}},"schemas":{"CreateContactDto":{"type":"object","properties":{"first_name":{"type":"string","maxLength":100},"last_name":{"type":"string","maxLength":100},"email":{"type":"string","format":"email"},"phone_number":{"type":"string","maxLength":50},"whatsapp_id":{"type":"string","maxLength":50},"profile_image":{"type":"string"},"address_line1":{"type":"string","maxLength":255},"address_line2":{"type":"string","maxLength":255},"city":{"type":"string","maxLength":100},"state":{"type":"string","maxLength":100},"postal_code":{"type":"string","maxLength":20},"country":{"type":"string","maxLength":100},"company_name":{"type":"string"},"notes":{"type":"string"},"preferred_channel_id":{"type":"number"},"tags":{"type":"array","items":{"type":"number"}},"audiences":{"type":"array","items":{"type":"number"}},"custom_fields":{"type":"object"}},"required":["first_name"]},"ContactSummaryDto":{"type":"object","properties":{"id":{"type":"number"},"first_name":{"type":"string"},"last_name":{"type":"string"},"email":{"type":"string","nullable":true},"phone_number":{"type":"string","nullable":true},"whatsapp_id":{"type":"string","nullable":true},"profile_image":{"type":"string","nullable":true},"last_contact_date":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"number"}},"audiences":{"type":"array","items":{"type":"number"}},"address_line1":{"type":"string","nullable":true},"address_line2":{"type":"string","nullable":true},"city":{"type":"string","nullable":true},"state":{"type":"string","nullable":true},"postal_code":{"type":"string","nullable":true},"country":{"type":"string","nullable":true},"company_name":{"type":"string","nullable":true},"notes":{"type":"string","nullable":true},"created_at":{"type":"string"},"custom_fields":{"type":"object"}},"required":["id","first_name","last_name","email","phone_number","whatsapp_id","profile_image","last_contact_date","tags","address_line1","address_line2","city","state","postal_code","country","company_name","notes","created_at"]},"ListContactsServiceResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/ContactSummaryDto"}},"nextCursor":{"type":"string"},"total":{"type":"number"},"filtered_count":{"type":"number"}},"required":["data","total","filtered_count"]},"FullContactDto":{"type":"object","properties":{"id":{"type":"number"},"first_name":{"type":"string"},"last_name":{"type":"string"},"email":{"type":"string","nullable":true},"phone_number":{"type":"string","nullable":true},"whatsapp_id":{"type":"string","nullable":true},"profile_image":{"type":"string","nullable":true},"last_contact_date":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"number"}},"audiences":{"type":"array","items":{"type":"number"}},"address_line1":{"type":"string","nullable":true},"address_line2":{"type":"string","nullable":true},"city":{"type":"string","nullable":true},"state":{"type":"string","nullable":true},"postal_code":{"type":"string","nullable":true},"country":{"type":"string","nullable":true},"company_name":{"type":"string","nullable":true},"notes":{"type":"string","nullable":true},"created_at":{"type":"string"},"custom_fields":{"type":"object"},"total_messages":{"type":"number","nullable":true}},"required":["id","first_name","last_name","email","phone_number","whatsapp_id","profile_image","last_contact_date","tags","address_line1","address_line2","city","state","postal_code","country","company_name","notes","created_at","total_messages"]},"UpdateContactDto":{"type":"object","properties":{"first_name":{"type":"string","maxLength":100},"last_name":{"type":"string","maxLength":100},"email":{"type":"string","format":"email"},"phone_number":{"type":"string","maxLength":50},"whatsapp_id":{"type":"string","maxLength":50},"profile_image":{"type":"string"},"address_line1":{"type":"string","maxLength":255},"address_line2":{"type":"string","maxLength":255},"city":{"type":"string","maxLength":100},"state":{"type":"string","maxLength":100},"postal_code":{"type":"string","maxLength":20},"country":{"type":"string","maxLength":100},"company_name":{"type":"string"},"notes":{"type":"string"},"preferred_channel_id":{"type":"number"},"tags":{"type":"array","items":{"type":"number"}},"audiences":{"type":"array","items":{"type":"number"}},"custom_fields":{"type":"object"}}},"TemplateHeaderMediaDto":{"type":"object","properties":{"attachment_id":{"type":"number","example":123,"description":"Attachment ID for template header media"}},"required":["attachment_id"]},"ContactDataDto":{"type":"object","properties":{"first_name":{"type":"string","maxLength":100,"example":"John","description":"First name for auto-created contact"},"last_name":{"type":"string","maxLength":100,"example":"Doe","description":"Last name for auto-created contact"}}},"SendMessageDto":{"type":"object","properties":{"channel_id":{"type":"number","example":53,"description":"Channel ID to send message through"},"contact_id":{"type":"number","example":100,"description":"Contact ID to send message to (mutually exclusive with \"to\")"},"to":{"type":"string","example":"+1234567890","description":"Phone number or email to send to (mutually exclusive with \"contact_id\")"},"body":{"type":"string","maxLength":10000,"example":"Hello! Your order has shipped.","description":"Message body (required unless using template)"},"subject":{"type":"string","maxLength":500,"example":"Order Update","description":"Email subject (email channel only)"},"cc":{"example":["cc@example.com"],"description":"CC recipients (email only)","type":"array","items":{"type":"string","format":"email"}},"bcc":{"example":["bcc@example.com"],"description":"BCC recipients (email only)","type":"array","items":{"type":"string","format":"email"}},"template_id":{"type":"string","example":"order_confirmation","description":"WhatsApp template ID"},"template_params":{"example":["ORD-12345"],"description":"Template parameter values","type":"array","items":{"type":"string"}},"template_header_media":{"description":"Media for template header","allOf":[{"$ref":"#/components/schemas/TemplateHeaderMediaDto"}]},"contact_data":{"description":"Contact data for auto-creation when using \"to\"","allOf":[{"$ref":"#/components/schemas/ContactDataDto"}]},"attachment_ids":{"example":[1,2],"description":"Attachment IDs to include","type":"array","items":{"type":"number"}}},"required":["channel_id"]},"MessageDto":{"type":"object","properties":{"id":{"type":"number","example":1234},"content":{"type":"string","example":"Hello, your order has shipped!"},"sender_type":{"type":"string","example":"user","enum":["user","contact","workflow","api","automation","echo"]},"sender_id":{"type":"number","example":5},"status":{"type":"string","example":"delivered","enum":["scheduled","pending","sent","delivered","read","failed"]},"sent_at":{"type":"string","example":"2025-01-27T10:00:01Z"},"delivered_at":{"type":"string","example":"2025-01-27T10:00:03Z"},"read_at":{"type":"string","example":"2025-01-27T10:00:05Z"}},"required":["id","content","sender_type","status","sent_at"]},"ConversationContactDto":{"type":"object","properties":{"id":{"type":"number","example":100},"first_name":{"type":"string","example":"John"},"last_name":{"type":"string","example":"Doe"},"phone_number":{"type":"string","example":"+1234567890"},"email":{"type":"string","example":"john@example.com"},"whatsapp_id":{"type":"string","example":"1234567890"},"profile_image":{"type":"string","nullable":true,"example":"https://example.com/avatar.jpg"}},"required":["id","first_name","last_name"]},"ConversationLastMessageDto":{"type":"object","properties":{"content":{"type":"string","nullable":true,"example":"Thanks for your help!"},"subject":{"type":"string","nullable":true,"example":"Order update"},"sender_type":{"type":"string","nullable":true,"example":"contact","enum":["user","contact","workflow","api","automation","echo"]},"attachment_type":{"type":"string","nullable":true,"example":"image"},"at":{"type":"string","nullable":true,"example":"2025-01-27T09:55:00Z"}}},"ConversationDto":{"type":"object","properties":{"id":{"type":"number","example":567},"status":{"type":"string","example":"open","enum":["open","closed","archived"]},"priority":{"type":"string","example":"medium"},"channel_type":{"type":"string","example":"WhatsApp","enum":["WhatsApp","Email","SMS"]},"channel_id":{"type":"number","example":53},"inbox_id":{"type":"number","example":7},"assigned_user_id":{"type":"number","nullable":true,"example":5},"labels":{"example":["vip"],"type":"array","items":{"type":"string"}},"unread_count":{"type":"number","example":3},"total_messages":{"type":"number","example":12},"contact":{"nullable":true,"allOf":[{"$ref":"#/components/schemas/ConversationContactDto"}]},"last_message":{"$ref":"#/components/schemas/ConversationLastMessageDto"},"last_message_at":{"type":"string","example":"2025-01-27T09:55:00Z"},"created_at":{"type":"string","example":"2025-01-25T14:00:00Z"},"updated_at":{"type":"string","example":"2025-01-27T09:55:00Z"}},"required":["id","status","priority","channel_type","channel_id","labels","unread_count","total_messages","last_message","created_at","updated_at"]},"ConversationListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/ConversationDto"}},"next_cursor":{"type":"string","nullable":true,"description":"Cursor for next page"},"has_more":{"type":"boolean","description":"Whether more results exist"}},"required":["data","has_more"]},"MessageListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/MessageDto"}},"next_cursor":{"type":"string","nullable":true,"description":"Cursor for next page"},"has_more":{"type":"boolean","description":"Whether more results exist"}},"required":["data","has_more"]},"ConversationActivityDto":{"type":"object","properties":{"id":{"type":"number","example":892},"activity_type":{"type":"string","example":"assigned","enum":["assigned","unassigned","status_change","priority_change","comment"]},"actor_type":{"type":"string","example":"user","enum":["user","contact","workflow","api","automation","echo"]},"actor_id":{"type":"number","nullable":true,"example":42},"activity_data":{"type":"object","description":"Shape depends on activity_type. assigned: assigned_to, previously_assigned_to, assigned_to_inbox, previously_assigned_to_inbox. unassigned: previously_assigned_to, assigned_to_inbox, previously_assigned_to_inbox. status_change: from, to, reason. priority_change: from, to. comment: text, blocks, mentions.","example":{"text":"Talk to Sarah about the refund","blocks":[{"type":"text","text":"Talk to "},{"type":"user","user_id":"17"},{"type":"text","text":" about the refund"}],"mentions":[{"user_id":17}]}},"created_at":{"type":"string","example":"2025-01-27T10:00:00Z"}},"required":["id","activity_type","actor_type","created_at"]},"ConversationActivityListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/ConversationActivityDto"}},"next_cursor":{"type":"string","nullable":true,"description":"Cursor for next page"},"has_more":{"type":"boolean","description":"Whether more results exist"}},"required":["data","has_more"]},"UpdateStatusDto":{"type":"object","properties":{"status":{"enum":["open","closed"],"type":"string","example":"closed","description":"New status for the conversation (\"open\" or \"closed\")"}},"required":["status"]},"ConversationStatusResponseDto":{"type":"object","properties":{"status":{"type":"string","example":"closed","enum":["open","closed"]},"activity_id":{"type":"number","nullable":true,"example":890,"description":"ID of the activity logged for this change (null if unchanged)"}},"required":["status"]},"AssignConversationDto":{"type":"object","properties":{"assignee_user_id":{"type":"number","nullable":true,"example":42,"description":"ID of the user to assign the conversation to. Pass null to unassign. Omit to leave the assignee unchanged."},"inbox_id":{"type":"number","example":7,"description":"ID of the inbox to move the conversation to (optional)."}}},"ConversationAssignmentResponseDto":{"type":"object","properties":{"assigned_user_id":{"type":"number","nullable":true,"example":42,"description":"ID of the assigned user (null if unassigned)"},"activity_id":{"type":"number","nullable":true,"example":891,"description":"ID of the activity logged for this change (null if unchanged)"}}},"TextBlockDto":{"type":"object","properties":{"type":{"type":"string","enum":["text","user"],"description":"Type of the block","example":"text"},"text":{"type":"string","description":"Text content (for text blocks)","example":"Reminder to talk to "},"user_id":{"type":"string","description":"User ID (for user blocks)","example":"UUS83BYQ3"}},"required":["type"]},"AddCommentDto":{"type":"object","properties":{"text":{"type":"string","maxLength":10000,"example":"Customer asked for a callback tomorrow.","description":"Plain-text internal note. Required, and used as the fallback rendering when blocks are supplied."},"blocks":{"description":"Optional rich-text structure. When omitted, the note is stored as a single text block.","example":[{"type":"text","text":"Talk to "},{"type":"user","user_id":"17"},{"type":"text","text":" about the refund"}],"type":"array","items":{"$ref":"#/components/schemas/TextBlockDto"}}},"required":["text"]},"ConversationCommentResponseDto":{"type":"object","properties":{"id":{"type":"number","example":892,"description":"ID of the created comment activity"},"created_at":{"type":"string","example":"2025-01-27T10:00:00Z"}},"required":["id","created_at"]},"ReplyDto":{"type":"object","properties":{"body":{"type":"string","example":"Thanks for reaching out — how can we help?","description":"Text content of the reply."},"subject":{"type":"string","description":"Subject line (email only)."},"cc":{"description":"CC recipients (email only).","type":"array","items":{"type":"string","format":"email"}},"bcc":{"description":"BCC recipients (email only).","type":"array","items":{"type":"string","format":"email"}},"attachment_ids":{"description":"IDs of previously uploaded attachments to include.","type":"array","items":{"type":"number"}},"reply_to_message_id":{"type":"number","minimum":1,"description":"Internal message ID to reply to (WhatsApp only)."}},"required":["body"]},"ChannelDto":{"type":"object","properties":{"id":{"type":"number","example":53},"name":{"type":"string","example":"Main WhatsApp"},"type":{"type":"string","example":"WhatsApp","enum":["WhatsApp","Email","SMS","Chat"]},"status":{"type":"string","example":"active","enum":["active","inactive","deleted"]},"created_at":{"type":"string","example":"2025-01-15T10:00:00Z"}},"required":["id","name","type","status","created_at"]},"ChannelListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/ChannelDto"}}},"required":["data"]},"TemplateComponentDto":{"type":"object","properties":{"type":{"type":"string","example":"BODY"},"text":{"type":"string","example":"Your order {{1}} has been confirmed."},"parameter_count":{"type":"number","example":1}},"required":["type"]},"TemplateDto":{"type":"object","properties":{"id":{"type":"number","example":42},"name":{"type":"string","example":"order_confirmation"},"language":{"type":"string","example":"en"},"status":{"type":"string","example":"APPROVED","enum":["DRAFT","PENDING","APPROVED","REJECTED","PAUSED","DISABLED"]},"category":{"type":"string","example":"UTILITY"},"components":{"type":"array","items":{"$ref":"#/components/schemas/TemplateComponentDto"}},"quality_score":{"type":"string","nullable":true,"example":"GREEN"},"created_at":{"type":"string","example":"2025-01-15T10:00:00Z"}},"required":["id","name","language","status","category","components","created_at"]},"TemplateListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/TemplateDto"}}},"required":["data"]},"CreateWebhookDto":{"type":"object","properties":{"url":{"type":"string","maxLength":2048,"format":"uri","pattern":"/^https:\\/\\//"},"events":{"type":"array","items":{"type":"string","enum":["message.received","message.created","message.status_changed","conversation.created","conversation.assigned","conversation.status_changed","contact.created","contact.updated"]}},"secret":{"type":"string","minLength":16,"maxLength":255}},"required":["url","events","secret"]},"WebhookDto":{"type":"object","properties":{"id":{"type":"number","example":1},"url":{"type":"string","example":"https://customer-app.com/webhooks/interline"},"events":{"type":"string","example":["message.received","message.status_changed"],"enum":["message.received","message.created","message.status_changed","conversation.created","conversation.assigned","conversation.status_changed","contact.created","contact.updated"]},"is_active":{"type":"boolean","example":true},"failure_count":{"type":"number","example":0},"disabled_at":{"type":"string","example":null},"created_at":{"type":"string","example":"2025-01-27T10:10:00Z"},"updated_at":{"type":"string","example":"2025-01-27T10:12:00Z"}},"required":["id","url","events","is_active"]},"WebhookListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/WebhookDto"}}},"required":["data"]},"WebhookDeliveryDto":{"type":"object","properties":{"id":{"type":"number","example":123},"event":{"type":"string","example":"message.received"},"status":{"type":"string","example":"success","enum":["pending","success","failed"]},"http_status":{"type":"number","example":200},"attempts":{"type":"number","example":1},"created_at":{"type":"string","example":"2025-01-27T10:15:00Z"},"completed_at":{"type":"string","example":"2025-01-27T10:15:01Z"}},"required":["id","event","status","attempts","created_at"]},"WebhookDeliveryListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/WebhookDeliveryDto"}}},"required":["data"]},"UpdateWebhookDto":{"type":"object","properties":{"url":{"type":"string","maxLength":2048,"format":"uri","pattern":"/^https:\\/\\//"},"events":{"type":"array","items":{"type":"string","enum":["message.received","message.created","message.status_changed","conversation.created","conversation.assigned","conversation.status_changed","contact.created","contact.updated"]}},"is_active":{"type":"boolean"}}},"UserDto":{"type":"object","properties":{"id":{"type":"number","example":12},"first_name":{"type":"string","nullable":true,"example":"Ada"},"last_name":{"type":"string","nullable":true,"example":"Lovelace"},"email":{"type":"string","example":"ada@acme.com"},"role":{"type":"string","example":"admin","enum":["admin","manager","agent"]},"status":{"type":"string","example":"active","enum":["active","inactive","disabled"]},"avatar_url":{"type":"string","nullable":true,"example":"https://cdn.interline.com/avatars/ada.png"},"timezone":{"type":"string","example":"UTC"},"last_login_at":{"type":"string","nullable":true,"example":"2025-01-27T10:15:00Z"},"created_at":{"type":"string","example":"2025-01-15T10:00:00Z"}},"required":["id","first_name","last_name","email","role","status","avatar_url","timezone","last_login_at","created_at"]},"UserListResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/UserDto"}},"next_cursor":{"type":"string","nullable":true,"example":"MjAyNS0wMS0xNVQxMDowMDowMC4wMDBafDEy"},"has_more":{"type":"boolean","example":false}},"required":["data","next_cursor","has_more"]},"RegisterUserDto":{"type":"object","properties":{"firstName":{"type":"string","description":"User's first name","example":"John"},"lastName":{"type":"string","description":"User's last name","example":"Doe"},"email":{"type":"string","format":"email","description":"User's email address","example":"john.doe@example.com"},"password":{"type":"string","minLength":6,"description":"User's password (min 6 characters)","example":"password123"},"orgName":{"type":"string","description":"Name of the organization to create","example":"Acme Inc."}},"required":["firstName","lastName","email","password","orgName"]},"LoginUserDto":{"type":"object","properties":{"email":{"type":"string","format":"email"},"password":{"type":"string","minLength":6}},"required":["email","password"]},"GoogleSignInDto":{"type":"object","properties":{"idToken":{"type":"string"}},"required":["idToken"]},"GoogleAcceptInvitationDto":{"type":"object","properties":{"idToken":{"type":"string","description":"Google ID token from credential response"},"userId":{"type":"number","description":"User ID from invitation link","example":123},"expires_at":{"type":"string","description":"Expiration timestamp from invitation link","example":"2025-12-09T10:00:00.000Z"},"signature":{"type":"string","description":"HMAC signature from invitation link"}},"required":["idToken","userId","expires_at","signature"]},"ChangePasswordDto":{"type":"object","properties":{"currentPassword":{"type":"string","description":"Current password for verification","example":"currentPassword123"},"newPassword":{"type":"string","minLength":8,"description":"New password for the user","example":"newSecurePassword123"}},"required":["currentPassword","newPassword"]},"UpdateProfileDto":{"type":"object","properties":{"firstName":{"type":"string","description":"First name","example":"Alice"},"lastName":{"type":"string","description":"Last name","example":"Smith"}},"required":["firstName","lastName"]},"ForgotPasswordDto":{"type":"object","properties":{"email":{"type":"string","format":"email","description":"Email address of the user requesting password reset","example":"user@example.com"},"turnstileToken":{"type":"string","description":"Cloudflare Turnstile token for bot protection"}},"required":["email"]},"AcceptInvitationDto":{"type":"object","properties":{"userId":{"type":"number","description":"User ID from invitation link","example":123},"expires_at":{"type":"string","description":"Expiration timestamp from invitation link","example":"2025-12-09T10:00:00.000Z"},"signature":{"type":"string","description":"HMAC signature from invitation link","example":"a1b2c3d4e5f6..."},"password":{"type":"string","minLength":6,"description":"New password (min 6 characters)","example":"SecurePass123"},"passwordConfirmation":{"type":"string","minLength":6,"description":"Password confirmation","example":"SecurePass123"},"firstName":{"type":"string","description":"First name (optional)","example":"John"},"lastName":{"type":"string","description":"Last name (optional)","example":"Doe"}},"required":["userId","expires_at","signature","password","passwordConfirmation"]}}}}
+{
+  "components": {
+    "schemas": {
+      "AcceptInvitationDto": {
+        "properties": {
+          "expires_at": {
+            "description": "Expiration timestamp from invitation link",
+            "example": "2025-12-09T10:00:00.000Z",
+            "type": "string"
+          },
+          "firstName": {
+            "description": "First name (optional)",
+            "example": "John",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "Last name (optional)",
+            "example": "Doe",
+            "type": "string"
+          },
+          "password": {
+            "description": "New password (min 6 characters)",
+            "example": "SecurePass123",
+            "minLength": 6,
+            "type": "string"
+          },
+          "passwordConfirmation": {
+            "description": "Password confirmation",
+            "example": "SecurePass123",
+            "minLength": 6,
+            "type": "string"
+          },
+          "signature": {
+            "description": "HMAC signature from invitation link",
+            "example": "a1b2c3d4e5f6...",
+            "type": "string"
+          },
+          "userId": {
+            "description": "User ID from invitation link",
+            "example": 123,
+            "type": "number"
+          }
+        },
+        "required": [
+          "userId",
+          "expires_at",
+          "signature",
+          "password",
+          "passwordConfirmation"
+        ],
+        "type": "object"
+      },
+      "AddCommentDto": {
+        "properties": {
+          "blocks": {
+            "description": "Optional rich-text structure. When omitted, the note is stored as a single text block.",
+            "example": [
+              {
+                "text": "Talk to ",
+                "type": "text"
+              },
+              {
+                "type": "user",
+                "user_id": "17"
+              },
+              {
+                "text": " about the refund",
+                "type": "text"
+              }
+            ],
+            "items": {
+              "$ref": "#/components/schemas/TextBlockDto"
+            },
+            "type": "array"
+          },
+          "text": {
+            "description": "Plain-text internal note. Required, and used as the fallback rendering when blocks are supplied.",
+            "example": "Customer asked for a callback tomorrow.",
+            "maxLength": 10000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "type": "object"
+      },
+      "AssignConversationDto": {
+        "properties": {
+          "assignee_user_id": {
+            "description": "ID of the user to assign the conversation to. Pass null to unassign. Omit to leave the assignee unchanged.",
+            "example": 42,
+            "nullable": true,
+            "type": "number"
+          },
+          "inbox_id": {
+            "description": "ID of the inbox to move the conversation to (optional).",
+            "example": 7,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "ChangePasswordDto": {
+        "properties": {
+          "currentPassword": {
+            "description": "Current password for verification",
+            "example": "currentPassword123",
+            "type": "string"
+          },
+          "newPassword": {
+            "description": "New password for the user",
+            "example": "newSecurePassword123",
+            "minLength": 8,
+            "type": "string"
+          }
+        },
+        "required": [
+          "currentPassword",
+          "newPassword"
+        ],
+        "type": "object"
+      },
+      "ChannelDto": {
+        "properties": {
+          "created_at": {
+            "example": "2025-01-15T10:00:00Z",
+            "type": "string"
+          },
+          "id": {
+            "example": 53,
+            "type": "number"
+          },
+          "name": {
+            "example": "Main WhatsApp",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "inactive",
+              "deleted"
+            ],
+            "example": "active",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "WhatsApp",
+              "Email",
+              "SMS",
+              "Chat"
+            ],
+            "example": "WhatsApp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "status",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "ChannelListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ChannelDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "ContactDataDto": {
+        "properties": {
+          "first_name": {
+            "description": "First name for auto-created contact",
+            "example": "John",
+            "maxLength": 100,
+            "type": "string"
+          },
+          "last_name": {
+            "description": "Last name for auto-created contact",
+            "example": "Doe",
+            "maxLength": 100,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ContactSummaryDto": {
+        "properties": {
+          "address_line1": {
+            "nullable": true,
+            "type": "string"
+          },
+          "address_line2": {
+            "nullable": true,
+            "type": "string"
+          },
+          "audiences": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "city": {
+            "nullable": true,
+            "type": "string"
+          },
+          "company_name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "nullable": true,
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "custom_fields": {
+            "type": "object"
+          },
+          "email": {
+            "nullable": true,
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "last_contact_date": {
+            "nullable": true,
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "notes": {
+            "nullable": true,
+            "type": "string"
+          },
+          "phone_number": {
+            "nullable": true,
+            "type": "string"
+          },
+          "postal_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "profile_image": {
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "whatsapp_id": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "first_name",
+          "last_name",
+          "email",
+          "phone_number",
+          "whatsapp_id",
+          "profile_image",
+          "last_contact_date",
+          "tags",
+          "address_line1",
+          "address_line2",
+          "city",
+          "state",
+          "postal_code",
+          "country",
+          "company_name",
+          "notes",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "ConversationActivityDto": {
+        "properties": {
+          "activity_data": {
+            "description": "Shape depends on activity_type. assigned: assigned_to, previously_assigned_to, assigned_to_inbox, previously_assigned_to_inbox. unassigned: previously_assigned_to, assigned_to_inbox, previously_assigned_to_inbox. status_change: from, to, reason. priority_change: from, to. comment: text, blocks, mentions.",
+            "example": {
+              "blocks": [
+                {
+                  "text": "Talk to ",
+                  "type": "text"
+                },
+                {
+                  "type": "user",
+                  "user_id": "17"
+                },
+                {
+                  "text": " about the refund",
+                  "type": "text"
+                }
+              ],
+              "mentions": [
+                {
+                  "user_id": 17
+                }
+              ],
+              "text": "Talk to Sarah about the refund"
+            },
+            "type": "object"
+          },
+          "activity_type": {
+            "enum": [
+              "assigned",
+              "unassigned",
+              "status_change",
+              "priority_change",
+              "comment"
+            ],
+            "example": "assigned",
+            "type": "string"
+          },
+          "actor_id": {
+            "example": 42,
+            "nullable": true,
+            "type": "number"
+          },
+          "actor_type": {
+            "enum": [
+              "user",
+              "contact",
+              "workflow",
+              "api",
+              "automation",
+              "echo"
+            ],
+            "example": "user",
+            "type": "string"
+          },
+          "created_at": {
+            "example": "2025-01-27T10:00:00Z",
+            "type": "string"
+          },
+          "id": {
+            "example": 892,
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "activity_type",
+          "actor_type",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "ConversationActivityListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ConversationActivityDto"
+            },
+            "type": "array"
+          },
+          "has_more": {
+            "description": "Whether more results exist",
+            "type": "boolean"
+          },
+          "next_cursor": {
+            "description": "Cursor for next page",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "has_more"
+        ],
+        "type": "object"
+      },
+      "ConversationAssignmentResponseDto": {
+        "properties": {
+          "activity_id": {
+            "description": "ID of the activity logged for this change (null if unchanged)",
+            "example": 891,
+            "nullable": true,
+            "type": "number"
+          },
+          "assigned_user_id": {
+            "description": "ID of the assigned user (null if unassigned)",
+            "example": 42,
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "ConversationCommentResponseDto": {
+        "properties": {
+          "created_at": {
+            "example": "2025-01-27T10:00:00Z",
+            "type": "string"
+          },
+          "id": {
+            "description": "ID of the created comment activity",
+            "example": 892,
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "ConversationContactDto": {
+        "properties": {
+          "email": {
+            "example": "john@example.com",
+            "type": "string"
+          },
+          "first_name": {
+            "example": "John",
+            "type": "string"
+          },
+          "id": {
+            "example": 100,
+            "type": "number"
+          },
+          "last_name": {
+            "example": "Doe",
+            "type": "string"
+          },
+          "phone_number": {
+            "example": "+1234567890",
+            "type": "string"
+          },
+          "profile_image": {
+            "example": "https://example.com/avatar.jpg",
+            "nullable": true,
+            "type": "string"
+          },
+          "whatsapp_id": {
+            "example": "1234567890",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "first_name",
+          "last_name"
+        ],
+        "type": "object"
+      },
+      "ConversationDto": {
+        "properties": {
+          "assigned_user_id": {
+            "example": 5,
+            "nullable": true,
+            "type": "number"
+          },
+          "channel_id": {
+            "example": 53,
+            "type": "number"
+          },
+          "channel_type": {
+            "enum": [
+              "WhatsApp",
+              "Email",
+              "SMS"
+            ],
+            "example": "WhatsApp",
+            "type": "string"
+          },
+          "contact": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConversationContactDto"
+              }
+            ],
+            "nullable": true
+          },
+          "created_at": {
+            "example": "2025-01-25T14:00:00Z",
+            "type": "string"
+          },
+          "id": {
+            "example": 567,
+            "type": "number"
+          },
+          "inbox_id": {
+            "example": 7,
+            "type": "number"
+          },
+          "labels": {
+            "example": [
+              "vip"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "last_message": {
+            "$ref": "#/components/schemas/ConversationLastMessageDto"
+          },
+          "last_message_at": {
+            "example": "2025-01-27T09:55:00Z",
+            "type": "string"
+          },
+          "priority": {
+            "example": "medium",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "closed",
+              "archived"
+            ],
+            "example": "open",
+            "type": "string"
+          },
+          "total_messages": {
+            "example": 12,
+            "type": "number"
+          },
+          "unread_count": {
+            "example": 3,
+            "type": "number"
+          },
+          "updated_at": {
+            "example": "2025-01-27T09:55:00Z",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "priority",
+          "channel_type",
+          "channel_id",
+          "labels",
+          "unread_count",
+          "total_messages",
+          "last_message",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object"
+      },
+      "ConversationLastMessageDto": {
+        "properties": {
+          "at": {
+            "example": "2025-01-27T09:55:00Z",
+            "nullable": true,
+            "type": "string"
+          },
+          "attachment_type": {
+            "example": "image",
+            "nullable": true,
+            "type": "string"
+          },
+          "content": {
+            "example": "Thanks for your help!",
+            "nullable": true,
+            "type": "string"
+          },
+          "sender_type": {
+            "enum": [
+              "user",
+              "contact",
+              "workflow",
+              "api",
+              "automation",
+              "echo"
+            ],
+            "example": "contact",
+            "nullable": true,
+            "type": "string"
+          },
+          "subject": {
+            "example": "Order update",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ConversationListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ConversationDto"
+            },
+            "type": "array"
+          },
+          "has_more": {
+            "description": "Whether more results exist",
+            "type": "boolean"
+          },
+          "next_cursor": {
+            "description": "Cursor for next page",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "has_more"
+        ],
+        "type": "object"
+      },
+      "ConversationStatusResponseDto": {
+        "properties": {
+          "activity_id": {
+            "description": "ID of the activity logged for this change (null if unchanged)",
+            "example": 890,
+            "nullable": true,
+            "type": "number"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "closed"
+            ],
+            "example": "closed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "type": "object"
+      },
+      "CreateContactDto": {
+        "properties": {
+          "address_line1": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "address_line2": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "audiences": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "city": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "country": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "custom_fields": {
+            "type": "object"
+          },
+          "email": {
+            "format": "email",
+            "type": "string"
+          },
+          "first_name": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "last_name": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "phone_number": {
+            "maxLength": 50,
+            "type": "string"
+          },
+          "postal_code": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "preferred_channel_id": {
+            "type": "number"
+          },
+          "profile_image": {
+            "type": "string"
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "whatsapp_id": {
+            "maxLength": 50,
+            "type": "string"
+          }
+        },
+        "required": [
+          "first_name"
+        ],
+        "type": "object"
+      },
+      "CreateWebhookDto": {
+        "properties": {
+          "events": {
+            "items": {
+              "enum": [
+                "message.received",
+                "message.created",
+                "message.status_changed",
+                "conversation.created",
+                "conversation.assigned",
+                "conversation.status_changed",
+                "contact.created",
+                "contact.updated"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "secret": {
+            "maxLength": 255,
+            "minLength": 16,
+            "type": "string"
+          },
+          "url": {
+            "format": "uri",
+            "maxLength": 2048,
+            "pattern": "/^https:\\/\\//",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "events",
+          "secret"
+        ],
+        "type": "object"
+      },
+      "FieldErrorDto": {
+        "properties": {
+          "field": {
+            "example": "contact_id",
+            "type": "string"
+          },
+          "messages": {
+            "example": [
+              "contact_id must be an integer"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "field",
+          "messages"
+        ],
+        "type": "object"
+      },
+      "ForgotPasswordDto": {
+        "properties": {
+          "email": {
+            "description": "Email address of the user requesting password reset",
+            "example": "user@example.com",
+            "format": "email",
+            "type": "string"
+          },
+          "turnstileToken": {
+            "description": "Cloudflare Turnstile token for bot protection",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "type": "object"
+      },
+      "FullContactDto": {
+        "properties": {
+          "address_line1": {
+            "nullable": true,
+            "type": "string"
+          },
+          "address_line2": {
+            "nullable": true,
+            "type": "string"
+          },
+          "audiences": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "city": {
+            "nullable": true,
+            "type": "string"
+          },
+          "company_name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "nullable": true,
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "custom_fields": {
+            "type": "object"
+          },
+          "email": {
+            "nullable": true,
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "last_contact_date": {
+            "nullable": true,
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "notes": {
+            "nullable": true,
+            "type": "string"
+          },
+          "phone_number": {
+            "nullable": true,
+            "type": "string"
+          },
+          "postal_code": {
+            "nullable": true,
+            "type": "string"
+          },
+          "profile_image": {
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "total_messages": {
+            "nullable": true,
+            "type": "number"
+          },
+          "whatsapp_id": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "first_name",
+          "last_name",
+          "email",
+          "phone_number",
+          "whatsapp_id",
+          "profile_image",
+          "last_contact_date",
+          "tags",
+          "address_line1",
+          "address_line2",
+          "city",
+          "state",
+          "postal_code",
+          "country",
+          "company_name",
+          "notes",
+          "created_at",
+          "total_messages"
+        ],
+        "type": "object"
+      },
+      "GoogleAcceptInvitationDto": {
+        "properties": {
+          "expires_at": {
+            "description": "Expiration timestamp from invitation link",
+            "example": "2025-12-09T10:00:00.000Z",
+            "type": "string"
+          },
+          "idToken": {
+            "description": "Google ID token from credential response",
+            "type": "string"
+          },
+          "signature": {
+            "description": "HMAC signature from invitation link",
+            "type": "string"
+          },
+          "userId": {
+            "description": "User ID from invitation link",
+            "example": 123,
+            "type": "number"
+          }
+        },
+        "required": [
+          "idToken",
+          "userId",
+          "expires_at",
+          "signature"
+        ],
+        "type": "object"
+      },
+      "GoogleSignInDto": {
+        "properties": {
+          "idToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idToken"
+        ],
+        "type": "object"
+      },
+      "InsufficientScopeProblemDto": {
+        "properties": {
+          "detail": {
+            "example": "The requested resource was not found.",
+            "type": "string"
+          },
+          "instance": {
+            "example": "/v1/contacts/123",
+            "type": "string"
+          },
+          "required_scopes": {
+            "example": [
+              "contacts:write"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "status": {
+            "example": 404,
+            "type": "number"
+          },
+          "title": {
+            "example": "Not found",
+            "type": "string"
+          },
+          "type": {
+            "example": "https://api.interline.chat/problems/not-found",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status",
+          "required_scopes"
+        ],
+        "type": "object"
+      },
+      "ListContactsServiceResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ContactSummaryDto"
+            },
+            "type": "array"
+          },
+          "filtered_count": {
+            "type": "number"
+          },
+          "nextCursor": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "total",
+          "filtered_count"
+        ],
+        "type": "object"
+      },
+      "LoginUserDto": {
+        "properties": {
+          "email": {
+            "format": "email",
+            "type": "string"
+          },
+          "password": {
+            "minLength": 6,
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object"
+      },
+      "MessageDto": {
+        "properties": {
+          "content": {
+            "example": "Hello, your order has shipped!",
+            "type": "string"
+          },
+          "delivered_at": {
+            "example": "2025-01-27T10:00:03Z",
+            "type": "string"
+          },
+          "id": {
+            "example": 1234,
+            "type": "number"
+          },
+          "read_at": {
+            "example": "2025-01-27T10:00:05Z",
+            "type": "string"
+          },
+          "sender_id": {
+            "example": 5,
+            "type": "number"
+          },
+          "sender_type": {
+            "enum": [
+              "user",
+              "contact",
+              "workflow",
+              "api",
+              "automation",
+              "echo"
+            ],
+            "example": "user",
+            "type": "string"
+          },
+          "sent_at": {
+            "example": "2025-01-27T10:00:01Z",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "scheduled",
+              "pending",
+              "sent",
+              "delivered",
+              "read",
+              "failed"
+            ],
+            "example": "delivered",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "content",
+          "sender_type",
+          "status",
+          "sent_at"
+        ],
+        "type": "object"
+      },
+      "MessageListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/MessageDto"
+            },
+            "type": "array"
+          },
+          "has_more": {
+            "description": "Whether more results exist",
+            "type": "boolean"
+          },
+          "next_cursor": {
+            "description": "Cursor for next page",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "has_more"
+        ],
+        "type": "object"
+      },
+      "ProblemDetailDto": {
+        "properties": {
+          "detail": {
+            "example": "The requested resource was not found.",
+            "type": "string"
+          },
+          "instance": {
+            "example": "/v1/contacts/123",
+            "type": "string"
+          },
+          "status": {
+            "example": 404,
+            "type": "number"
+          },
+          "title": {
+            "example": "Not found",
+            "type": "string"
+          },
+          "type": {
+            "example": "https://api.interline.chat/problems/not-found",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status"
+        ],
+        "type": "object"
+      },
+      "RegisterUserDto": {
+        "properties": {
+          "email": {
+            "description": "User's email address",
+            "example": "john.doe@example.com",
+            "format": "email",
+            "type": "string"
+          },
+          "firstName": {
+            "description": "User's first name",
+            "example": "John",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "User's last name",
+            "example": "Doe",
+            "type": "string"
+          },
+          "orgName": {
+            "description": "Name of the organization to create",
+            "example": "Acme Inc.",
+            "type": "string"
+          },
+          "password": {
+            "description": "User's password (min 6 characters)",
+            "example": "password123",
+            "minLength": 6,
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "orgName"
+        ],
+        "type": "object"
+      },
+      "ReplyDto": {
+        "properties": {
+          "attachment_ids": {
+            "description": "IDs of previously uploaded attachments to include.",
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "bcc": {
+            "description": "BCC recipients (email only).",
+            "items": {
+              "format": "email",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "body": {
+            "description": "Text content of the reply.",
+            "example": "Thanks for reaching out — how can we help?",
+            "type": "string"
+          },
+          "cc": {
+            "description": "CC recipients (email only).",
+            "items": {
+              "format": "email",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "reply_to_message_id": {
+            "description": "Internal message ID to reply to (WhatsApp only).",
+            "minimum": 1,
+            "type": "number"
+          },
+          "subject": {
+            "description": "Subject line (email only).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "type": "object"
+      },
+      "SendMessageDto": {
+        "properties": {
+          "attachment_ids": {
+            "description": "Attachment IDs to include",
+            "example": [
+              1,
+              2
+            ],
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "bcc": {
+            "description": "BCC recipients (email only)",
+            "example": [
+              "bcc@example.com"
+            ],
+            "items": {
+              "format": "email",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "body": {
+            "description": "Message body (required unless using template)",
+            "example": "Hello! Your order has shipped.",
+            "maxLength": 10000,
+            "type": "string"
+          },
+          "cc": {
+            "description": "CC recipients (email only)",
+            "example": [
+              "cc@example.com"
+            ],
+            "items": {
+              "format": "email",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "channel_id": {
+            "description": "Channel ID to send message through",
+            "example": 53,
+            "type": "number"
+          },
+          "contact_data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContactDataDto"
+              }
+            ],
+            "description": "Contact data for auto-creation when using \"to\""
+          },
+          "contact_id": {
+            "description": "Contact ID to send message to (mutually exclusive with \"to\")",
+            "example": 100,
+            "type": "number"
+          },
+          "subject": {
+            "description": "Email subject (email channel only)",
+            "example": "Order Update",
+            "maxLength": 500,
+            "type": "string"
+          },
+          "template_header_media": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TemplateHeaderMediaDto"
+              }
+            ],
+            "description": "Media for template header"
+          },
+          "template_id": {
+            "description": "WhatsApp template ID",
+            "example": "order_confirmation",
+            "type": "string"
+          },
+          "template_params": {
+            "description": "Template parameter values",
+            "example": [
+              "ORD-12345"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "to": {
+            "description": "Phone number or email to send to (mutually exclusive with \"contact_id\")",
+            "example": "+1234567890",
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel_id"
+        ],
+        "type": "object"
+      },
+      "TemplateComponentDto": {
+        "properties": {
+          "parameter_count": {
+            "example": 1,
+            "type": "number"
+          },
+          "text": {
+            "example": "Your order {{1}} has been confirmed.",
+            "type": "string"
+          },
+          "type": {
+            "example": "BODY",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "TemplateDto": {
+        "properties": {
+          "category": {
+            "example": "UTILITY",
+            "type": "string"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateComponentDto"
+            },
+            "type": "array"
+          },
+          "created_at": {
+            "example": "2025-01-15T10:00:00Z",
+            "type": "string"
+          },
+          "id": {
+            "example": 42,
+            "type": "number"
+          },
+          "language": {
+            "example": "en",
+            "type": "string"
+          },
+          "name": {
+            "example": "order_confirmation",
+            "type": "string"
+          },
+          "quality_score": {
+            "example": "GREEN",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "DRAFT",
+              "PENDING",
+              "APPROVED",
+              "REJECTED",
+              "PAUSED",
+              "DISABLED"
+            ],
+            "example": "APPROVED",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "language",
+          "status",
+          "category",
+          "components",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "TemplateHeaderMediaDto": {
+        "properties": {
+          "attachment_id": {
+            "description": "Attachment ID for template header media",
+            "example": 123,
+            "type": "number"
+          }
+        },
+        "required": [
+          "attachment_id"
+        ],
+        "type": "object"
+      },
+      "TemplateListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "TextBlockDto": {
+        "properties": {
+          "text": {
+            "description": "Text content (for text blocks)",
+            "example": "Reminder to talk to ",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of the block",
+            "enum": [
+              "text",
+              "user"
+            ],
+            "example": "text",
+            "type": "string"
+          },
+          "user_id": {
+            "description": "User ID (for user blocks)",
+            "example": "UUS83BYQ3",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "UpdateContactDto": {
+        "properties": {
+          "address_line1": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "address_line2": {
+            "maxLength": 255,
+            "type": "string"
+          },
+          "audiences": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "city": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "country": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "custom_fields": {
+            "type": "object"
+          },
+          "email": {
+            "format": "email",
+            "type": "string"
+          },
+          "first_name": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "last_name": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "phone_number": {
+            "maxLength": 50,
+            "type": "string"
+          },
+          "postal_code": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "preferred_channel_id": {
+            "type": "number"
+          },
+          "profile_image": {
+            "type": "string"
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "whatsapp_id": {
+            "maxLength": 50,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateProfileDto": {
+        "properties": {
+          "firstName": {
+            "description": "First name",
+            "example": "Alice",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "Last name",
+            "example": "Smith",
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "type": "object"
+      },
+      "UpdateStatusDto": {
+        "properties": {
+          "status": {
+            "description": "New status for the conversation (\"open\" or \"closed\")",
+            "enum": [
+              "open",
+              "closed"
+            ],
+            "example": "closed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "type": "object"
+      },
+      "UpdateWebhookDto": {
+        "properties": {
+          "events": {
+            "items": {
+              "enum": [
+                "message.received",
+                "message.created",
+                "message.status_changed",
+                "conversation.created",
+                "conversation.assigned",
+                "conversation.status_changed",
+                "contact.created",
+                "contact.updated"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "url": {
+            "format": "uri",
+            "maxLength": 2048,
+            "pattern": "/^https:\\/\\//",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UserDto": {
+        "properties": {
+          "avatar_url": {
+            "example": "https://cdn.interline.com/avatars/ada.png",
+            "nullable": true,
+            "type": "string"
+          },
+          "created_at": {
+            "example": "2025-01-15T10:00:00Z",
+            "type": "string"
+          },
+          "email": {
+            "example": "ada@acme.com",
+            "type": "string"
+          },
+          "first_name": {
+            "example": "Ada",
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "example": 12,
+            "type": "number"
+          },
+          "last_login_at": {
+            "example": "2025-01-27T10:15:00Z",
+            "nullable": true,
+            "type": "string"
+          },
+          "last_name": {
+            "example": "Lovelace",
+            "nullable": true,
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "admin",
+              "manager",
+              "agent"
+            ],
+            "example": "admin",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "inactive",
+              "disabled"
+            ],
+            "example": "active",
+            "type": "string"
+          },
+          "timezone": {
+            "example": "UTC",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "first_name",
+          "last_name",
+          "email",
+          "role",
+          "status",
+          "avatar_url",
+          "timezone",
+          "last_login_at",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "UserListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/UserDto"
+            },
+            "type": "array"
+          },
+          "has_more": {
+            "example": false,
+            "type": "boolean"
+          },
+          "next_cursor": {
+            "example": "MjAyNS0wMS0xNVQxMDowMDowMC4wMDBafDEy",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "next_cursor",
+          "has_more"
+        ],
+        "type": "object"
+      },
+      "ValidationProblemDetailDto": {
+        "properties": {
+          "detail": {
+            "example": "The requested resource was not found.",
+            "type": "string"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/FieldErrorDto"
+            },
+            "type": "array"
+          },
+          "instance": {
+            "example": "/v1/contacts/123",
+            "type": "string"
+          },
+          "status": {
+            "example": 404,
+            "type": "number"
+          },
+          "title": {
+            "example": "Not found",
+            "type": "string"
+          },
+          "type": {
+            "example": "https://api.interline.chat/problems/not-found",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status"
+        ],
+        "type": "object"
+      },
+      "WebhookDeliveryDto": {
+        "properties": {
+          "attempts": {
+            "example": 1,
+            "type": "number"
+          },
+          "completed_at": {
+            "example": "2025-01-27T10:15:01Z",
+            "type": "string"
+          },
+          "created_at": {
+            "example": "2025-01-27T10:15:00Z",
+            "type": "string"
+          },
+          "event": {
+            "example": "message.received",
+            "type": "string"
+          },
+          "http_status": {
+            "example": 200,
+            "type": "number"
+          },
+          "id": {
+            "example": 123,
+            "type": "number"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "success",
+              "failed"
+            ],
+            "example": "success",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "event",
+          "status",
+          "attempts",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "WebhookDeliveryListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookDeliveryDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "WebhookDto": {
+        "properties": {
+          "created_at": {
+            "example": "2025-01-27T10:10:00Z",
+            "type": "string"
+          },
+          "disabled_at": {
+            "example": null,
+            "type": "string"
+          },
+          "events": {
+            "enum": [
+              "message.received",
+              "message.created",
+              "message.status_changed",
+              "conversation.created",
+              "conversation.assigned",
+              "conversation.status_changed",
+              "contact.created",
+              "contact.updated"
+            ],
+            "example": [
+              "message.received",
+              "message.status_changed"
+            ],
+            "type": "string"
+          },
+          "failure_count": {
+            "example": 0,
+            "type": "number"
+          },
+          "id": {
+            "example": 1,
+            "type": "number"
+          },
+          "is_active": {
+            "example": true,
+            "type": "boolean"
+          },
+          "updated_at": {
+            "example": "2025-01-27T10:12:00Z",
+            "type": "string"
+          },
+          "url": {
+            "example": "https://customer-app.com/webhooks/interline",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "events",
+          "is_active"
+        ],
+        "type": "object"
+      },
+      "WebhookListResponseDto": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/WebhookDto"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "bearerFormat": "JWT",
+        "description": "API key, e.g. `Authorization: Bearer ilc_live_...`",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "\n## Overview\n\nThe Interline Public API allows you to programmatically send messages, manage contacts, read conversations, and receive real-time webhook notifications.\n\nThis page documents **only** `/v1/...` routes. It is published for customers at [help.interline.chat/api/reference](https://help.interline.chat/api/reference/), rebuilt from this spec on every production deploy. The full authenticated product API (JWT) is internal, and documented separately on the app host at `/api/reference`.\n\n## Authentication\n\nAll API requests require an API key, passed as a Bearer token:\n\n```\nAuthorization: Bearer ilc_live_your_api_key_here\n```\n\nYou can create and manage API keys in the Interline dashboard under Settings > API Keys.\n\n## Rate Limiting\n\nAuthenticated requests are rate limited per endpoint, based on the HTTP method:\n\n- Read requests (`GET`, `HEAD`): 120 requests per minute per API key\n- Write requests (everything else): 30 requests per minute per API key\n\nSome endpoints set a stricter limit than these defaults; check the endpoint's documentation for its specific limit.\n\nAuthenticated limits are enforced at two levels — per API key, and per organization across all of that organization's API keys combined. The organization ceiling scales with the org's subscription plan, so it is always a multiple of the per-key limit. Requests without a valid API key are additionally limited per IP address before authentication.\n\nRate limit headers are included in every response, reflecting whichever applicable limit is closest to being reached:\n\n- `X-RateLimit-Limit`: Maximum requests per minute for the binding scope\n- `X-RateLimit-Remaining`: Remaining requests in current window\n- `X-RateLimit-Reset`: Unix timestamp when the limit resets\n- `Retry-After`: Seconds to wait before retrying (sent only on `429` responses)\n\n## Scopes\n\nAPI keys can be restricted to specific scopes:\n\n| Scope | Description |\n|-------|-------------|\n| `messages:read` | Read message status and content |\n| `messages:write` | Send messages |\n| `contacts:read` | List and view contacts |\n| `contacts:write` | Create and update contacts |\n| `conversations:read` | List and view conversations |\n| `conversations:write` | Open, close, assign, comment on, and reply to conversations |\n| `channels:read` | List available channels |\n| `templates:read` | List WhatsApp templates |\n| `webhooks:read` | List registered webhooks |\n| `webhooks:write` | Create and delete webhooks |\n| `users:read` | List and view organization members |\n\n## Errors\n\nAll error responses are [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)\nProblem Details documents with the media type `application/problem+json`.\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/insufficient-scope\",\n  \"title\": \"Insufficient scope\",\n  \"status\": 403,\n  \"detail\": \"This endpoint requires one of the following scopes: contacts:write.\",\n  \"required_scopes\": [\"contacts:write\"],\n  \"instance\": \"/v1/contacts\"\n}\n```\n\nThe `type` URI is the stable, machine-readable identifier for each error.\n\n| Status | `type` | When |\n|--------|--------|------|\n| 401 | `.../unauthorized` | Missing or invalid API key |\n| 403 | `.../insufficient-scope` | Key lacks a required scope (see `required_scopes`) |\n| 404 | `.../not-found` | Resource does not exist |\n| 409 | `.../conflict` | Resource conflict (e.g. duplicate) |\n| 422 | `.../validation-error` | Request understood but invalid; see `errors` |\n| 429 | `.../rate-limit-exceeded` | Rate limit hit; see `Retry-After` |\n| 400 | `.../bad-request` | Request was malformed/unreadable |\n| 500 | `.../internal-error` | Unexpected server error |\n\nValidation failures (422) include a grouped `errors` array:\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/validation-error\",\n  \"title\": \"Validation failed\",\n  \"status\": 422,\n  \"detail\": \"The request body failed validation.\",\n  \"errors\": [\n    { \"field\": \"contact_id\", \"messages\": [\"contact_id must be an integer\"] }\n  ]\n}\n```\n",
+    "title": "Interline API",
+    "version": "1.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/channels": {
+      "get": {
+        "description": "Retrieve all active channels for your organization. Returns channel ID, name, type (whatsapp, email, etc.), and status.",
+        "operationId": "ChannelsV1Controller_findAll_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelListResponseDto"
+                }
+              }
+            },
+            "description": "List of channels"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List channels",
+        "tags": [
+          "Channels"
+        ]
+      }
+    },
+    "/v1/contacts": {
+      "get": {
+        "description": "Retrieve a paginated list of contacts. Supports search and filtering.",
+        "operationId": "ContactsV1Controller_findAll_v1",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "has_channel",
+            "required": false,
+            "schema": {
+              "enum": [
+                "SMS",
+                "WhatsApp",
+                "Email",
+                "WebChat"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tag_ids",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "audience_ids",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "created_after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "created_before",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListContactsServiceResponseDto"
+                }
+              }
+            },
+            "description": "List of contacts"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List contacts",
+        "tags": [
+          "Contacts"
+        ]
+      },
+      "post": {
+        "description": "Create a new contact in your organization. At least one of phone_number, email, or whatsapp_id is required.",
+        "operationId": "ContactsV1Controller_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactSummaryDto"
+                }
+              }
+            },
+            "description": "Contact created successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conflict - contact already exists"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new contact",
+        "tags": [
+          "Contacts"
+        ]
+      }
+    },
+    "/v1/contacts/{id}": {
+      "delete": {
+        "description": "Permanently delete a contact. This action cannot be undone.",
+        "operationId": "ContactsV1Controller_delete_v1",
+        "parameters": [
+          {
+            "description": "Contact ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Contact deleted successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Contact not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete contact",
+        "tags": [
+          "Contacts"
+        ]
+      },
+      "get": {
+        "description": "Retrieve detailed information about a specific contact.",
+        "operationId": "ContactsV1Controller_findOne_v1",
+        "parameters": [
+          {
+            "description": "Contact ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullContactDto"
+                }
+              }
+            },
+            "description": "Contact details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Contact not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get contact by ID",
+        "tags": [
+          "Contacts"
+        ]
+      },
+      "patch": {
+        "description": "Update an existing contact. Only provided fields will be updated.",
+        "operationId": "ContactsV1Controller_update_v1",
+        "parameters": [
+          {
+            "description": "Contact ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateContactDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactSummaryDto"
+                }
+              }
+            },
+            "description": "Contact updated successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Contact not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update contact",
+        "tags": [
+          "Contacts"
+        ]
+      }
+    },
+    "/v1/conversations": {
+      "get": {
+        "description": "Retrieve a paginated list of conversations. Supports filtering by status, contact, and channel.",
+        "operationId": "ConversationsV1Controller_findAll_v1",
+        "parameters": [
+          {
+            "description": "Number of results (default: 20, max: 100)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Cursor for pagination",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by conversation status (open, closed, snoozed)",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "open",
+                "closed",
+                "archived"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by contact ID",
+            "in": "query",
+            "name": "contact_id",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Filter by channel ID",
+            "in": "query",
+            "name": "channel_id",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponseDto"
+                }
+              }
+            },
+            "description": "List of conversations with pagination"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List conversations",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}": {
+      "get": {
+        "description": "Retrieve detailed information about a specific conversation including contact and channel details.",
+        "operationId": "ConversationsV1Controller_findOne_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationDto"
+                }
+              }
+            },
+            "description": "Conversation details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conversation not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get conversation by ID",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/activity": {
+      "get": {
+        "description": "Retrieve a paginated history of assignments, status and priority changes, and internal comments, ordered by most recent first.",
+        "operationId": "ConversationsV1Controller_getActivity_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Number of activity entries (default: 50, max: 100)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Cursor for pagination",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by activity type. Repeat the parameter or pass a comma-separated list.",
+            "in": "query",
+            "name": "activity_type",
+            "required": false,
+            "schema": {
+              "items": {
+                "enum": [
+                  "assigned",
+                  "unassigned",
+                  "status_change",
+                  "priority_change",
+                  "comment"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActivityListResponseDto"
+                }
+              }
+            },
+            "description": "List of activity with pagination"
+          },
+          "401": {
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "description": "Conversation not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get activity for a conversation",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/assign": {
+      "post": {
+        "description": "Assign a conversation to a user, or pass a null assignee_user_id to unassign. Optionally move it to a different inbox.",
+        "operationId": "ConversationsV1Controller_assign_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignConversationDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationAssignmentResponseDto"
+                }
+              }
+            },
+            "description": "Updated assignment"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationAssignmentResponseDto"
+                }
+              }
+            },
+            "description": ""
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsufficientScopeProblemDto"
+                }
+              }
+            },
+            "description": "Forbidden - insufficient scope"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conversation or assignee user not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Assign or unassign a conversation",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/comments": {
+      "post": {
+        "description": "Add an internal note to a conversation, optionally with rich-text blocks and user mentions. Comments are not sent to the contact.",
+        "operationId": "ConversationsV1Controller_addComment_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommentDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationCommentResponseDto"
+                }
+              }
+            },
+            "description": "Comment added"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsufficientScopeProblemDto"
+                }
+              }
+            },
+            "description": "Forbidden - insufficient scope"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conversation not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add an internal comment",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/messages": {
+      "get": {
+        "description": "Retrieve a paginated list of messages in a conversation, ordered by most recent first.",
+        "operationId": "ConversationsV1Controller_getMessages_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Number of messages (default: 50, max: 100)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          {
+            "description": "Cursor for pagination",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageListResponseDto"
+                }
+              }
+            },
+            "description": "List of messages with pagination"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conversation not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get messages for a conversation",
+        "tags": [
+          "Conversations"
+        ]
+      },
+      "post": {
+        "description": "Send an outbound message in an existing conversation. A closed conversation is automatically reopened.",
+        "operationId": "ConversationsV1Controller_reply_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplyDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageDto"
+                }
+              }
+            },
+            "description": "Reply queued for delivery"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsufficientScopeProblemDto"
+                }
+              }
+            },
+            "description": "Forbidden - insufficient scope"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conversation not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reply to a conversation",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/status": {
+      "put": {
+        "description": "Set a conversation status to \"open\" or \"closed\".",
+        "operationId": "ConversationsV1Controller_updateStatus_v1",
+        "parameters": [
+          {
+            "description": "Conversation ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationStatusResponseDto"
+                }
+              }
+            },
+            "description": "Updated conversation status"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsufficientScopeProblemDto"
+                }
+              }
+            },
+            "description": "Forbidden - insufficient scope"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conversation not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Open or close a conversation",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v1/messages": {
+      "post": {
+        "description": "Send a message through a channel. Requires either contact_id or to (phone/email). Requires either body or template_id.",
+        "operationId": "MessagesV1Controller_send_v1",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageDto"
+                }
+              }
+            },
+            "description": "Message queued for delivery"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsufficientScopeProblemDto"
+                }
+              }
+            },
+            "description": "Forbidden - insufficient scope"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Conflict (e.g. channel not active)"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Too many requests - rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send a message",
+        "tags": [
+          "Messages"
+        ]
+      }
+    },
+    "/v1/templates": {
+      "get": {
+        "description": "Retrieve WhatsApp message templates. Templates must be approved by Meta before they can be used for sending messages.",
+        "operationId": "TemplatesV1Controller_findAll_v1",
+        "parameters": [
+          {
+            "description": "Filter by WhatsApp channel ID",
+            "in": "query",
+            "name": "channel_id",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "Filter by status (APPROVED, PENDING, REJECTED)",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "DRAFT",
+                "PENDING",
+                "APPROVED",
+                "REJECTED",
+                "PAUSED",
+                "DISABLED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by category (MARKETING, UTILITY, AUTHENTICATION)",
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "enum": [
+                "MARKETING",
+                "UTILITY",
+                "AUTHENTICATION"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateListResponseDto"
+                }
+              }
+            },
+            "description": "List of templates"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List WhatsApp templates",
+        "tags": [
+          "Templates"
+        ]
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "description": "Retrieve a paginated list of the members of your organization. Removed members are excluded. Use these IDs to resolve `assigned_user_id` on conversations, or to pick an `assignee_user_id` when assigning.",
+        "operationId": "UsersV1Controller_findAll_v1",
+        "parameters": [
+          {
+            "description": "Filter by organization role (admin, manager, agent)",
+            "in": "query",
+            "name": "role",
+            "required": false,
+            "schema": {
+              "enum": [
+                "admin",
+                "manager",
+                "agent"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by user status (active, inactive, disabled)",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "active",
+                "inactive",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Cursor for pagination",
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of results (default: 50, max: 100)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserListResponseDto"
+                }
+              }
+            },
+            "description": "List of users with pagination"
+          },
+          "401": {
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "description": "Forbidden - API key lacks the users:read scope"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List users",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/users/{id}": {
+      "get": {
+        "description": "Retrieve a single member of your organization. Returns 404 if the user is not an active member of your organization.",
+        "operationId": "UsersV1Controller_findOne_v1",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            },
+            "description": "User details"
+          },
+          "401": {
+            "description": "Unauthorized - invalid API key"
+          },
+          "403": {
+            "description": "Forbidden - API key lacks the users:read scope"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get user by ID",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/webhooks": {
+      "get": {
+        "description": "Retrieve all registered webhooks for your organization.",
+        "operationId": "WebhooksV1Controller_findAll_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookListResponseDto"
+                }
+              }
+            },
+            "description": "List of webhooks"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List webhooks",
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "post": {
+        "description": "Register a new webhook endpoint to receive event notifications. You can subscribe to specific events like message.received, conversation.created, etc.",
+        "operationId": "WebhooksV1Controller_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWebhookDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDto"
+                }
+              }
+            },
+            "description": "Webhook registered successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Register a webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
+    "/v1/webhooks/{id}": {
+      "delete": {
+        "description": "Permanently delete a webhook. This will stop all future event deliveries to this endpoint.",
+        "operationId": "WebhooksV1Controller_remove_v1",
+        "parameters": [
+          {
+            "description": "Webhook ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook deleted successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Webhook not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "get": {
+        "description": "Retrieve details of a specific webhook including its configuration and health status.",
+        "operationId": "WebhooksV1Controller_findOne_v1",
+        "parameters": [
+          {
+            "description": "Webhook ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDto"
+                }
+              }
+            },
+            "description": "Webhook details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Webhook not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get webhook by ID",
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "patch": {
+        "description": "Update webhook configuration. You can change the URL, subscribed events, or enable/disable the webhook.",
+        "operationId": "WebhooksV1Controller_update_v1",
+        "parameters": [
+          {
+            "description": "Webhook ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWebhookDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDto"
+                }
+              }
+            },
+            "description": "Webhook updated successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Webhook not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update webhook",
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
+    "/v1/webhooks/{id}/deliveries": {
+      "get": {
+        "description": "Retrieve recent delivery attempts for a webhook. Useful for debugging failed deliveries.",
+        "operationId": "WebhooksV1Controller_getDeliveries_v1",
+        "parameters": [
+          {
+            "description": "Webhook ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookDeliveryListResponseDto"
+                }
+              }
+            },
+            "description": "List of delivery attempts"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Webhook not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get webhook delivery history",
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Production",
+      "url": "https://api.interline.chat"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Send and retrieve messages",
+      "name": "Messages"
+    },
+    {
+      "description": "Manage contacts",
+      "name": "Contacts"
+    },
+    {
+      "description": "View conversations and message history; open, close, assign, comment, and reply",
+      "name": "Conversations"
+    },
+    {
+      "description": "List available messaging channels",
+      "name": "Channels"
+    },
+    {
+      "description": "WhatsApp message templates",
+      "name": "Templates"
+    },
+    {
+      "description": "Configure webhook notifications",
+      "name": "Webhooks"
+    }
+  ]
+}
