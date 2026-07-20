@@ -45,6 +45,32 @@
   color: #e9eef5;
 }
 
+/* ===========================================================================
+   Match the product app's typography and surface tokens
+   =========================================================================== */
+
+/* The app only uses weights 400/500/600 (Inter); Material's default
+   headings go to 700 — pull them back so the docs match the product. */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 600;
+}
+
+/* Surface tokens from the app, for callouts/cards */
+:root {
+  --interline-surface-light: hsl(206 47% 97%);
+  --interline-surface-dark:  hsl(0 0% 3.9%);
+  --interline-radius:        0.5rem;
+}
+
+/* Round callouts and buttons to the app's radius */
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset .md-button {
+  border-radius: var(--interline-radius);
+}
+
 /* Give the header logo a little breathing room */
 .md-header__button.md-logo img,
 .md-header__button.md-logo svg {

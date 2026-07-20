@@ -6,7 +6,7 @@ description: Interline API overview — create an API key, choose scopes, authen
 
 The Interline API lets you integrate Interline with your own systems — send and receive messages across SMS, WhatsApp, and email, manage contacts and audiences, and trigger broadcasts programmatically.
 
-[Open the API Reference :material-arrow-right:](reference.md){ .md-button .md-button--primary }
+[Open the API Reference :lucide-arrow-right:](reference.md){ .md-button .md-button--primary }
 
 The reference is interactive — browse every endpoint, see request/response schemas, and try calls directly from the page.
 
