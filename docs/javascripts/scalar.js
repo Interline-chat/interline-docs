@@ -1,36 +1,16 @@
 /* Mounts the Scalar API reference on pages containing #scalar-api-reference.
  * Uses Material's document$ observable so it also works with
  * navigation.instant (SPA-style page loads), where plain inline
- * <script> tags in page content are NOT re-executed. */
+ * <script> tags in page content are NOT re-executed.
+ *
+ * NOTE: do not manipulate Scalar's DOM from here (no .remove(), no inline
+ * style overrides) — its Vue renderer crashes if nodes change under it.
+ * Unwanted widgets (Ask AI, Generate MCP, dev toolbar, "Powered by
+ * Scalar") are hidden with CSS in docs/api/reference.md instead. */
 (function () {
   // Pinned version — bump deliberately after testing, don't float "latest"
   var SCALAR_CDN =
     "https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.62.9/dist/browser/standalone.js";
-
-  // Hide Scalar promo/AI widgets we don't want on a customer-facing page:
-  // "Ask AI" / "Ask AI Agent" buttons, the "Generate MCP" layer, the
-  // dev toolbar (Developer Tools / Configure / Share / Deploy), and
-  // "Powered by Scalar". IMPORTANT: hide with CSS, never .remove() —
-  // Scalar's renderer (Vue) still owns these nodes and crashes if
-  // they disappear from under it.
-  function hide(el) {
-    el.style.setProperty("display", "none", "important");
-  }
-  function stripScalarExtras(root) {
-    var strip = function () {
-      root
-        .querySelectorAll(".scalar-mcp-layer, .api-reference-toolbar")
-        .forEach(hide);
-      root.querySelectorAll("button").forEach(function (b) {
-        if (/^\s*ask ai( agent)?\s*$/i.test(b.textContent)) hide(b);
-      });
-      root.querySelectorAll("a").forEach(function (a) {
-        if (/powered by scalar/i.test(a.textContent)) hide(a);
-      });
-    };
-    strip();
-    new MutationObserver(strip).observe(root, { childList: true, subtree: true });
-  }
 
   function mount() {
     var el = document.getElementById("scalar-api-reference");
@@ -42,7 +22,6 @@
         url: el.dataset.specUrl,
         hideDarkModeToggle: true, // follow the MkDocs theme toggle instead
       });
-      stripScalarExtras(el);
     };
 
     if (window.Scalar) {

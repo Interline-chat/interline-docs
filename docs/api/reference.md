@@ -16,6 +16,16 @@ hide:
   .md-content__inner::before { display: none; }
   .md-content__inner > h1:first-child { display: none; }
   #scalar-api-reference { min-height: 100vh; }
+
+  /* Hide Scalar promo/AI widgets on this customer-facing page.
+     CSS-only: removing or inline-hiding these via JS breaks Scalar's
+     (Vue) renderer. Selectors verified against Scalar 1.62.9. */
+  .api-reference-toolbar,                    /* Developer Tools / Configure / Share / Deploy */
+  .darklight-reference,                      /* Generate MCP + "Powered by Scalar" footer */
+  .agent-button-container,                   /* "Ask AI Agent" on request examples */
+  .t-doc__sidebar .pt-3 > button:last-child  /* "Ask AI" next to sidebar search */ {
+    display: none !important;
+  }
 </style>
 
 <div id="scalar-api-reference" data-spec-url="/api/openapi.json"></div>
