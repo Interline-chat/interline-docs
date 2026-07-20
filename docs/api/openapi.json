@@ -2101,6 +2101,86 @@
         ]
       }
     },
+    "/v1/contacts/lookup": {
+      "get": {
+        "description": "Find a single contact by phone number or email. Provide exactly one of phone_number or email.",
+        "operationId": "ContactsV1Controller_lookup_v1",
+        "parameters": [
+          {
+            "description": "Email address to look up. Provide exactly one of email or phone_number.",
+            "in": "query",
+            "name": "email",
+            "required": false,
+            "schema": {
+              "example": "bob@example.com",
+              "format": "email",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Phone number to look up. Provide exactly one of email or phone_number.",
+            "in": "query",
+            "name": "phone_number",
+            "required": false,
+            "schema": {
+              "example": "+14155550123",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullContactDto"
+                }
+              }
+            },
+            "description": "Contact details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Unauthorized - invalid API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailDto"
+                }
+              }
+            },
+            "description": "Contact not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetailDto"
+                }
+              }
+            },
+            "description": "Validation failed"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Look up a contact by phone or email",
+        "tags": [
+          "Contacts"
+        ]
+      }
+    },
     "/v1/contacts/{id}": {
       "delete": {
         "description": "Permanently delete a contact. This action cannot be undone.",
