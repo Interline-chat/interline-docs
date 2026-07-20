@@ -1,0 +1,7 @@
+# CI/CD-generated API specs: keep LF everywhere so Windows checkouts don't
+# produce whole-file CRLF diffs against what the pipeline pushes.
+docs/api/openapi.json text eol=lf
+docs/api/openapi.yaml text eol=lf
+
+# Keep shell-adjacent text assets stable too
+*.svg text eol=lf
