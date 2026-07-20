@@ -1,39 +1,66 @@
 ---
-description: Stay on top of Interline notifications for assignments, @mentions, new messages, and awaiting responses — and tune your alerts.
+description: Configure your Interline notifications — choose which events alert you (in-app, desktop, email), set a sound, and tune preferences.
 ---
 
 # Notifications
 
-Notifications keep you on top of what needs your attention without having to constantly scan the queue. As an agent, you're alerted when something becomes *yours* or needs a reply.
+Notifications keep you on top of what needs your attention without constantly scanning the queue. You control your own alerts on the **Notifications** settings page.
 
-## What you get notified about
+## Opening notification settings
 
-Interline notifies you when:
+Click your **profile avatar** in the top-right corner and choose **Notifications** (you'll land on **Settings → Notifications**). These settings are **personal** — each user configures their own; they don't affect teammates.
 
-- A conversation is **assigned to you** — it's now under **Assigned to me** in your [My Inbox](mailboxes.md) and you own it.
-- You're **@mentioned** in an internal comment — a teammate is pulling you in. See [Team Collaboration](collaboration.md).
-- A **new message** arrives in an inbox you're watching, or a client replies to a conversation you own.
-- A conversation you own moves to **awaiting response** — the client has replied and the ball is back in your court.
+![The Notifications settings page: browser-permission banner, the per-event In-app / Desktop / Email matrix, notification sound, and preferences.](../assets/media/notifications-settings.png){ width="820" }
 
-## Where notifications show up
+## Allow browser notifications first
 
-Notifications appear inside Interline — typically as a badge or notification center in the app — so you can see and clear them as you work. Depending on how your workspace is configured, they may also reach you by **email** or **desktop/browser alerts** so you're notified even when Interline isn't the active tab.
+The banner at the top shows whether your browser has **granted permission** for desktop alerts. When it reads **Granted** (*Allowed for this site*), you're set.
 
-!!! tip "Triage with notifications, not just the queue"
-    A good habit: clear your notifications first (assignments and @mentions — things aimed directly at you), then work the shared queue. That way nothing pointed at you personally slips through.
+!!! warning "Turn on browser notifications to get desktop alerts"
+    Desktop alerts **only work if your browser allows notifications for Interline**. The first time you enable a Desktop toggle, your browser will ask for permission — click **Allow**. If you previously blocked it, the banner won't say *Granted*; open your browser's site settings (the padlock/site icon in the address bar → **Notifications → Allow**) and reload. Until permission is granted, In-app alerts still work but nothing will pop up on your desktop.
 
-## Managing your own notifications
+## Choosing what notifies you — and how
 
-You can tune how much you're notified so the signal stays useful:
+The main table lets you turn each **event** on or off across three delivery methods:
 
-- Choose **which events** notify you (assignments, mentions, new messages).
-- Choose **how** you're notified (in-app, email, desktop).
-- **Mark notifications as read** or clear them once handled.
+- **In-app** — a badge/alert inside Interline while you're using it.
+- **Desktop** — a browser push notification, so you're alerted even when Interline isn't the active tab (requires browser permission above).
+- **Email** — an email notification.
 
-Find these under your personal notification settings.
+The events are:
+
+| Event | What it means | Scope |
+|-------|---------------|-------|
+| **A conversation is opened** | A new or reopened conversation lands in your inbox. | **Assigned to me** or **Any conversation** |
+| **New message** | A message arrives on a conversation. | **Assigned to me** or **Any conversation** |
+| **Assigned to you** | A conversation is assigned to you. | — |
+| **Mention** *(coming soon)* | A teammate @mentions you in a note. | — |
+
+For **A conversation is opened** and **New message**, use the **Assigned to me / Any conversation** toggle to decide how broadly you're alerted — only your own conversations, or everything coming into the inboxes you can see.
+
+!!! note "Delivery availability"
+    Not every method is available for every event yet — where a method isn't offered, it shows a dash (—). Currently **Email** is available for **Assigned to you**, and the **Mention** event is **coming soon**.
+
+## Notification sound
+
+Under **Notification sound** you can pick the sound that plays for in-app/desktop alerts (for example *Alert*), **Preview** it, and set the **volume**.
+
+## Preferences
+
+Two extra options fine-tune the noise:
+
+- **Only notify when tab is in background** — skip desktop alerts while you're actively looking at the inbox, so you're only pinged when you've stepped away.
+- **Email digest instead of per-event** — bundle email notifications into a single **daily summary** rather than one email per event.
+
+## Save
+
+Adjust the toggles, sound, and preferences, then click **Save**. **Cancel** discards your changes.
+
+!!! tip "A sensible starting point"
+    Keep **in-app** and **desktop** on for *Assigned to you* and *New message → Assigned to me* so you never miss your own conversations, turn on **Only notify when tab is in background** to cut noise while you're working, and reach for **Any conversation** only if you're actively triaging a shared inbox.
 
 !!! note "Agent vs. workspace settings"
-    This page covers *your* notifications. Workspace-wide notification rules and defaults are set by admins — see the [Admin Guide](../admin/index.md).
+    This page covers *your* notifications. Workspace-wide settings live in the [Admin Guide](../admin/index.md).
 
 ---
 
