@@ -1,15 +1,22 @@
 ---
+title: API Reference
 description: Interactive Interline API reference — every endpoint, request and response schema, and example.
 hide:
   - navigation
   - toc
 ---
 
-# API Reference
-
-Complete reference for the Interline API — browse endpoints, schemas, and example requests.
-
-Need an API key? Create one in [**Settings → API**](https://app-ui.interline.chat/settings/api). See the [API Overview](index.md) for authentication basics.
+<style>
+  /* Scalar owns the whole viewport on this page — hide the site chrome
+     (its fixed sidebar otherwise collides with Material's sticky header) */
+  .md-header, .md-tabs, .md-footer { display: none; }
+  .md-grid { max-width: 100%; }
+  .md-main__inner { margin: 0; }
+  .md-content__inner { margin: 0; padding: 0; }
+  .md-content__inner::before { display: none; }
+  .md-content__inner > h1:first-child { display: none; }
+  #scalar-api-reference { min-height: 100vh; }
+</style>
 
 <div id="scalar-api-reference" data-spec-url="/api/openapi.json"></div>
 
