@@ -1,0 +1,10 @@
+# PLACEHOLDER — this file is overwritten automatically by the API CI/CD
+# pipeline on every release. Do not edit by hand; changes will be lost.
+openapi: 3.1.0
+info:
+  title: Interline API
+  version: 0.0.0-placeholder
+  description: >-
+    Placeholder spec. The real specification is published here by CI/CD
+    when the Interline API is deployed.
+paths: {}

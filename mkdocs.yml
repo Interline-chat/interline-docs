@@ -78,14 +78,24 @@ nav:
           - Auto-Assign: admin/auto-assign.md
           - Auto-Responders: admin/auto-responders.md
           - Keyword Campaigns: keywords/index.md
-  - API & Reference:
+  - API:
       - Overview: api/index.md
+      - Webhooks: api/webhooks.md
+      - API Reference: api/reference.md
 
 # ---------------------------------------------------------------------------
 # Custom brand styling
 # ---------------------------------------------------------------------------
 extra_css:
   - stylesheets/extra.css
+
+# ---------------------------------------------------------------------------
+# Custom JavaScript
+# ---------------------------------------------------------------------------
+# scalar.js mounts the interactive API reference (Scalar) on api/reference/.
+# It subscribes to Material's document$ so it survives navigation.instant.
+extra_javascript:
+  - javascripts/scalar.js
 
 # ---------------------------------------------------------------------------
 # Plugins
