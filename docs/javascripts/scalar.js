@@ -3,7 +3,9 @@
  * navigation.instant (SPA-style page loads), where plain inline
  * <script> tags in page content are NOT re-executed. */
 (function () {
-  var SCALAR_CDN = "https://cdn.jsdelivr.net/npm/@scalar/api-reference";
+  // Pinned version — bump deliberately after testing, don't float "latest"
+  var SCALAR_CDN =
+    "https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.62.9/dist/browser/standalone.js";
 
   function mount() {
     var el = document.getElementById("scalar-api-reference");

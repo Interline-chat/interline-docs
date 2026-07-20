@@ -1,0 +1,9 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Interline API",
+    "version": "0.0.0-placeholder",
+    "description": "Placeholder spec. Overwritten automatically by the API CI/CD pipeline on every release - do not edit by hand."
+  },
+  "paths": {}
+}

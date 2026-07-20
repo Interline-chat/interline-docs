@@ -11,9 +11,9 @@ Complete reference for the Interline API — browse endpoints, schemas, and exam
 
 Need an API key? Create one in [**Settings → API**](https://app-ui.interline.chat/settings/api). See the [API Overview](index.md) for authentication basics.
 
-<div id="scalar-api-reference" data-spec-url="/api/openapi.yaml"></div>
+<div id="scalar-api-reference" data-spec-url="/api/openapi.json"></div>
 
 <noscript>
 JavaScript is required to view the interactive reference. You can
-<a href="/api/openapi.yaml">download the raw OpenAPI spec</a> instead.
+<a href="/api/openapi.json">download the raw OpenAPI spec</a> instead.
 </noscript>
