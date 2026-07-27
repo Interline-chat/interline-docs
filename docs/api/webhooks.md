@@ -6,13 +6,13 @@ description: Receive real-time notifications from Interline — set up webhooks 
 
 Webhooks push real-time notifications to your server whenever something happens in Interline — a message arrives, a delivery status changes, a contact is updated — so you don't have to poll the API.
 
-Manage them from the **Webhooks** tab in [**Settings → API**](https://app-ui.interline.chat/settings/api). The list shows each endpoint, the events it subscribes to, its status, and when it was created.
+Manage them from the **Webhooks** tab in [**Settings → API**](https://app.interline.chat/settings/api){ target="_blank" rel="noopener" }. The list shows each endpoint, the events it subscribes to, its status, and when it was created.
 
 ![Webhooks tab listing endpoints, events, and status](../assets/media/api-webhooks-list.png){ width="760" }
 
 ## Add a webhook
 
-1. Go to [**Settings → API**](https://app-ui.interline.chat/settings/api) and open the **Webhooks** tab.
+1. Go to [**Settings → API**](https://app.interline.chat/settings/api){ target="_blank" rel="noopener" } and open the **Webhooks** tab.
 2. Click **Create webhook**.
 3. Enter your **Endpoint URL** — it must be a valid **HTTPS** URL.
 4. Copy the **Signing Secret** and store it safely (see below).

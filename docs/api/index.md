@@ -12,7 +12,7 @@ The reference is interactive — browse every endpoint, see request/response sch
 
 ## Create an API key
 
-1. Go to [**Settings → API**](https://app-ui.interline.chat/settings/api). The **API Keys** tab opens by default.
+1. Go to [**Settings → API**](https://app.interline.chat/settings/api){ target="_blank" rel="noopener" }. The **API Keys** tab opens by default.
 2. Click **Create API key**.
 3. Give the key a descriptive name (e.g. "CRM integration"), pick an expiration, and choose its scopes.
 4. Click **Create API Key**.
@@ -28,7 +28,7 @@ As soon as the key is created it's displayed at the top of the page. Click **Cop
 ![API key created — copy it now, it won't be shown again](../assets/media/api-key-created.png){ width="760" }
 
 !!! warning "Keep your key secret"
-    Anyone with your API key can act on your account within the key's scopes. Never commit it to source control or expose it in client-side code. If a key leaks, revoke it from [Settings → API](https://app-ui.interline.chat/settings/api) and create a new one.
+    Anyone with your API key can act on your account within the key's scopes. Never commit it to source control or expose it in client-side code. If a key leaks, revoke it from [Settings → API](https://app.interline.chat/settings/api){ target="_blank" rel="noopener" } and create a new one.
 
 ## Scopes
 
