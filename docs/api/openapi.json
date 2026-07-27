@@ -1810,6 +1810,7 @@
             "type": "string"
           },
           "events": {
+            "description": "Messages sent as part of a campaign do not emit `message.created` or `message.status_changed` webhooks. Campaigns are created and managed in the Interline web app, where their delivery results are reported.",
             "enum": [
               "message.received",
               "message.created",
@@ -3399,7 +3400,7 @@
         ]
       },
       "post": {
-        "description": "Register a new webhook endpoint to receive event notifications. You can subscribe to specific events like message.received, conversation.created, etc.",
+        "description": "Register a new webhook endpoint to receive event notifications. You can subscribe to specific events like message.received, conversation.created, etc. Messages sent as part of a campaign do not emit message.created or message.status_changed webhooks — campaigns are created and managed in the Interline web app, where their delivery results are reported.",
         "operationId": "WebhooksV1Controller_create_v1",
         "parameters": [],
         "requestBody": {
