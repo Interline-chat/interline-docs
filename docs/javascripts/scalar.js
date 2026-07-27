@@ -12,7 +12,24 @@
   var SCALAR_CDN =
     "https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.62.9/dist/browser/standalone.js";
 
+  // The API Reference is a full-screen page distinct from the regular docs,
+  // so every link to it (sidebar nav, buttons, prev/next footer) opens in a
+  // new tab. Skipped on the reference page itself so Scalar's own hash
+  // navigation keeps working.
+  function markReferenceLinks() {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      if (
+        a.pathname.replace(/\/$/, "").endsWith("/api/reference") &&
+        a.pathname !== window.location.pathname
+      ) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+    });
+  }
+
   function mount() {
+    markReferenceLinks();
     var el = document.getElementById("scalar-api-reference");
     if (!el || el.dataset.mounted) return;
     el.dataset.mounted = "true";
