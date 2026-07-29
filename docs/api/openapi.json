@@ -1,55 +1,6 @@
 {
   "components": {
     "schemas": {
-      "AcceptInvitationDto": {
-        "properties": {
-          "expires_at": {
-            "description": "Expiration timestamp from invitation link",
-            "example": "2025-12-09T10:00:00.000Z",
-            "type": "string"
-          },
-          "firstName": {
-            "description": "First name (optional)",
-            "example": "John",
-            "type": "string"
-          },
-          "lastName": {
-            "description": "Last name (optional)",
-            "example": "Doe",
-            "type": "string"
-          },
-          "password": {
-            "description": "New password (min 6 characters)",
-            "example": "SecurePass123",
-            "minLength": 6,
-            "type": "string"
-          },
-          "passwordConfirmation": {
-            "description": "Password confirmation",
-            "example": "SecurePass123",
-            "minLength": 6,
-            "type": "string"
-          },
-          "signature": {
-            "description": "HMAC signature from invitation link",
-            "example": "a1b2c3d4e5f6...",
-            "type": "string"
-          },
-          "userId": {
-            "description": "User ID from invitation link",
-            "example": 123,
-            "type": "number"
-          }
-        },
-        "required": [
-          "userId",
-          "expires_at",
-          "signature",
-          "password",
-          "passwordConfirmation"
-        ],
-        "type": "object"
-      },
       "AddCommentDto": {
         "properties": {
           "blocks": {
@@ -99,26 +50,6 @@
             "type": "number"
           }
         },
-        "type": "object"
-      },
-      "ChangePasswordDto": {
-        "properties": {
-          "currentPassword": {
-            "description": "Current password for verification",
-            "example": "currentPassword123",
-            "type": "string"
-          },
-          "newPassword": {
-            "description": "New password for the user",
-            "example": "newSecurePassword123",
-            "minLength": 8,
-            "type": "string"
-          }
-        },
-        "required": [
-          "currentPassword",
-          "newPassword"
-        ],
         "type": "object"
       },
       "ChannelDto": {
@@ -789,24 +720,6 @@
         ],
         "type": "object"
       },
-      "ForgotPasswordDto": {
-        "properties": {
-          "email": {
-            "description": "Email address of the user requesting password reset",
-            "example": "user@example.com",
-            "format": "email",
-            "type": "string"
-          },
-          "turnstileToken": {
-            "description": "Cloudflare Turnstile token for bot protection",
-            "type": "string"
-          }
-        },
-        "required": [
-          "email"
-        ],
-        "type": "object"
-      },
       "FullContactDto": {
         "properties": {
           "address_line1": {
@@ -916,46 +829,6 @@
         ],
         "type": "object"
       },
-      "GoogleAcceptInvitationDto": {
-        "properties": {
-          "expires_at": {
-            "description": "Expiration timestamp from invitation link",
-            "example": "2025-12-09T10:00:00.000Z",
-            "type": "string"
-          },
-          "idToken": {
-            "description": "Google ID token from credential response",
-            "type": "string"
-          },
-          "signature": {
-            "description": "HMAC signature from invitation link",
-            "type": "string"
-          },
-          "userId": {
-            "description": "User ID from invitation link",
-            "example": 123,
-            "type": "number"
-          }
-        },
-        "required": [
-          "idToken",
-          "userId",
-          "expires_at",
-          "signature"
-        ],
-        "type": "object"
-      },
-      "GoogleSignInDto": {
-        "properties": {
-          "idToken": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "idToken"
-        ],
-        "type": "object"
-      },
       "InsufficientScopeProblemDto": {
         "properties": {
           "detail": {
@@ -1018,23 +891,6 @@
           "data",
           "total",
           "filtered_count"
-        ],
-        "type": "object"
-      },
-      "LoginUserDto": {
-        "properties": {
-          "email": {
-            "format": "email",
-            "type": "string"
-          },
-          "password": {
-            "minLength": 6,
-            "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "password"
         ],
         "type": "object"
       },
@@ -1149,45 +1005,6 @@
           "type",
           "title",
           "status"
-        ],
-        "type": "object"
-      },
-      "RegisterUserDto": {
-        "properties": {
-          "email": {
-            "description": "User's email address",
-            "example": "john.doe@example.com",
-            "format": "email",
-            "type": "string"
-          },
-          "firstName": {
-            "description": "User's first name",
-            "example": "John",
-            "type": "string"
-          },
-          "lastName": {
-            "description": "User's last name",
-            "example": "Doe",
-            "type": "string"
-          },
-          "orgName": {
-            "description": "Name of the organization to create",
-            "example": "Acme Inc.",
-            "type": "string"
-          },
-          "password": {
-            "description": "User's password (min 6 characters)",
-            "example": "password123",
-            "minLength": 6,
-            "type": "string"
-          }
-        },
-        "required": [
-          "firstName",
-          "lastName",
-          "email",
-          "password",
-          "orgName"
         ],
         "type": "object"
       },
@@ -1542,25 +1359,6 @@
         },
         "type": "object"
       },
-      "UpdateProfileDto": {
-        "properties": {
-          "firstName": {
-            "description": "First name",
-            "example": "Alice",
-            "type": "string"
-          },
-          "lastName": {
-            "description": "Last name",
-            "example": "Smith",
-            "type": "string"
-          }
-        },
-        "required": [
-          "firstName",
-          "lastName"
-        ],
-        "type": "object"
-      },
       "UpdateStatusDto": {
         "properties": {
           "status": {
@@ -1740,6 +1538,181 @@
         ],
         "type": "object"
       },
+      "WebhookContactCreatedPayloadDto": {
+        "properties": {
+          "contact_id": {
+            "example": 42,
+            "type": "number"
+          },
+          "created_at": {
+            "example": "2025-01-27T10:10:00.000Z",
+            "type": "string"
+          },
+          "email": {
+            "example": "ada@example.com",
+            "type": "string"
+          },
+          "first_name": {
+            "example": "Ada",
+            "type": "string"
+          },
+          "last_name": {
+            "example": "Lovelace",
+            "type": "string"
+          },
+          "phone_number": {
+            "example": "+15551234567",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contact_id",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "WebhookContactUpdatedPayloadDto": {
+        "properties": {
+          "changes": {
+            "additionalProperties": true,
+            "description": "The fields sent on the update, keyed by field name, holding the new value — not an old/new pair. It reflects what was submitted rather than a computed diff, so a field resent with an unchanged value still appears, and values are as submitted (a phone number may not yet be normalised). Possible keys: first_name, last_name, email, phone_number, whatsapp_id, profile_image, address_line1, address_line2, city, state, postal_code, country, company_name, notes, tags, custom_fields, preferredChannelId.",
+            "example": {
+              "first_name": "Ada",
+              "tags": [
+                3,
+                7
+              ]
+            },
+            "type": "object"
+          },
+          "contact_id": {
+            "example": 42,
+            "type": "number"
+          },
+          "updated_at": {
+            "example": "2025-01-27T10:12:00.000Z",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contact_id",
+          "changes",
+          "updated_at"
+        ],
+        "type": "object"
+      },
+      "WebhookConversationAssignedPayloadDto": {
+        "properties": {
+          "actor_id": {
+            "description": "Who made the change. A user ID for actions taken in the app, an API key ID for actions taken through this API.",
+            "example": 5,
+            "type": "number"
+          },
+          "assigned_at": {
+            "example": "2025-01-27T10:05:00.000Z",
+            "type": "string"
+          },
+          "assigned_to": {
+            "description": "User the conversation is now assigned to. Null when the conversation was unassigned, and also when only its inbox changed.",
+            "example": 5,
+            "nullable": true,
+            "type": "number"
+          },
+          "conversation_id": {
+            "example": 88,
+            "type": "number"
+          },
+          "previously_assigned_to": {
+            "description": "User the conversation was assigned to before this change.",
+            "example": 3,
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "conversation_id",
+          "assigned_to",
+          "previously_assigned_to",
+          "assigned_at"
+        ],
+        "type": "object"
+      },
+      "WebhookConversationCreatedPayloadDto": {
+        "properties": {
+          "channel_id": {
+            "example": 53,
+            "type": "number"
+          },
+          "channel_type": {
+            "enum": [
+              "WhatsApp",
+              "Email",
+              "SMS",
+              "Chat"
+            ],
+            "example": "WhatsApp",
+            "type": "string"
+          },
+          "contact_id": {
+            "example": 42,
+            "type": "number"
+          },
+          "conversation_id": {
+            "example": 88,
+            "type": "number"
+          },
+          "created_at": {
+            "example": "2025-01-27T10:00:00.000Z",
+            "type": "string"
+          }
+        },
+        "required": [
+          "conversation_id",
+          "contact_id",
+          "channel_id",
+          "channel_type",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "WebhookConversationStatusChangedPayloadDto": {
+        "properties": {
+          "changed_at": {
+            "example": "2025-01-27T10:06:00.000Z",
+            "type": "string"
+          },
+          "conversation_id": {
+            "example": 88,
+            "type": "number"
+          },
+          "previous_status": {
+            "description": "The status being replaced. Null when the conversation had no prior status.",
+            "enum": [
+              "open",
+              "closed",
+              "archived"
+            ],
+            "example": "open",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "closed",
+              "archived"
+            ],
+            "example": "closed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "conversation_id",
+          "status",
+          "changed_at"
+        ],
+        "type": "object"
+      },
       "WebhookDeliveryDto": {
         "properties": {
           "attempts": {
@@ -1856,6 +1829,49 @@
         ],
         "type": "object"
       },
+      "WebhookEventEnvelopeDto": {
+        "properties": {
+          "data": {
+            "additionalProperties": true,
+            "description": "The event body. Which schema this is depends on `event` — see the event table in the Webhooks section.",
+            "example": {
+              "channel_id": 53,
+              "contact_phone": "+15551234567",
+              "conversation_id": 88,
+              "is_new_conversation": false,
+              "message_id": 1234,
+              "received_at": "2025-01-27T10:00:00.000Z",
+              "sender_type": "contact"
+            },
+            "type": "object"
+          },
+          "event": {
+            "enum": [
+              "message.received",
+              "message.created",
+              "message.status_changed",
+              "conversation.created",
+              "conversation.assigned",
+              "conversation.status_changed",
+              "contact.created",
+              "contact.updated"
+            ],
+            "example": "message.received",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "When the event was dispatched. Retries of the same delivery keep this value, so it is not the time the request was sent.",
+            "example": "2025-01-27T10:00:00.000Z",
+            "type": "string"
+          }
+        },
+        "required": [
+          "event",
+          "timestamp",
+          "data"
+        ],
+        "type": "object"
+      },
       "WebhookListResponseDto": {
         "properties": {
           "data": {
@@ -1867,6 +1883,161 @@
         },
         "required": [
           "data"
+        ],
+        "type": "object"
+      },
+      "WebhookMessageCreatedPayloadDto": {
+        "properties": {
+          "channel_id": {
+            "example": 53,
+            "nullable": true,
+            "type": "number"
+          },
+          "channel_type": {
+            "enum": [
+              "WhatsApp",
+              "Email",
+              "SMS",
+              "Chat"
+            ],
+            "example": "WhatsApp",
+            "type": "string"
+          },
+          "content": {
+            "description": "Null for messages that carry only attachments.",
+            "example": "Your order has shipped!",
+            "nullable": true,
+            "type": "string"
+          },
+          "conversation_id": {
+            "example": 88,
+            "type": "number"
+          },
+          "created_at": {
+            "example": "2025-01-27T10:00:01.000Z",
+            "type": "string"
+          },
+          "message_id": {
+            "example": 1234,
+            "type": "number"
+          },
+          "sender_type": {
+            "enum": [
+              "user",
+              "contact",
+              "workflow",
+              "api",
+              "automation",
+              "echo"
+            ],
+            "example": "user",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id",
+          "conversation_id",
+          "channel_id",
+          "channel_type",
+          "sender_type",
+          "content",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "WebhookMessageReceivedPayloadDto": {
+        "properties": {
+          "channel_id": {
+            "example": 53,
+            "type": "number"
+          },
+          "contact_phone": {
+            "description": "Empty string when the contact has no phone or WhatsApp identifier, as on email channels.",
+            "example": "+15551234567",
+            "type": "string"
+          },
+          "conversation_id": {
+            "example": 88,
+            "type": "number"
+          },
+          "is_new_conversation": {
+            "description": "True when this message opened a new conversation.",
+            "example": false,
+            "type": "boolean"
+          },
+          "message_id": {
+            "example": 1234,
+            "type": "number"
+          },
+          "received_at": {
+            "description": "When the provider received the message.",
+            "example": "2025-01-27T10:00:00.000Z",
+            "type": "string"
+          },
+          "sender_type": {
+            "enum": [
+              "contact"
+            ],
+            "example": "contact",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id",
+          "conversation_id",
+          "channel_id",
+          "contact_phone",
+          "is_new_conversation",
+          "sender_type",
+          "received_at"
+        ],
+        "type": "object"
+      },
+      "WebhookMessageStatusChangedPayloadDto": {
+        "properties": {
+          "changed_at": {
+            "example": "2025-01-27T10:00:03.000Z",
+            "type": "string"
+          },
+          "conversation_id": {
+            "example": 88,
+            "type": "number"
+          },
+          "message_id": {
+            "example": 1234,
+            "type": "number"
+          },
+          "previous_status": {
+            "description": "The status being replaced. Absent when the previous status could not be determined, which is common for provider status callbacks.",
+            "enum": [
+              "scheduled",
+              "pending",
+              "sent",
+              "delivered",
+              "read",
+              "failed"
+            ],
+            "example": "sent",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "scheduled",
+              "pending",
+              "sent",
+              "delivered",
+              "read",
+              "failed"
+            ],
+            "example": "delivered",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id",
+          "conversation_id",
+          "status",
+          "changed_at"
         ],
         "type": "object"
       }
@@ -1882,7 +2053,7 @@
   },
   "info": {
     "contact": {},
-    "description": "\n## Overview\n\nThe Interline Public API allows you to programmatically send messages, manage contacts, read conversations, and receive real-time webhook notifications.\n\n## Authentication\n\nAll API requests require an API key, passed as a Bearer token:\n\n```\nAuthorization: Bearer ilc_live_your_api_key_here\n```\n\nYou can create and manage API keys in the Interline dashboard under Settings > API Keys.\n\n## Rate Limiting\n\nAuthenticated requests are rate limited per endpoint, based on the HTTP method:\n\n- Read requests (`GET`, `HEAD`): 120 requests per minute per API key\n- Write requests (everything else): 30 requests per minute per API key\n\nSome endpoints set a stricter limit than these defaults; check the endpoint's documentation for its specific limit.\n\nAuthenticated limits are enforced at two levels — per API key, and per organization across all of that organization's API keys combined. The organization ceiling scales with the org's subscription plan, so it is always a multiple of the per-key limit. Requests without a valid API key are additionally limited per IP address before authentication.\n\nRate limit headers are included in every response, reflecting whichever applicable limit is closest to being reached:\n\n- `X-RateLimit-Limit`: Maximum requests per minute for the binding scope\n- `X-RateLimit-Remaining`: Remaining requests in current window\n- `X-RateLimit-Reset`: Unix timestamp when the limit resets\n- `Retry-After`: Seconds to wait before retrying (sent only on `429` responses)\n\n## Scopes\n\nAPI keys can be restricted to specific scopes:\n\n| Scope | Description |\n|-------|-------------|\n| `messages:read` | Read message status and content |\n| `messages:write` | Send messages |\n| `contacts:read` | List and view contacts |\n| `contacts:write` | Create and update contacts |\n| `conversations:read` | List and view conversations |\n| `conversations:write` | Open, close, assign, comment on, and reply to conversations |\n| `channels:read` | List available channels |\n| `templates:read` | List WhatsApp templates |\n| `webhooks:read` | List registered webhooks |\n| `webhooks:write` | Create and delete webhooks |\n| `users:read` | List and view organization members |\n\n## Errors\n\nAll error responses are [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)\nProblem Details documents with the media type `application/problem+json`.\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/insufficient-scope\",\n  \"title\": \"Insufficient scope\",\n  \"status\": 403,\n  \"detail\": \"This endpoint requires one of the following scopes: contacts:write.\",\n  \"required_scopes\": [\"contacts:write\"],\n  \"instance\": \"/v1/contacts\"\n}\n```\n\nThe `type` URI is the stable, machine-readable identifier for each error.\n\n| Status | `type` | When |\n|--------|--------|------|\n| 401 | `.../unauthorized` | Missing or invalid API key |\n| 403 | `.../insufficient-scope` | Key lacks a required scope (see `required_scopes`) |\n| 404 | `.../not-found` | Resource does not exist |\n| 409 | `.../conflict` | Resource conflict (e.g. duplicate) |\n| 422 | `.../validation-error` | Request understood but invalid; see `errors` |\n| 429 | `.../rate-limit-exceeded` | Rate limit hit; see `Retry-After` |\n| 400 | `.../bad-request` | Request was malformed/unreadable |\n| 500 | `.../internal-error` | Unexpected server error |\n\nValidation failures (422) include a grouped `errors` array:\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/validation-error\",\n  \"title\": \"Validation failed\",\n  \"status\": 422,\n  \"detail\": \"The request body failed validation.\",\n  \"errors\": [\n    { \"field\": \"contact_id\", \"messages\": [\"contact_id must be an integer\"] }\n  ]\n}\n```\n",
+    "description": "\n## Overview\n\nThe Interline Public API allows you to programmatically send messages, manage contacts, read conversations, and receive real-time webhook notifications.\n\n## Authentication\n\nAll API requests require an API key, passed as a Bearer token:\n\n```\nAuthorization: Bearer ilc_live_your_api_key_here\n```\n\nYou can create and manage API keys in the Interline dashboard under Settings > API Keys.\n\n## Rate Limiting\n\nAuthenticated requests are rate limited per endpoint, based on the HTTP method:\n\n- Read requests (`GET`, `HEAD`): 120 requests per minute per API key\n- Write requests (everything else): 30 requests per minute per API key\n\nSome endpoints set a stricter limit than these defaults; check the endpoint's documentation for its specific limit.\n\nAuthenticated limits are enforced at two levels — per API key, and per organization across all of that organization's API keys combined. The organization ceiling scales with the org's subscription plan, so it is always a multiple of the per-key limit. Requests without a valid API key are additionally limited per IP address before authentication.\n\nRate limit headers are included in every response, reflecting whichever applicable limit is closest to being reached:\n\n- `X-RateLimit-Limit`: Maximum requests per minute for the binding scope\n- `X-RateLimit-Remaining`: Remaining requests in current window\n- `X-RateLimit-Reset`: Unix timestamp when the limit resets\n- `Retry-After`: Seconds to wait before retrying (sent only on `429` responses)\n\n## Scopes\n\nAPI keys can be restricted to specific scopes:\n\n| Scope | Description |\n|-------|-------------|\n| `messages:read` | Read message status and content |\n| `messages:write` | Send messages |\n| `contacts:read` | List and view contacts |\n| `contacts:write` | Create and update contacts |\n| `conversations:read` | List and view conversations |\n| `conversations:write` | Open, close, assign, comment on, and reply to conversations |\n| `channels:read` | List available channels |\n| `templates:read` | List WhatsApp templates |\n| `webhooks:read` | List registered webhooks |\n| `webhooks:write` | Create and delete webhooks |\n| `users:read` | List and view organization members |\n\n## Errors\n\nAll error responses are [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)\nProblem Details documents with the media type `application/problem+json`.\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/insufficient-scope\",\n  \"title\": \"Insufficient scope\",\n  \"status\": 403,\n  \"detail\": \"This endpoint requires one of the following scopes: contacts:write.\",\n  \"required_scopes\": [\"contacts:write\"],\n  \"instance\": \"/v1/contacts\"\n}\n```\n\nThe `type` URI is the stable, machine-readable identifier for each error.\n\n| Status | `type` | When |\n|--------|--------|------|\n| 401 | `.../unauthorized` | Missing or invalid API key |\n| 403 | `.../insufficient-scope` | Key lacks a required scope (see `required_scopes`) |\n| 404 | `.../not-found` | Resource does not exist |\n| 409 | `.../conflict` | Resource conflict (e.g. duplicate) |\n| 422 | `.../validation-error` | Request understood but invalid; see `errors` |\n| 429 | `.../rate-limit-exceeded` | Rate limit hit; see `Retry-After` |\n| 400 | `.../bad-request` | Request was malformed/unreadable |\n| 500 | `.../internal-error` | Unexpected server error |\n\nValidation failures (422) include a grouped `errors` array:\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/validation-error\",\n  \"title\": \"Validation failed\",\n  \"status\": 422,\n  \"detail\": \"The request body failed validation.\",\n  \"errors\": [\n    { \"field\": \"contact_id\", \"messages\": [\"contact_id must be an integer\"] }\n  ]\n}\n```\n\n## Receiving webhooks\n\nHow to consume the events we send you: the payload format, how to verify a delivery is\ngenuinely from us, and what happens when your endpoint is down. To register and manage\nendpoints, see the [Webhooks](#tag/webhooks) endpoints.\n\nRegister an endpoint with `POST /v1/webhooks` (or in the Interline web app under\nSettings > API Keys) and we `POST` a JSON body to it whenever one of the events you\nsubscribed to fires. Subscribe to each event by name; there are no wildcards.\n\nYour endpoint must:\n\n- be reachable over HTTPS at a public host, and respond directly — redirects are **not**\n  followed, so a `3xx` counts as a failed delivery\n- answer within 10 seconds\n- return any `2xx` to acknowledge. Every other status is treated as a failure and retried\n\n### Payload\n\nEvery delivery has the same envelope. `data` varies by event — see `WebhookEventEnvelope`\nand the per-event payload schemas.\n\n```json\n{\n  \"event\": \"message.received\",\n  \"timestamp\": \"2025-01-27T10:00:00.000Z\",\n  \"data\": {\n    \"message_id\": 1234,\n    \"conversation_id\": 88,\n    \"channel_id\": 53,\n    \"contact_phone\": \"+15551234567\",\n    \"is_new_conversation\": false,\n    \"sender_type\": \"contact\",\n    \"received_at\": \"2025-01-27T10:00:00.000Z\"\n  }\n}\n```\n\nOptional fields are omitted rather than sent as `null`, so check for the key's presence.\n\n| Event | Fires when |\n|-------|------------|\n| `message.received` | A contact sends you a message |\n| `message.created` | A message is created on a conversation. Scheduled messages emit this when they send, not when they are scheduled |\n| `message.status_changed` | A message moves between `scheduled`, `pending`, `sent`, `delivered`, `read` and `failed` |\n| `conversation.created` | A new conversation is opened |\n| `conversation.assigned` | A conversation is assigned, reassigned or unassigned. On unassignment `assigned_to` is `null` |\n| `conversation.status_changed` | A conversation moves between `open`, `closed` and `archived` |\n| `contact.created` | A contact is created through the API or the web app. Contacts created automatically from an inbound message do not fire this event |\n| `contact.updated` | A contact is updated. `changes` holds the submitted fields and their new values |\n\nMessages sent as part of a campaign do not emit `message.created` or\n`message.status_changed`. Campaigns are created and managed in the Interline web app,\nwhere their delivery results are reported.\n\n### Headers\n\n| Header | Value |\n|--------|-------|\n| `X-Webhook-Signature` | `sha256=` followed by the hex HMAC described below |\n| `X-Webhook-Event` | The event name, matching `event` in the body |\n| `X-Webhook-Timestamp` | When the event was dispatched, matching `timestamp` in the body |\n\nThere is no delivery ID header. Deliveries are at-least-once and unordered, so make your\nhandler idempotent using the resource IDs inside `data`.\n\n### Verifying a delivery\n\nThe signature is an HMAC-SHA256, keyed by the signing secret you supplied when you\nregistered the webhook, over the timestamp and the **raw** request body joined by a\nperiod — `${timestamp}.${body}` — hex encoded.\n\n```js\nconst crypto = require('crypto');\nconst express = require('express');\n\nconst app = express();\n\n// The signature covers the exact bytes we sent. Keep them: re-serialising the\n// parsed object will not produce a matching signature.\napp.use(express.json({ verify: (req, _res, buf) => { req.rawBody = buf; } }));\n\napp.post('/webhooks/interline', (req, res) => {\n  const timestamp = req.get('X-Webhook-Timestamp');\n  const expected = crypto\n    .createHmac('sha256', process.env.INTERLINE_WEBHOOK_SECRET)\n    .update(`${timestamp}.${req.rawBody}`)\n    .digest('hex');\n\n  const received = Buffer.from(req.get('X-Webhook-Signature') ?? '');\n  const signature = Buffer.from(`sha256=${expected}`);\n\n  if (\n    received.length !== signature.length ||\n    !crypto.timingSafeEqual(received, signature)\n  ) {\n    return res.sendStatus(401);\n  }\n\n  res.sendStatus(200);\n  processEventAsync(req.body);\n});\n```\n\nAcknowledge first and do your work afterwards, so slow processing does not run into the\n10 second timeout.\n\n`timestamp` is when the event was dispatched, and a retry keeps the original value rather\nthan getting a fresh one. If you reject stale timestamps, allow at least 24 hours or you\nwill reject legitimate retries.\n\nThe signing secret is write-only: no endpoint returns it and there is no rotation endpoint.\nIf you lose it, register a new webhook and delete the old one.\n\n### Retries and failures\n\nA delivery is attempted up to 7 times, with fixed waits between attempts:\n\n| After attempt | Next attempt in |\n|---------------|-----------------|\n| 1 | 1 minute |\n| 2 | 5 minutes |\n| 3 | 30 minutes |\n| 4 | 2 hours |\n| 5 | 5 hours |\n| 6 | 10 hours |\n\nA delivery that fails all 7 attempts counts against the webhook. After 10 such deliveries\nin a row the webhook is disabled: `is_active` becomes `false`, `disabled_at` is set, and it\nstops receiving events. A single successful delivery resets the count.\n\nRe-enable a webhook with `PATCH /v1/webhooks/{id}` and `{\"is_active\": true}`, which also\nclears its failure count. `GET /v1/webhooks/{id}/deliveries` returns the 50 most recent\nattempts, newest first, to help you debug.\n",
     "title": "Interline API",
     "version": "1.0"
   },
@@ -3726,7 +3897,7 @@
       "name": "Templates"
     },
     {
-      "description": "Configure webhook notifications",
+      "description": "Register and manage webhook endpoints. For the payloads they deliver and how to verify them, see [Receiving webhooks](#description/receiving-webhooks).",
       "name": "Webhooks"
     }
   ]
