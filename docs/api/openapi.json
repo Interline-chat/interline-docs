@@ -1836,12 +1836,18 @@
             "description": "The event body. Which schema this is depends on `event` — see the event table in the Webhooks section.",
             "example": {
               "channel_id": 53,
+              "channel_type": "SMS",
+              "contact_id": 42,
               "contact_phone": "+15551234567",
+              "content": "Thanks, that works for me.",
               "conversation_id": 88,
+              "has_attachments": false,
               "is_new_conversation": false,
               "message_id": 1234,
               "received_at": "2025-01-27T10:00:00.000Z",
-              "sender_type": "contact"
+              "sender_id": 42,
+              "sender_type": "contact",
+              "subject": null
             },
             "type": "object"
           },
@@ -1903,6 +1909,10 @@
             "example": "WhatsApp",
             "type": "string"
           },
+          "contact_id": {
+            "example": 42,
+            "type": "number"
+          },
           "content": {
             "description": "Null for messages that carry only attachments.",
             "example": "Your order has shipped!",
@@ -1917,8 +1927,26 @@
             "example": "2025-01-27T10:00:01.000Z",
             "type": "string"
           },
+          "email": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookMessageEmailDto"
+              }
+            ],
+            "description": "Present only on email messages."
+          },
+          "has_attachments": {
+            "description": "True when the message has attachments.",
+            "example": false,
+            "type": "boolean"
+          },
           "message_id": {
             "example": 1234,
+            "type": "number"
+          },
+          "sender_id": {
+            "description": "Who sent the message: a user, contact, or API key ID depending on `sender_type`.",
+            "example": 5,
             "type": "number"
           },
           "sender_type": {
@@ -1932,6 +1960,12 @@
             ],
             "example": "user",
             "type": "string"
+          },
+          "subject": {
+            "description": "The email subject. Null on channels without one, such as SMS.",
+            "example": "Your order has shipped",
+            "nullable": true,
+            "type": "string"
           }
         },
         "required": [
@@ -1939,9 +1973,61 @@
           "conversation_id",
           "channel_id",
           "channel_type",
+          "contact_id",
           "sender_type",
+          "sender_id",
           "content",
+          "subject",
+          "has_attachments",
           "created_at"
+        ],
+        "type": "object"
+      },
+      "WebhookMessageEmailDto": {
+        "properties": {
+          "bcc": {
+            "example": [
+              "bcc@example.com"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "cc": {
+            "example": [
+              "cc@example.com"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "from": {
+            "description": "Sender address. Null when it could not be determined.",
+            "example": "sender@example.com",
+            "nullable": true,
+            "type": "string"
+          },
+          "to": {
+            "description": "Recipient addresses. Null when none are recorded.",
+            "example": [
+              "recipient@example.com"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "cc",
+          "bcc"
         ],
         "type": "object"
       },
@@ -1951,14 +2037,47 @@
             "example": 53,
             "type": "number"
           },
+          "channel_type": {
+            "enum": [
+              "WhatsApp",
+              "Email",
+              "SMS",
+              "Chat"
+            ],
+            "example": "Email",
+            "type": "string"
+          },
+          "contact_id": {
+            "example": 42,
+            "type": "number"
+          },
           "contact_phone": {
             "description": "Empty string when the contact has no phone or WhatsApp identifier, as on email channels.",
             "example": "+15551234567",
             "type": "string"
           },
+          "content": {
+            "description": "Null for messages that carry only attachments.",
+            "example": "Thanks, that works for me.",
+            "nullable": true,
+            "type": "string"
+          },
           "conversation_id": {
             "example": 88,
             "type": "number"
+          },
+          "email": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookMessageEmailDto"
+              }
+            ],
+            "description": "Present only on email messages."
+          },
+          "has_attachments": {
+            "description": "True when the message has attachments.",
+            "example": false,
+            "type": "boolean"
           },
           "is_new_conversation": {
             "description": "True when this message opened a new conversation.",
@@ -1974,11 +2093,22 @@
             "example": "2025-01-27T10:00:00.000Z",
             "type": "string"
           },
+          "sender_id": {
+            "description": "The contact who sent the message.",
+            "example": 42,
+            "type": "number"
+          },
           "sender_type": {
             "enum": [
               "contact"
             ],
             "example": "contact",
+            "type": "string"
+          },
+          "subject": {
+            "description": "The email subject. Null on channels without one, such as SMS.",
+            "example": "Re: your order",
+            "nullable": true,
             "type": "string"
           }
         },
@@ -1986,9 +2116,15 @@
           "message_id",
           "conversation_id",
           "channel_id",
+          "channel_type",
+          "contact_id",
           "contact_phone",
           "is_new_conversation",
           "sender_type",
+          "sender_id",
+          "content",
+          "subject",
+          "has_attachments",
           "received_at"
         ],
         "type": "object"
@@ -2053,7 +2189,7 @@
   },
   "info": {
     "contact": {},
-    "description": "\n## Overview\n\nThe Interline Public API allows you to programmatically send messages, manage contacts, read conversations, and receive real-time webhook notifications.\n\n## Authentication\n\nAll API requests require an API key, passed as a Bearer token:\n\n```\nAuthorization: Bearer ilc_live_your_api_key_here\n```\n\nYou can create and manage API keys in the Interline dashboard under Settings > API Keys.\n\n## Rate Limiting\n\nAuthenticated requests are rate limited per endpoint, based on the HTTP method:\n\n- Read requests (`GET`, `HEAD`): 120 requests per minute per API key\n- Write requests (everything else): 30 requests per minute per API key\n\nSome endpoints set a stricter limit than these defaults; check the endpoint's documentation for its specific limit.\n\nAuthenticated limits are enforced at two levels — per API key, and per organization across all of that organization's API keys combined. The organization ceiling scales with the org's subscription plan, so it is always a multiple of the per-key limit. Requests without a valid API key are additionally limited per IP address before authentication.\n\nRate limit headers are included in every response, reflecting whichever applicable limit is closest to being reached:\n\n- `X-RateLimit-Limit`: Maximum requests per minute for the binding scope\n- `X-RateLimit-Remaining`: Remaining requests in current window\n- `X-RateLimit-Reset`: Unix timestamp when the limit resets\n- `Retry-After`: Seconds to wait before retrying (sent only on `429` responses)\n\n## Scopes\n\nAPI keys can be restricted to specific scopes:\n\n| Scope | Description |\n|-------|-------------|\n| `messages:read` | Read message status and content |\n| `messages:write` | Send messages |\n| `contacts:read` | List and view contacts |\n| `contacts:write` | Create and update contacts |\n| `conversations:read` | List and view conversations |\n| `conversations:write` | Open, close, assign, comment on, and reply to conversations |\n| `channels:read` | List available channels |\n| `templates:read` | List WhatsApp templates |\n| `webhooks:read` | List registered webhooks |\n| `webhooks:write` | Create and delete webhooks |\n| `users:read` | List and view organization members |\n\n## Errors\n\nAll error responses are [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)\nProblem Details documents with the media type `application/problem+json`.\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/insufficient-scope\",\n  \"title\": \"Insufficient scope\",\n  \"status\": 403,\n  \"detail\": \"This endpoint requires one of the following scopes: contacts:write.\",\n  \"required_scopes\": [\"contacts:write\"],\n  \"instance\": \"/v1/contacts\"\n}\n```\n\nThe `type` URI is the stable, machine-readable identifier for each error.\n\n| Status | `type` | When |\n|--------|--------|------|\n| 401 | `.../unauthorized` | Missing or invalid API key |\n| 403 | `.../insufficient-scope` | Key lacks a required scope (see `required_scopes`) |\n| 404 | `.../not-found` | Resource does not exist |\n| 409 | `.../conflict` | Resource conflict (e.g. duplicate) |\n| 422 | `.../validation-error` | Request understood but invalid; see `errors` |\n| 429 | `.../rate-limit-exceeded` | Rate limit hit; see `Retry-After` |\n| 400 | `.../bad-request` | Request was malformed/unreadable |\n| 500 | `.../internal-error` | Unexpected server error |\n\nValidation failures (422) include a grouped `errors` array:\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/validation-error\",\n  \"title\": \"Validation failed\",\n  \"status\": 422,\n  \"detail\": \"The request body failed validation.\",\n  \"errors\": [\n    { \"field\": \"contact_id\", \"messages\": [\"contact_id must be an integer\"] }\n  ]\n}\n```\n\n## Receiving webhooks\n\nHow to consume the events we send you: the payload format, how to verify a delivery is\ngenuinely from us, and what happens when your endpoint is down. To register and manage\nendpoints, see the [Webhooks](#tag/webhooks) endpoints.\n\nRegister an endpoint with `POST /v1/webhooks` (or in the Interline web app under\nSettings > API Keys) and we `POST` a JSON body to it whenever one of the events you\nsubscribed to fires. Subscribe to each event by name; there are no wildcards.\n\nYour endpoint must:\n\n- be reachable over HTTPS at a public host, and respond directly — redirects are **not**\n  followed, so a `3xx` counts as a failed delivery\n- answer within 10 seconds\n- return any `2xx` to acknowledge. Every other status is treated as a failure and retried\n\n### Payload\n\nEvery delivery has the same envelope. `data` varies by event — see `WebhookEventEnvelope`\nand the per-event payload schemas.\n\n```json\n{\n  \"event\": \"message.received\",\n  \"timestamp\": \"2025-01-27T10:00:00.000Z\",\n  \"data\": {\n    \"message_id\": 1234,\n    \"conversation_id\": 88,\n    \"channel_id\": 53,\n    \"contact_phone\": \"+15551234567\",\n    \"is_new_conversation\": false,\n    \"sender_type\": \"contact\",\n    \"received_at\": \"2025-01-27T10:00:00.000Z\"\n  }\n}\n```\n\nOptional fields are omitted rather than sent as `null`, so check for the key's presence.\n\n| Event | Fires when |\n|-------|------------|\n| `message.received` | A contact sends you a message |\n| `message.created` | A message is created on a conversation. Scheduled messages emit this when they send, not when they are scheduled |\n| `message.status_changed` | A message moves between `scheduled`, `pending`, `sent`, `delivered`, `read` and `failed` |\n| `conversation.created` | A new conversation is opened |\n| `conversation.assigned` | A conversation is assigned, reassigned or unassigned. On unassignment `assigned_to` is `null` |\n| `conversation.status_changed` | A conversation moves between `open`, `closed` and `archived` |\n| `contact.created` | A contact is created through the API or the web app. Contacts created automatically from an inbound message do not fire this event |\n| `contact.updated` | A contact is updated. `changes` holds the submitted fields and their new values |\n\nMessages sent as part of a campaign do not emit `message.created` or\n`message.status_changed`. Campaigns are created and managed in the Interline web app,\nwhere their delivery results are reported.\n\n### Headers\n\n| Header | Value |\n|--------|-------|\n| `X-Webhook-Signature` | `sha256=` followed by the hex HMAC described below |\n| `X-Webhook-Event` | The event name, matching `event` in the body |\n| `X-Webhook-Timestamp` | When the event was dispatched, matching `timestamp` in the body |\n\nThere is no delivery ID header. Deliveries are at-least-once and unordered, so make your\nhandler idempotent using the resource IDs inside `data`.\n\n### Verifying a delivery\n\nThe signature is an HMAC-SHA256, keyed by the signing secret you supplied when you\nregistered the webhook, over the timestamp and the **raw** request body joined by a\nperiod — `${timestamp}.${body}` — hex encoded.\n\n```js\nconst crypto = require('crypto');\nconst express = require('express');\n\nconst app = express();\n\n// The signature covers the exact bytes we sent. Keep them: re-serialising the\n// parsed object will not produce a matching signature.\napp.use(express.json({ verify: (req, _res, buf) => { req.rawBody = buf; } }));\n\napp.post('/webhooks/interline', (req, res) => {\n  const timestamp = req.get('X-Webhook-Timestamp');\n  const expected = crypto\n    .createHmac('sha256', process.env.INTERLINE_WEBHOOK_SECRET)\n    .update(`${timestamp}.${req.rawBody}`)\n    .digest('hex');\n\n  const received = Buffer.from(req.get('X-Webhook-Signature') ?? '');\n  const signature = Buffer.from(`sha256=${expected}`);\n\n  if (\n    received.length !== signature.length ||\n    !crypto.timingSafeEqual(received, signature)\n  ) {\n    return res.sendStatus(401);\n  }\n\n  res.sendStatus(200);\n  processEventAsync(req.body);\n});\n```\n\nAcknowledge first and do your work afterwards, so slow processing does not run into the\n10 second timeout.\n\n`timestamp` is when the event was dispatched, and a retry keeps the original value rather\nthan getting a fresh one. If you reject stale timestamps, allow at least 24 hours or you\nwill reject legitimate retries.\n\nThe signing secret is write-only: no endpoint returns it and there is no rotation endpoint.\nIf you lose it, register a new webhook and delete the old one.\n\n### Retries and failures\n\nA delivery is attempted up to 7 times, with fixed waits between attempts:\n\n| After attempt | Next attempt in |\n|---------------|-----------------|\n| 1 | 1 minute |\n| 2 | 5 minutes |\n| 3 | 30 minutes |\n| 4 | 2 hours |\n| 5 | 5 hours |\n| 6 | 10 hours |\n\nA delivery that fails all 7 attempts counts against the webhook. After 10 such deliveries\nin a row the webhook is disabled: `is_active` becomes `false`, `disabled_at` is set, and it\nstops receiving events. A single successful delivery resets the count.\n\nRe-enable a webhook with `PATCH /v1/webhooks/{id}` and `{\"is_active\": true}`, which also\nclears its failure count. `GET /v1/webhooks/{id}/deliveries` returns the 50 most recent\nattempts, newest first, to help you debug.\n",
+    "description": "\n## Overview\n\nThe Interline Public API allows you to programmatically send messages, manage contacts, read conversations, and receive real-time webhook notifications.\n\n## Authentication\n\nAll API requests require an API key, passed as a Bearer token:\n\n```\nAuthorization: Bearer ilc_live_your_api_key_here\n```\n\nYou can create and manage API keys in the Interline dashboard under Settings > API Keys.\n\n## Rate Limiting\n\nAuthenticated requests are rate limited per endpoint, based on the HTTP method:\n\n- Read requests (`GET`, `HEAD`): 120 requests per minute per API key\n- Write requests (everything else): 30 requests per minute per API key\n\nSome endpoints set a stricter limit than these defaults; check the endpoint's documentation for its specific limit.\n\nAuthenticated limits are enforced at two levels — per API key, and per organization across all of that organization's API keys combined. The organization ceiling scales with the org's subscription plan, so it is always a multiple of the per-key limit. Requests without a valid API key are additionally limited per IP address before authentication.\n\nRate limit headers are included in every response, reflecting whichever applicable limit is closest to being reached:\n\n- `X-RateLimit-Limit`: Maximum requests per minute for the binding scope\n- `X-RateLimit-Remaining`: Remaining requests in current window\n- `X-RateLimit-Reset`: Unix timestamp when the limit resets\n- `Retry-After`: Seconds to wait before retrying (sent only on `429` responses)\n\n## Scopes\n\nAPI keys can be restricted to specific scopes:\n\n| Scope | Description |\n|-------|-------------|\n| `messages:read` | Read message status and content |\n| `messages:write` | Send messages |\n| `contacts:read` | List and view contacts |\n| `contacts:write` | Create and update contacts |\n| `conversations:read` | List and view conversations |\n| `conversations:write` | Open, close, assign, comment on, and reply to conversations |\n| `channels:read` | List available channels |\n| `templates:read` | List WhatsApp templates |\n| `webhooks:read` | List registered webhooks |\n| `webhooks:write` | Create and delete webhooks |\n| `users:read` | List and view organization members |\n\n## Errors\n\nAll error responses are [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)\nProblem Details documents with the media type `application/problem+json`.\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/insufficient-scope\",\n  \"title\": \"Insufficient scope\",\n  \"status\": 403,\n  \"detail\": \"This endpoint requires one of the following scopes: contacts:write.\",\n  \"required_scopes\": [\"contacts:write\"],\n  \"instance\": \"/v1/contacts\"\n}\n```\n\nThe `type` URI is the stable, machine-readable identifier for each error.\n\n| Status | `type` | When |\n|--------|--------|------|\n| 401 | `.../unauthorized` | Missing or invalid API key |\n| 403 | `.../insufficient-scope` | Key lacks a required scope (see `required_scopes`) |\n| 404 | `.../not-found` | Resource does not exist |\n| 409 | `.../conflict` | Resource conflict (e.g. duplicate) |\n| 422 | `.../validation-error` | Request understood but invalid; see `errors` |\n| 429 | `.../rate-limit-exceeded` | Rate limit hit; see `Retry-After` |\n| 400 | `.../bad-request` | Request was malformed/unreadable |\n| 500 | `.../internal-error` | Unexpected server error |\n\nValidation failures (422) include a grouped `errors` array:\n\n```json\n{\n  \"type\": \"https://api.interline.chat/problems/validation-error\",\n  \"title\": \"Validation failed\",\n  \"status\": 422,\n  \"detail\": \"The request body failed validation.\",\n  \"errors\": [\n    { \"field\": \"contact_id\", \"messages\": [\"contact_id must be an integer\"] }\n  ]\n}\n```\n\n## Receiving webhooks\n\nHow to consume the events we send you: the payload format, how to verify a delivery is\ngenuinely from us, and what happens when your endpoint is down. To register and manage\nendpoints, see the [Webhooks](#tag/webhooks) endpoints.\n\nRegister an endpoint with `POST /v1/webhooks` (or in the Interline web app under\nSettings > API Keys) and we `POST` a JSON body to it whenever one of the events you\nsubscribed to fires. Subscribe to each event by name; there are no wildcards.\n\nYour endpoint must:\n\n- be reachable over HTTPS at a public host, and respond directly — redirects are **not**\n  followed, so a `3xx` counts as a failed delivery\n- answer within 10 seconds\n- return any `2xx` to acknowledge. Every other status is treated as a failure and retried\n\n### Payload\n\nEvery delivery has the same envelope. `data` varies by event — see `WebhookEventEnvelope`\nand the per-event payload schemas.\n\n```json\n{\n  \"event\": \"message.received\",\n  \"timestamp\": \"2025-01-27T10:00:00.000Z\",\n  \"data\": {\n    \"message_id\": 1234,\n    \"conversation_id\": 88,\n    \"channel_id\": 53,\n    \"channel_type\": \"SMS\",\n    \"contact_id\": 42,\n    \"contact_phone\": \"+15551234567\",\n    \"is_new_conversation\": false,\n    \"sender_type\": \"contact\",\n    \"sender_id\": 42,\n    \"content\": \"Thanks, that works for me.\",\n    \"subject\": null,\n    \"has_attachments\": false,\n    \"received_at\": \"2025-01-27T10:00:00.000Z\"\n  }\n}\n```\n\nOn email messages, `message.received` and `message.created` also carry an `email`\nobject with the `from`, `to`, `cc` and `bcc` addresses; it is omitted on other channels.\n\nOptional fields are omitted rather than sent as `null`, so check for the key's presence.\n\n| Event | Fires when |\n|-------|------------|\n| `message.received` | A contact sends you a message |\n| `message.created` | A message is created on a conversation. Scheduled messages emit this when they send, not when they are scheduled |\n| `message.status_changed` | A message moves between `scheduled`, `pending`, `sent`, `delivered`, `read` and `failed` |\n| `conversation.created` | A new conversation is opened |\n| `conversation.assigned` | A conversation is assigned, reassigned or unassigned. On unassignment `assigned_to` is `null` |\n| `conversation.status_changed` | A conversation moves between `open`, `closed` and `archived` |\n| `contact.created` | A contact is created through the API or the web app. Contacts created automatically from an inbound message do not fire this event |\n| `contact.updated` | A contact is updated. `changes` holds the submitted fields and their new values |\n\nMessages sent as part of a campaign do not emit `message.created` or\n`message.status_changed`. Campaigns are created and managed in the Interline web app,\nwhere their delivery results are reported.\n\n### Headers\n\n| Header | Value |\n|--------|-------|\n| `X-Webhook-Signature` | `sha256=` followed by the hex HMAC described below |\n| `X-Webhook-Event` | The event name, matching `event` in the body |\n| `X-Webhook-Timestamp` | When the event was dispatched, matching `timestamp` in the body |\n\nThere is no delivery ID header. Deliveries are at-least-once and unordered, so make your\nhandler idempotent using the resource IDs inside `data`.\n\n### Verifying a delivery\n\nThe signature is an HMAC-SHA256, keyed by the signing secret you supplied when you\nregistered the webhook, over the timestamp and the **raw** request body joined by a\nperiod — `${timestamp}.${body}` — hex encoded.\n\n```js\nconst crypto = require('crypto');\nconst express = require('express');\n\nconst app = express();\n\n// The signature covers the exact bytes we sent. Keep them: re-serialising the\n// parsed object will not produce a matching signature.\napp.use(express.json({ verify: (req, _res, buf) => { req.rawBody = buf; } }));\n\napp.post('/webhooks/interline', (req, res) => {\n  const timestamp = req.get('X-Webhook-Timestamp');\n  const expected = crypto\n    .createHmac('sha256', process.env.INTERLINE_WEBHOOK_SECRET)\n    .update(`${timestamp}.${req.rawBody}`)\n    .digest('hex');\n\n  const received = Buffer.from(req.get('X-Webhook-Signature') ?? '');\n  const signature = Buffer.from(`sha256=${expected}`);\n\n  if (\n    received.length !== signature.length ||\n    !crypto.timingSafeEqual(received, signature)\n  ) {\n    return res.sendStatus(401);\n  }\n\n  res.sendStatus(200);\n  processEventAsync(req.body);\n});\n```\n\nAcknowledge first and do your work afterwards, so slow processing does not run into the\n10 second timeout.\n\n`timestamp` is when the event was dispatched, and a retry keeps the original value rather\nthan getting a fresh one. If you reject stale timestamps, allow at least 24 hours or you\nwill reject legitimate retries.\n\nThe signing secret is write-only: no endpoint returns it and there is no rotation endpoint.\nIf you lose it, register a new webhook and delete the old one.\n\n### Retries and failures\n\nA delivery is attempted up to 7 times, with fixed waits between attempts:\n\n| After attempt | Next attempt in |\n|---------------|-----------------|\n| 1 | 1 minute |\n| 2 | 5 minutes |\n| 3 | 30 minutes |\n| 4 | 2 hours |\n| 5 | 5 hours |\n| 6 | 10 hours |\n\nA delivery that fails all 7 attempts counts against the webhook. After 10 such deliveries\nin a row the webhook is disabled: `is_active` becomes `false`, `disabled_at` is set, and it\nstops receiving events. A single successful delivery resets the count.\n\nRe-enable a webhook with `PATCH /v1/webhooks/{id}` and `{\"is_active\": true}`, which also\nclears its failure count. `GET /v1/webhooks/{id}/deliveries` returns the 50 most recent\nattempts, newest first, to help you debug.\n",
     "title": "Interline API",
     "version": "1.0"
   },
