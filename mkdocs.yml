@@ -64,6 +64,7 @@ nav:
       - Overview: admin/index.md
       - Company Settings: admin/company-settings.md
       - Channels: admin/channels.md
+      - Connecting Email: admin/email-channel.md
       - Users & Roles: admin/users-roles.md
       - Inboxes: admin/inboxes.md
       - Custom Views: admin/custom-views.md
