@@ -43,4 +43,4 @@ Webhooks can also be managed programmatically — see the webhook endpoints in t
 
 ## Payloads & verification
 
-Delivery payload formats and signature verification details are documented in the [API Reference](reference.md).
+Delivery payload formats and signature verification details are documented in the [Receiving webhooks section of the API Reference](reference.md#description/receiving-webhooks).
