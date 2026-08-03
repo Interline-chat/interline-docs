@@ -1008,6 +1008,21 @@
         ],
         "type": "object"
       },
+      "PublicAttachmentDto": {
+        "properties": {
+          "url": {
+            "description": "Publicly accessible HTTPS URL. The file is imported into Interline storage before delivery.",
+            "example": "https://example.com/invoice.pdf",
+            "format": "uri",
+            "maxLength": 2048,
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "type": "object"
+      },
       "ReplyDto": {
         "properties": {
           "attachment_ids": {
@@ -1055,15 +1070,12 @@
       },
       "SendMessageDto": {
         "properties": {
-          "attachment_ids": {
-            "description": "Attachment IDs to include",
-            "example": [
-              1,
-              2
-            ],
+          "attachments": {
+            "description": "Public HTTPS attachments to import into Interline storage before delivery",
             "items": {
-              "type": "number"
+              "$ref": "#/components/schemas/PublicAttachmentDto"
             },
+            "maxItems": 10,
             "type": "array"
           },
           "bcc": {
@@ -1121,7 +1133,7 @@
           "template_header_media": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TemplateHeaderMediaDto"
+                "$ref": "#/components/schemas/PublicAttachmentDto"
               }
             ],
             "description": "Media for template header"
@@ -1226,19 +1238,6 @@
           "category",
           "components",
           "created_at"
-        ],
-        "type": "object"
-      },
-      "TemplateHeaderMediaDto": {
-        "properties": {
-          "attachment_id": {
-            "description": "Attachment ID for template header media",
-            "example": 123,
-            "type": "number"
-          }
-        },
-        "required": [
-          "attachment_id"
         ],
         "type": "object"
       },
@@ -3367,7 +3366,7 @@
     },
     "/v1/messages": {
       "post": {
-        "description": "Send a message through a channel. Requires either contact_id or to (phone/email). Requires either body or template_id.",
+        "description": "Send a message through a channel. Requires either contact_id or to (phone/email), plus body, template_id, or attachments. Public HTTPS attachments are imported into Interline storage before delivery.",
         "operationId": "MessagesV1Controller_send_v1",
         "parameters": [],
         "requestBody": {
