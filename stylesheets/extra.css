@@ -1,0 +1,79 @@
+/* ===========================================================================
+   Interline brand theme
+   Brand blue sampled from the Interline logo (≈ #1A85FF).
+   Adjust the hex values below if you have exact brand colors.
+   =========================================================================== */
+
+:root {
+  --interline-blue:        #0085FF; /* exact brand blue from the logo */
+  --interline-blue-light:  #4DA9FF;
+  --interline-blue-dark:   #006AD1;
+  --interline-ink:         #1C1C1C; /* near-black from the wordmark */
+
+  /* Material primary (header, nav highlights) */
+  --md-primary-fg-color:        var(--interline-blue);
+  --md-primary-fg-color--light: var(--interline-blue-light);
+  --md-primary-fg-color--dark:  var(--interline-blue-dark);
+
+  /* Material accent (links on hover, active elements) */
+  --md-accent-fg-color:         var(--interline-blue-dark);
+}
+
+/* Dark mode: keep the same brand blue, just a touch brighter for contrast */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        var(--interline-blue);
+  --md-primary-fg-color--light: var(--interline-blue-light);
+  --md-primary-fg-color--dark:  var(--interline-blue-dark);
+  --md-accent-fg-color:         var(--interline-blue-light);
+}
+
+/* Make in-content links use the brand blue */
+.md-typeset a {
+  color: var(--interline-blue);
+}
+.md-typeset a:hover {
+  color: var(--interline-blue-dark);
+}
+
+/* Slightly bolder, brand-colored section headings */
+.md-typeset h1,
+.md-typeset h2 {
+  color: var(--interline-ink);
+}
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: #e9eef5;
+}
+
+/* ===========================================================================
+   Match the product app's typography and surface tokens
+   =========================================================================== */
+
+/* The app only uses weights 400/500/600 (Inter); Material's default
+   headings go to 700 — pull them back so the docs match the product. */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 600;
+}
+
+/* Surface tokens from the app, for callouts/cards */
+:root {
+  --interline-surface-light: hsl(206 47% 97%);
+  --interline-surface-dark:  hsl(0 0% 3.9%);
+  --interline-radius:        0.5rem;
+}
+
+/* Round callouts and buttons to the app's radius */
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset .md-button {
+  border-radius: var(--interline-radius);
+}
+
+/* Give the header logo a little breathing room */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+  width: auto;
+}
