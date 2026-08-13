@@ -894,6 +894,33 @@
         ],
         "type": "object"
       },
+      "MeResponseDto": {
+        "properties": {
+          "api_key_name": {
+            "example": "Zapier",
+            "type": "string"
+          },
+          "org_name": {
+            "example": "Acme Support",
+            "type": "string"
+          },
+          "scopes": {
+            "example": [
+              "*"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "org_name",
+          "api_key_name",
+          "scopes"
+        ],
+        "type": "object"
+      },
       "MessageDto": {
         "properties": {
           "content": {
@@ -3361,6 +3388,40 @@
         "summary": "Open or close a conversation",
         "tags": [
           "Conversations"
+        ]
+      }
+    },
+    "/v1/me": {
+      "get": {
+        "description": "Identify the organization and API key behind the current request. Accepts a key with any scope, which makes it a reliable authentication test for integrations such as Zapier.",
+        "operationId": "MeV1Controller_getMe_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeResponseDto"
+                }
+              }
+            },
+            "description": "Organization and API key details"
+          },
+          "401": {
+            "description": "Unauthorized - invalid API key"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get current organization",
+        "tags": [
+          "Me"
         ]
       }
     },
