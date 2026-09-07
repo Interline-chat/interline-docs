@@ -1,3 +1,5 @@
 # Docs build dependencies (used by the GitHub Actions deploy workflow).
 # The [imaging] extra pulls in Pillow + cairosvg for the social-cards plugin.
 mkdocs-material[imaging]
+# Click-to-enlarge images (lightbox).
+mkdocs-glightbox

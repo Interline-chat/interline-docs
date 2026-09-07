@@ -75,4 +75,4 @@ From the same Email settings page you can, per account:
 - **The sign-in window closed but nothing happened** — pop-ups may be blocked. Allow pop-ups for Interline and try again.
 - **Wrong account got connected** — disconnect it, then reconnect and pick the right account in the provider's account chooser.
 - **Channel shows as disconnected** — use **Refresh Connection** on the Email settings page. This usually happens after a password change or when your organization's IT revokes third-party access.
-- **Microsoft 365 says approval is needed** — some organizations require an IT admin to approve new apps. Ask your Microsoft 365 admin to grant consent for Interline, then sign in again.
+- **Microsoft 365 says "Need admin approval"** — some organizations require an IT admin to approve new apps before employees can connect them. See [Microsoft 365: Admin Approval Required](microsoft-admin-approval.md) for what to do (and what your admin needs to click), then sign in again.
