@@ -56,6 +56,7 @@ nav:
       - Overview: agent/index.md
       - Mailboxes & Inboxes: agent/mailboxes.md
       - Reading & Replying: agent/reading-and-replying.md
+      - Signatures: agent/signatures.md
       - Organizing Conversations: agent/organizing.md
       - Team Collaboration: agent/collaboration.md
       - Contacts: agent/contacts.md

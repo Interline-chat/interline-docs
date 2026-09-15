@@ -20,6 +20,8 @@ For **email** conversations the editor is a **rich text editor** — you can for
 
 For **SMS and WhatsApp**, formatting is simpler because the channels themselves are plain text (WhatsApp supports light formatting like bold and italics; SMS is plain). Interline shows the editor appropriate to the channel you're replying on.
 
+If a [signature](signatures.md) is set up for the channel, the editor shows it below your draft with an **Insert signature** checkbox — it's appended when you send, and you can untick it for a single message.
+
 !!! tip "Saving a contact's name"
     The first time you reply to a new sender, Interline prompts you to **save their name to your contacts**. Do it — next time the conversation shows a name instead of a raw phone number or email address, which makes the whole inbox easier to scan. See [Contacts](contacts.md).
 

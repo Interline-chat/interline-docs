@@ -1,5 +1,5 @@
 ---
-description: Connect and manage Interline channels — SMS, WhatsApp, and email — including channel status and how channels feed your inboxes.
+description: Connect and manage Interline channels — SMS, WhatsApp, and email — including channel status, default signatures, and how channels feed your inboxes.
 ---
 
 # Channels
@@ -26,6 +26,22 @@ Connecting a new SMS number, WhatsApp number, or email address is done from the 
 
 !!! tip "Channel status toggle"
     Use the **Channel status** toggle to pause a channel without removing it — useful during maintenance or if you temporarily stop using a number.
+
+## Default signature
+
+Every channel can carry a **default signature** — a sign-off appended to outgoing messages on that channel. You'll find it in the channel's settings: **Settings → Channels**, open the channel type's settings (e.g. *SMS Settings*), select the number or address, and scroll to **Default signature**.
+
+The default is used by **every agent on that channel who hasn't set a personal signature** of their own — an agent's [personal signature](../agent/signatures.md) always takes priority. Agent variables resolve to whoever is sending, so a single default like `Thanks, {{agent.first_name}} · {{org.name}}` still personalizes itself per agent.
+
+A few things to know:
+
+- Signatures are **plain text** — HTML isn't supported — and they take the same **variables** as personal signatures; see the [variables list](../agent/signatures.md#variables).
+- The **Enable signature** toggle controls whether the default is offered at all: when it's off, agents without a personal signature get nothing in the composer.
+- The **Preview** shows the resolved result as you type; **Save signature** applies it, and **Delete** removes it from the channel.
+
+![Default signature in a channel's settings](../assets/media/signatures-channel-default.png){ width="820" }
+
+In the composer, agents see an **Insert signature** checkbox with a preview of what will be appended, and can switch it off for a single message — see [Signatures](../agent/signatures.md#in-the-composer) in the Agent Guide.
 
 ## How channels relate to inboxes
 
