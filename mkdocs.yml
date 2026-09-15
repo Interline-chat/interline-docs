@@ -156,7 +156,7 @@ markdown_extensions:
 # ---------------------------------------------------------------------------
 extra:
   generator: false
-  # Google Analytics 4 — add your Measurement ID (G-XXXX) to track traffic:
-  # analytics:
-  #   provider: google
-  #   property: G-XXXXXXXXXX
+  # Google Analytics 4 (GA property interline.chat, web stream "Help Center")
+  analytics:
+    provider: google
+    property: G-CVH91D3NW1
