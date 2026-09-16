@@ -158,6 +158,7 @@
             "type": "string"
           },
           "custom_fields": {
+            "additionalProperties": true,
             "type": "object"
           },
           "email": {
@@ -233,6 +234,7 @@
       "ConversationActivityDto": {
         "properties": {
           "activity_data": {
+            "additionalProperties": true,
             "description": "Shape depends on activity_type. assigned: assigned_to, previously_assigned_to, assigned_to_inbox, previously_assigned_to_inbox. unassigned: previously_assigned_to, assigned_to_inbox, previously_assigned_to_inbox. status_change: from, to, reason. priority_change: from, to. comment: text, blocks, mentions.",
             "example": {
               "blocks": [
@@ -427,7 +429,8 @@
                 "$ref": "#/components/schemas/ConversationContactDto"
               }
             ],
-            "nullable": true
+            "nullable": true,
+            "type": "object"
           },
           "created_at": {
             "example": "2025-01-25T14:00:00Z",
@@ -610,6 +613,7 @@
             "type": "string"
           },
           "custom_fields": {
+            "additionalProperties": true,
             "type": "object"
           },
           "email": {
@@ -687,7 +691,7 @@
           "url": {
             "format": "uri",
             "maxLength": 2048,
-            "pattern": "/^https:\\/\\//",
+            "pattern": "^https:\\/\\/",
             "type": "string"
           }
         },
@@ -752,6 +756,7 @@
             "type": "string"
           },
           "custom_fields": {
+            "additionalProperties": true,
             "type": "object"
           },
           "email": {
@@ -1344,6 +1349,7 @@
             "type": "string"
           },
           "custom_fields": {
+            "additionalProperties": true,
             "type": "object"
           },
           "email": {
@@ -1433,7 +1439,7 @@
           "url": {
             "format": "uri",
             "maxLength": 2048,
-            "pattern": "/^https:\\/\\//",
+            "pattern": "^https:\\/\\/",
             "type": "string"
           }
         },
@@ -2979,16 +2985,6 @@
               }
             },
             "description": "Updated assignment"
-          },
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ConversationAssignmentResponseDto"
-                }
-              }
-            },
-            "description": ""
           },
           "401": {
             "content": {
