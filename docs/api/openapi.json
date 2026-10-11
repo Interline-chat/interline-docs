@@ -3215,7 +3215,7 @@
         ]
       },
       "post": {
-        "description": "Send an outbound message in an existing conversation. A closed conversation is automatically reopened.",
+        "description": "Send an outbound message in an existing conversation. The conversation status is left unchanged: a closed or archived conversation stays closed or archived. To open it, call PUT /conversations/:id/status with { \"status\": \"open\" }.",
         "operationId": "ConversationsV1Controller_reply_v1",
         "parameters": [
           {
@@ -3445,7 +3445,7 @@
     },
     "/v1/messages": {
       "post": {
-        "description": "Send a message through a channel. Requires either contact_id or to (phone/email), plus body, template_id, or attachments. Public HTTPS attachments are imported into Interline storage before delivery.",
+        "description": "Send a message through a channel. Requires either contact_id or to (phone/email), plus body, template_id, or attachments. Public HTTPS attachments are imported into Interline storage before delivery. Sending does not change conversation status: an existing closed or archived conversation stays closed or archived. To open it, call PUT /conversations/:id/status with { \"status\": \"open\" }.",
         "operationId": "MessagesV1Controller_send_v1",
         "parameters": [],
         "requestBody": {
