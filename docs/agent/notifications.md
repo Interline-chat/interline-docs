@@ -34,12 +34,12 @@ The events are:
 | **A conversation is opened** | A new or reopened conversation lands in your inbox. | **Assigned to me** or **Any conversation** |
 | **New message** | A message arrives on a conversation. | **Assigned to me** or **Any conversation** |
 | **Assigned to you** | A conversation is assigned to you. | — |
-| **Mention** *(coming soon)* | A teammate @mentions you in a note. | — |
+| **Mention** | A teammate @mentions you in a note. | — |
 
 For **A conversation is opened** and **New message**, use the **Assigned to me / Any conversation** toggle to decide how broadly you're alerted — only your own conversations, or everything coming into the inboxes you can see.
 
 !!! note "Delivery availability"
-    Not every method is available for every event yet — where a method isn't offered, it shows a dash (—). Currently **Email** is available for **Assigned to you**, and the **Mention** event is **coming soon**.
+    Not every method is available for every event yet — where a method isn't offered, it shows a dash (—). Currently **Email** is available for **Assigned to you** and **Mention**.
 
 ## Notification sound
 

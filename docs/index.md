@@ -9,8 +9,8 @@ Welcome to the Interline documentation. Interline is a unified messaging platfor
 This help center is organized for three audiences:
 
 - **[Agent Guide](agent/index.md)** — day-to-day Inbox work: handling conversations, sorting, canned replies, comments, opening/closing, and notifications.
-- **[Admin Guide](admin/index.md)** — setup, team management, roles, channels, contacts, campaigns (Broadcast & Keywords), auto-responders, and billing.
-- **[API & Reference](api/index.md)** — developer documentation (coming soon).
+- **[Admin Guide](admin/index.md)** — setup, team management, roles, channels, contacts, campaigns (Broadcast & Keywords), and automation.
+- **[API & Reference](api/index.md)** — developer documentation: API keys, webhooks, and the interactive API reference.
 
 ## The three core tools
 

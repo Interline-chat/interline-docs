@@ -35,6 +35,7 @@ If you're a front-line agent handling conversations, see the [Agent Guide](../ag
 - **Settings → Messages** → [Canned Replies](canned-messages.md).
 - **Settings → Inboxes** → [Inboxes](inboxes.md) and [Custom Views](custom-views.md).
 - **Settings → Contacts** → [Custom Fields & Tags](custom-fields.md).
+- **Settings → Integrations** → [API keys](../api/index.md) and [Webhooks](../api/webhooks.md).
 
 !!! note "Coming soon"
-    **Billing** (subscription and payment methods), **API keys**, and **Reports** appear in the app marked *coming soon* and will be documented here once available.
+    **Billing** (subscription and payment methods) appears in the app marked *coming soon* and will be documented here once available.

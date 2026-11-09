@@ -71,10 +71,13 @@ Use **Test message** to send the campaign to yourself before committing, so you 
 On the final step you can rename the campaign and then choose:
 
 - **Send now** — sends the campaign immediately to the selected audiences.
+- **Schedule** — sends it once at a later date and time. Pick the **date**, **time**, and **time zone**, then click **Schedule campaign**. The campaign shows as **Scheduled** in the campaign list until it goes out.
 - **Save as draft** — keeps it in the campaign list to finish or send later.
 
-!!! note "Scheduling"
-    Sending at a future date/time (**Schedule**) is **coming soon**. For now, send immediately or save as a draft. Recurring sends can be approximated today by **duplicating** a past campaign when you need to send it again.
+!!! note "Changing or cancelling a schedule"
+    Open the scheduled campaign to see when it will send. Click **Reschedule** to pick a new time, or **Cancel schedule** to stop it. Saving a scheduled campaign as a draft also cancels the schedule.
+
+    Scheduling is one-time. For a recurring send, **duplicate** a past campaign and schedule the copy.
 
 ## Quick recap
 
@@ -82,6 +85,6 @@ On the final step you can rename the campaign and then choose:
 2. Pick **SMS or WhatsApp** and the sending number.
 3. Choose **audiences** (lists/segments) — watch the recipient count.
 4. Write the message (use **{variables}**, watch the **segment counter**, add an opt-out), and **Test message** to yourself.
-5. **Review**, then **Send now** or **Save as draft**.
+5. **Review**, then **Send now**, **Schedule**, or **Save as draft**.
 
 See also: [Importing Contacts](../admin/contacts-import.md) to build the lists you send to, and [Automation](../admin/automation.md) for keyword-triggered and automatic messages.
