@@ -10,6 +10,8 @@ This guide gives you a quick orientation to Interline so you can start handling 
 
 Open Interline in your browser and sign in with the email address your admin invited. On first sign-in you'll be asked to set your name and, optionally, a profile photo — this is what teammates see on internal comments and assignments.
 
+Prefer an app? Interline is also available for iPhone, Android, and as a desktop app — see [Mobile & Desktop Apps](apps.md).
+
 ## The layout
 
 Once you're in, the screen is split into three areas:

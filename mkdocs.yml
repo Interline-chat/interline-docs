@@ -52,6 +52,7 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - Mobile & Desktop Apps: apps.md
   - Agent Guide:
       - Overview: agent/index.md
       - Mailboxes & Inboxes: agent/mailboxes.md
