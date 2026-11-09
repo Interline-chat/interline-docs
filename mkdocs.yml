@@ -81,6 +81,8 @@ nav:
           - Auto-Assign: admin/auto-assign.md
           - Auto-Responders: admin/auto-responders.md
           - Keyword Campaigns: keywords/index.md
+  - Integrations:
+      - Zapier: integrations/zapier.md
   - API:
       - Overview: api/index.md
       - Webhooks: api/webhooks.md
