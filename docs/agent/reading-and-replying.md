@@ -1,5 +1,5 @@
 ---
-description: Reply to clients in Interline — the reply editor, canned replies, attachments, delivery status, and the awaiting-response indicator.
+description: Reply to clients in Interline — the reply editor, send options, scheduled messages, AI drafting, canned replies, attachments, and delivery status.
 ---
 
 # Reading & Replying
@@ -24,6 +24,46 @@ If a [signature](signatures.md) is set up for the channel, the editor shows it b
 
 !!! tip "Saving a contact's name"
     The first time you reply to a new sender, Interline prompts you to **save their name to your contacts**. Do it — next time the conversation shows a name instead of a raw phone number or email address, which makes the whole inbox easier to scan. See [Contacts](contacts.md).
+
+## Send, Send and close, Send later
+
+The **Send** button has a small arrow next to it. Click the arrow for the other ways to send:
+
+![The send menu with Send, Send and close, Send later, and Discard](../assets/media/composer-send-menu.png){ width="295" }
+
+- **Send** — sends the reply and leaves the conversation open.
+- **Send and close** — sends the reply and closes the conversation in one step. Use it when your reply finishes the job.
+- **Send later** — schedules the reply. Pick a **date** and **time**, then click **Schedule**.
+- **Discard** — clears your draft.
+
+### Scheduled messages
+
+A scheduled message appears in the conversation marked **Scheduled for** with its date and time. Until it goes out, open the menu on it to:
+
+- **Edit** — change the text, date, or time.
+- **Send now** — send it immediately instead of waiting.
+- **Cancel** — cancel the send. The message is not sent.
+
+### Your send preferences
+
+Click your **profile avatar** → **Preferences** to set how sending works for you:
+
+![The Preferences page with Default send button and Send shortcut](../assets/media/preferences-send.png){ width="658" }
+
+- **Default send button** — whether the main button is **Send** or **Send and close**. The other action stays in the menu next to it. *Organization default* follows what your admin set for the workspace.
+- **Send shortcut** — the key that sends a reply: **Enter**, or **Ctrl + Enter** (**⌘ + Enter** on a Mac). With **Enter**, press **Shift + Enter** to start a new line. The shortcut isn't used on mobile.
+
+## Writing with AI
+
+If your admin has set up the [AI Assistant](../admin/ai-assistant.md), the composer has AI tools next to the canned-reply button.
+
+![The AI prompt box in the composer: describe the reply you want, then Generate](../assets/media/composer-ai-generate.png){ width="445" }
+
+- **Suggest response** — drafts a reply to the customer's latest message, based on the conversation and, if enabled, your knowledge base. If you already have a draft, Interline asks before replacing it.
+- **Write from a description** — click the **wand** icon while the editor is empty, describe the reply you want (for example *apologize for the late shipment and offer a 10% discount*), and click **Generate**.
+- **Refine draft** — click the **wand** icon when you've already typed something to **Fix spelling**, **Fix grammar**, **Fix tone**, or **Fix all**. Click **Undo** if you prefer your original.
+
+Nothing is sent automatically — the text lands in the editor for you to review, edit, and send.
 
 ## Canned replies
 

@@ -10,7 +10,7 @@ Notifications keep you on top of what needs your attention without constantly sc
 
 Click your **profile avatar** in the top-right corner and choose **Notifications** (you'll land on **Settings → Notifications**). These settings are **personal** — each user configures their own; they don't affect teammates.
 
-![The Notifications settings page: browser-permission banner, the per-event In-app / Desktop / Email matrix, notification sound, and preferences.](../assets/media/notifications-settings.png){ width="820" }
+![The Notifications settings page: browser-permission banner, the per-event In-app / Desktop / Email matrix, and notification sound](../assets/media/notifications-settings.png){ width="658" }
 
 ## Allow browser notifications first
 
@@ -40,6 +40,16 @@ For **A conversation is opened** and **New message**, use the **Assigned to me /
 
 !!! note "Delivery availability"
     Not every method is available for every event yet — where a method isn't offered, it shows a dash (—). Currently **Email** is available for **Assigned to you** and **Mention**.
+
+## Mentions
+
+When a teammate **@mentions** you in an internal comment, you get a **Mention** notification by whichever methods you've ticked.
+
+You can also see every mention in one place: open **Inbox** and click **Mentions** under **My Inbox**. It lists the comments that mention you, newest first — click one to jump to the conversation. See [Team Collaboration](collaboration.md) for how to @mention someone.
+
+## On your phone
+
+The [mobile app](../apps.md) sends **push notifications**, so you're alerted when you're away from your computer. Turn them on or off in the app's **Settings**.
 
 ## Notification sound
 
