@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
 <!--
+  OpenAI (ChatGPT Ads) measurement pixel. Same pixel ID as interline.chat.
+  Placed in site_meta so it lands right after the charset/viewport meta tags,
+  ahead of all stylesheets and scripts. No oaiq("measure", ...) calls here:
+  the help site has no lead forms.
+-->
+{% block site_meta %}
+  {{ super() }}
+  <script id="openai-ads-pixel">
+!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+oaiq("init",{pixelId:"2StoMo177tgTS74cF6zMcA",debug:location.search.indexOf("oai_debug")>-1});
+  </script>
+{% endblock %}
+
+<!--
   Favicon fallbacks. The primary favicon (SVG) is set via theme.favicon in
   mkdocs.yml; these add classic raster fallbacks for full browser + Google
   Search support.
